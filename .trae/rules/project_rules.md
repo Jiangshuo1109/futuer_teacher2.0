@@ -1,0 +1,4 @@
+- 所有新代码使用 vue3 + TypeScript + ElementPlus + echarts
+- 遵循代码整洁之道
+- 优先使用 async/await 而不是回调
+- 编写完善的错误处理
