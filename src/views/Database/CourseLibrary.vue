@@ -24,9 +24,10 @@
         <div class="toolbar-right">
           <el-select v-model="selectedCategory" placeholder="选择分类" style="width: 120px; margin-right: 8px" clearable>
             <el-option label="全部分类" value="" />
-            <el-option label="计算机" value="计算机" />
-            <el-option label="教育学" value="教育学" />
-            <el-option label="数学" value="数学" />
+            <el-option label="语文" value="语文" />
+            <el-option label="现代文阅读" value="现代文阅读" />
+            <el-option label="古诗词鉴赏" value="古诗词鉴赏" />
+            <el-option label="作文指导" value="作文指导" />
           </el-select>
           <el-select v-model="selectedLevel" placeholder="选择难度" style="width: 120px; margin-right: 8px" clearable>
             <el-option label="全部难度" value="" />
@@ -131,8 +132,8 @@ const total = ref(100)
 const tableData = ref<Course[]>([
   {
     id: 1,
-    name: 'Java程序设计基础',
-    category: '计算机',
+    name: '现代文阅读',
+    category: '语文',
     level: '初级',
     duration: 64,
     teacher: '张教授',
@@ -142,8 +143,8 @@ const tableData = ref<Course[]>([
   },
   {
     id: 2,
-    name: '数据结构与算法',
-    category: '计算机',
+    name: '古诗词鉴赏',
+    category: '语文',
     level: '中级',
     duration: 48,
     teacher: '李教授',
@@ -153,14 +154,36 @@ const tableData = ref<Course[]>([
   },
   {
     id: 3,
-    name: '教育心理学',
-    category: '教育学',
+    name: '作文指导',
+    category: '语文',
     level: '初级',
     duration: 32,
     teacher: '王教授',
     studentCount: 200,
     status: 'draft',
     createTime: '2024-01-08'
+  },
+  {
+    id: 4,
+    name: '文言文阅读',
+    category: '语文',
+    level: '初级',
+    duration: 40,
+    teacher: '赵教授',
+    studentCount: 150,
+    status: 'published',
+    createTime: '2024-01-12'
+  },
+  {
+    id: 5,
+    name: '语言文字运用',
+    category: '语文',
+    level: '中级',
+    duration: 36,
+    teacher: '陈教授',
+    studentCount: 95,
+    status: 'reviewing',
+    createTime: '2024-01-25'
   }
 ])
 

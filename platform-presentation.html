@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能分析平台 - 核心功能展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(1, 65, 141, 0.4);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* 光效背景 */
+        .light-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .light-beam {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(1, 65, 141, 0.15), transparent);
+            animation: beam 8s infinite linear;
+        }
+
+        @keyframes beam {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+                opacity: 0;
+            }
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        /* 标题区域 */
+        .header {
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-title {
+            font-size: 3.2rem;
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #5a6c7d;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* 主要内容区域 */
+        .main-content {
+            flex: 1;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, rgb(1, 65, 141), rgb(0, 100, 200));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            animation: iconGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes iconGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(1, 65, 141, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(1, 65, 141, 0.6));
+            }
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .feature-highlights {
+            list-style: none;
+            text-align: left;
+        }
+
+        .feature-highlights li {
+            font-size: 0.8rem;
+            color: #34495e;
+            margin-bottom: 6px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .feature-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-text {
+            color: #5a6c7d;
+            font-size: 0.9rem;
+        }
+
+        /* 动画定义 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+                max-width: 900px;
+            }
+            
+            .main-title {
+                font-size: 2.6rem;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 500px;
+            }
+            
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .feature-card {
+                padding: 18px;
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+                margin-bottom: 12px;
+            }
+        }
+
+        /* 特殊效果 */
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(1, 65, 141, 0.1), transparent);
+            animation: rotate 4s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* 增强的卡片效果 */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 65, 141, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out both;
+            border: 1px solid rgba(1, 65, 141, 0.15);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 30px rgba(1, 65, 141, 0.3);
+            border-color: rgba(1, 65, 141, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 粒子背景 -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- 光效背景 -->
+    <div class="light-effects" id="lightEffects"></div>
+    
+    <div class="presentation-container">
+        <!-- 标题区域 -->
+        <header class="header">
+            <h1 class="main-title">智能分析平台</h1>
+            <p class="subtitle">核心功能展示 - 智能化数据分析平台</p>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <div class="features-grid">
+                <!-- 功能1: 教学任务及追踪 -->
+                <div class="feature-card glow-effect">
+                    <i class="fas fa-tasks feature-icon"></i>
+                    <h3 class="feature-title">教学任务及追踪</h3>
+                    <p class="feature-description">全流程教学任务管理，实时追踪师范生学习进度</p>
+                    <ul class="feature-highlights">
+                        <li>智能任务发布与分配</li>
+                        <li>实时进度监控</li>
+                        <li>多维度学习评估</li>
+                        <li>个性化学习路径</li>
+                    </ul>
+                </div>
+
+                <!-- 功能2: 平台与未来教师虚拟实验数据协同 -->
+                <div class="feature-card shimmer">
+                    <i class="fas fa-network-wired feature-icon"></i>
+                    <h3 class="feature-title">虚拟实验数据协同</h3>
+                    <p class="feature-description">打通虚拟实验平台，实现数据无缝对接与协同分析</p>
+                    <ul class="feature-highlights">
+                        <li>实验数据实时同步</li>
+                        <li>跨平台数据整合</li>
+                        <li>智能数据分析</li>
+                        <li>协同实验环境</li>
+                    </ul>
+                </div>
+
+                <!-- 功能3: AI学生模型智能体维护 -->
+                <div class="feature-card glow-effect">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3 class="feature-title">AI学生模型智能体</h3>
+                    <p class="feature-description">维护丰富的AI学生模型库，模拟真实课堂互动场景</p>
+                    <ul class="feature-highlights">
+                        <li>多样化学生人格模型</li>
+                        <li>智能行为模拟</li>
+                        <li>个性化反馈机制</li>
+                        <li>动态模型优化</li>
+                    </ul>
+                </div>
+
+                <!-- 功能4: 其他各类数据维护 -->
+                <div class="feature-card shimmer">
+                    <i class="fas fa-database feature-icon"></i>
+                    <h3 class="feature-title">数据资源管理</h3>
+                    <p class="feature-description">全方位数据资源管理，支撑教学活动各个环节</p>
+                    <ul class="feature-highlights">
+                        <li>课程资源库管理</li>
+                        <li>课件素材维护</li>
+                        <li>语义知识库</li>
+                        <li>特殊事件库</li>
+                    </ul>
+                </div>
+
+                <!-- 功能5: 教学评价体系 -->
+                <div class="feature-card glow-effect">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">教学评价体系</h3>
+                    <p class="feature-description">科学完善的教学评价体系，多维度评估教学效果</p>
+                    <ul class="feature-highlights">
+                        <li>六维度评价模型</li>
+                        <li>智能评价算法</li>
+                        <li>可视化评价报告</li>
+                        <li>持续改进建议</li>
+                    </ul>
+                </div>
+
+                <!-- 功能6: 智能多维教学能力画像 -->
+                <div class="feature-card shimmer">
+                    <i class="fas fa-user-graduate feature-icon"></i>
+                    <h3 class="feature-title">教学能力画像</h3>
+                    <p class="feature-description">基于AI分析的多维教学能力画像，精准识别优势与不足</p>
+                    <ul class="feature-highlights">
+                        <li>多维能力分析</li>
+                        <li>智能画像生成</li>
+                        <li>成长轨迹追踪</li>
+                        <li>个性化提升方案</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部信息 -->
+        <footer class="footer">
+            <p class="footer-text">© 2024 智能分析平台 - 智能化数据分析平台</p>
+        </footer>
+    </div>
+
+    <script>
+        // 页面加载完成后的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建粒子效果
+            createParticles();
+            
+            // 创建光效
+            createLightBeams();
+            
+            // 为卡片添加点击效果
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 添加点击动画
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+                
+                // 鼠标进入时增强发光效果
+                card.addEventListener('mouseenter', function() {
+                    this.style.filter = 'brightness(1.1)';
+                });
+                
+                // 鼠标离开时恢复正常
+                card.addEventListener('mouseleave', function() {
+                    this.style.filter = '';
+                });
+            });
+            
+            // 添加键盘导航支持
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F11') {
+                    e.preventDefault();
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    } else {
+                        document.documentElement.requestFullscreen();
+                    }
+                }
+            });
+        });
+        
+        // 创建粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // 创建光效
+        function createLightBeams() {
+            const lightContainer = document.getElementById('lightEffects');
+            const beamCount = 5;
+            
+            for (let i = 0; i < beamCount; i++) {
+                const beam = document.createElement('div');
+                beam.className = 'light-beam';
+                beam.style.left = Math.random() * 100 + '%';
+                beam.style.animationDelay = Math.random() * 8 + 's';
+                beam.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                lightContainer.appendChild(beam);
+            }
+        }
+        
+        // 滚动视差效果
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.header');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>

@@ -31,9 +31,10 @@
           </el-select>
           <el-select v-model="selectedSubject" placeholder="学科分类" style="width: 120px; margin-right: 8px" clearable>
             <el-option label="全部学科" value="" />
-            <el-option label="计算机" value="计算机" />
-            <el-option label="教育学" value="教育学" />
-            <el-option label="数学" value="数学" />
+            <el-option label="语文" value="语文" />
+            <el-option label="现代文阅读" value="现代文阅读" />
+            <el-option label="古诗词鉴赏" value="古诗词鉴赏" />
+            <el-option label="作文指导" value="作文指导" />
           </el-select>
           <el-input
             v-model="searchKeyword"
@@ -141,9 +142,9 @@ const total = ref(100)
 const tableData = ref<Courseware[]>([
   {
     id: 1,
-    name: 'Java基础语法.pptx',
+    name: '现代文阅读技巧.pptx',
     type: 'ppt',
-    subject: '计算机',
+    subject: '语文',
     size: '2.5MB',
     uploader: '张教授',
     downloadCount: 45,
@@ -152,9 +153,9 @@ const tableData = ref<Courseware[]>([
   },
   {
     id: 2,
-    name: '数据结构讲义.pdf',
+    name: '古诗词鉴赏方法.pdf',
     type: 'pdf',
-    subject: '计算机',
+    subject: '语文',
     size: '1.8MB',
     uploader: '李教授',
     downloadCount: 32,
@@ -163,9 +164,9 @@ const tableData = ref<Courseware[]>([
   },
   {
     id: 3,
-    name: '教学方法视频.mp4',
+    name: '作文写作指导.mp4',
     type: 'video',
-    subject: '教育学',
+    subject: '语文',
     size: '125MB',
     uploader: '王教授',
     downloadCount: 18,

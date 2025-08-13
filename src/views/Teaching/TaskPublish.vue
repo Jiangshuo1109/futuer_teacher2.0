@@ -27,9 +27,10 @@
           </el-select>
           <el-select v-model="filterCourse" placeholder="全部课程" style="width: 120px; margin-right: 8px" clearable>
             <el-option label="全部课程" value="" />
-            <el-option label="Web前端开发" value="web" />
-            <el-option label="教育心理学" value="psychology" />
-            <el-option label="Java程序设计" value="java" />
+            <el-option label="现代文阅读" value="modern" />
+            <el-option label="古诗词鉴赏" value="poetry" />
+            <el-option label="作文指导" value="writing" />
+            <el-option label="文言文阅读" value="classical" />
           </el-select>
           <el-input
             v-model="searchKeyword"
@@ -63,12 +64,7 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="progress" label="任务进度" width="100">
-          <template #default="{ row }">
-            <el-progress :percentage="row.progress" :stroke-width="6" :show-text="false" />
-            <span style="margin-left: 8px; font-size: 12px;">{{ row.progress }}%</span>
-          </template>
-        </el-table-column>
+
         <el-table-column prop="taskType" label="任务类型" width="100">
           <template #default="{ row }">
             <el-tag :type="row.taskType === '教学任务' ? 'primary' : 'success'" size="small">
@@ -380,8 +376,8 @@ const selectedClass = ref('')
 const tableData = ref<Task[]>([
   {
     taskNumber: 1,
-    taskName: 'HTML基础练习',
-    courseName: 'Web前端开发',
+    taskName: '现代文阅读理解练习',
+    courseName: '现代文阅读',
     creator: '张教授',
     createTime: '2024-01-20 10:30:00',
     publishTime: '2024-01-20 14:00:00',
@@ -396,9 +392,9 @@ const tableData = ref<Task[]>([
   },
   {
     taskNumber: 2,
-    taskName: 'JavaScript函数应用',
-    courseName: 'Web前端开发',
-    creator: '李老师',
+    taskName: '古诗词背诵默写',
+    courseName: '古诗词鉴赏',
+    creator: '王明华',
     createTime: '2024-01-19 16:20:00',
     deadline: '2024-01-28 23:59:59',
     taskStatus: 'draft',
@@ -411,8 +407,8 @@ const tableData = ref<Task[]>([
   },
   {
     taskNumber: 3,
-    taskName: '教育心理学案例分析',
-    courseName: '教育心理学',
+    taskName: '作文写作训练',
+    courseName: '作文指导',
     creator: '王教授',
     createTime: '2024-01-19 09:15:00',
     publishTime: '2024-01-19 15:30:00',
@@ -429,9 +425,10 @@ const tableData = ref<Task[]>([
 
 // 基础数据
 const courseList = ref<Course[]>([
-  { id: 1, name: 'Web前端开发' },
-  { id: 2, name: '教育心理学' },
-  { id: 3, name: 'Java程序设计' }
+  { id: 1, name: '现代文阅读' },
+  { id: 2, name: '古诗词鉴赏' },
+  { id: 3, name: '作文指导' },
+  { id: 4, name: '文言文阅读' }
 ])
 
 const evaluationSystems = ref<EvaluationSystem[]>([
@@ -477,14 +474,14 @@ const classList = ref<Class[]>([
 
 // 学生数据
 const studentList = ref<Student[]>([
-  { id: 1, name: '张三', studentNumber: '2021001', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 2, name: '李四', studentNumber: '2021002', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 3, name: '王五', studentNumber: '2021003', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 4, name: '赵六', studentNumber: '2021004', classId: 2, className: '计算机科学与技术2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 5, name: '钱七', studentNumber: '2021005', classId: 2, className: '计算机科学与技术2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 6, name: '孙八', studentNumber: '2021006', classId: 3, className: '软件工程2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 7, name: '周九', studentNumber: '2021007', classId: 3, className: '软件工程2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
-  { id: 8, name: '吴十', studentNumber: '2021008', classId: 4, className: '软件工程2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' }
+  { id: 1, name: '李明轩', studentNumber: '2021001', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 2, name: '张雨涵', studentNumber: '2021002', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 3, name: '陈思琪', studentNumber: '2021003', classId: 1, className: '计算机科学与技术2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 4, name: '刘浩然', studentNumber: '2021004', classId: 2, className: '计算机科学与技术2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 5, name: '王欣怡', studentNumber: '2021005', classId: 2, className: '计算机科学与技术2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 6, name: '赵子涵', studentNumber: '2021006', classId: 3, className: '软件工程2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 7, name: '孙佳琪', studentNumber: '2021007', classId: 3, className: '软件工程2021级1班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' },
+  { id: 8, name: '周俊杰', studentNumber: '2021008', classId: 4, className: '软件工程2021级2班', avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png' }
 ])
 
 // 表单数据

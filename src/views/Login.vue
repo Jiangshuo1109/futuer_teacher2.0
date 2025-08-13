@@ -7,7 +7,7 @@
           <div class="logo">
             <img src="https://www.deepvrai.com/logo/logo-site.png" alt="Logo" class="logo-image" />
           </div>
-          <h2 class="title">未来教师实习实训系统</h2>
+          <h2 class="title">未来教师智能分析平台</h2>
           <p class="subtitle">培养未来时代的优秀教师</p>
         </div>
 
@@ -83,7 +83,7 @@
 
         <!-- 底部版权信息 -->
         <div class="login-footer">
-          <p>© 2025 未来教师实习实训系统 v1.0</p>
+          <p>© 2025 未来教师智能分析平台 v1.0</p>
           <div class="footer-links">
             <el-link>使用协议</el-link>
             <el-divider direction="vertical" />

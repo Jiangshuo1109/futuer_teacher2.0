@@ -201,7 +201,7 @@ const uploadRules: FormRules = {
 const versionList = ref<ClientVersion[]>([
   {
     id: '1',
-    versionName: '未来教师实习实训系统 v2.1.0',
+    versionName: '未来教师智能分析平台 v2.1.0',
     version: '2.1.0',
     updateContent: '1. 新增AI智能评价功能\n2. 优化用户界面体验\n3. 修复已知bug\n4. 提升系统性能',
     updateTime: '2024-01-15 14:30:00',
@@ -212,7 +212,7 @@ const versionList = ref<ClientVersion[]>([
   },
   {
     id: '2',
-    versionName: '未来教师实习实训系统 v2.0.5',
+    versionName: '未来教师智能分析平台 v2.0.5',
     version: '2.0.5',
     updateContent: '1. 修复登录问题\n2. 优化数据库连接\n3. 更新依赖包',
     updateTime: '2024-01-10 10:15:00',
@@ -223,7 +223,7 @@ const versionList = ref<ClientVersion[]>([
   },
   {
     id: '3',
-    versionName: '未来教师实习实训系统 v2.0.0',
+    versionName: '未来教师智能分析平台 v2.0.0',
     version: '2.0.0',
     updateContent: '1. 全新界面设计\n2. 重构核心功能\n3. 提升系统稳定性',
     updateTime: '2024-01-01 09:00:00',

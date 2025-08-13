@@ -61,7 +61,9 @@
       <div class="student-grid" v-loading="loading">
         <div v-for="student in studentList" :key="student.id" class="student-card">
           <div class="student-avatar">
-            <img :src="student.avatar" :alt="student.name" />
+            <div class="student-avatar-div" :style="{ backgroundColor: getAvatarColor(student.name) }">
+              {{ getInitials(student.name) }}
+            </div>
             <div class="student-overlay">
               <el-button type="primary" size="small" @click="handleView(student)">
                 查看详情
@@ -135,7 +137,9 @@
                     :before-upload="beforeAvatarUpload"
                     :on-success="handleAvatarSuccess"
                   >
-                    <img v-if="studentForm.avatar" :src="studentForm.avatar" class="avatar" />
+                    <div v-if="studentForm.name" class="avatar-div" :style="{ backgroundColor: getAvatarColor(studentForm.name) }">
+                      {{ getInitials(studentForm.name) }}
+                    </div>
                     <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
                   </el-upload>
                 </el-form-item>
@@ -393,7 +397,9 @@
       <div v-if="currentStudent" class="student-detail">
         <div class="detail-header">
           <div class="student-avatar-large">
-            <img :src="currentStudent.avatar" :alt="currentStudent.name" />
+            <div class="student-avatar-large-div" :style="{ backgroundColor: getAvatarColor(currentStudent.name) }">
+              {{ getInitials(currentStudent.name) }}
+            </div>
           </div>
           <div class="student-basic-info">
             <h2>{{ currentStudent.name }}</h2>
@@ -811,7 +817,26 @@ const beforeAvatarUpload = (file: File) => {
 }
 
 const handleAvatarSuccess = (response: any, file: any) => {
-  studentForm.avatar = URL.createObjectURL(file.raw)
+  // Avatar functionality removed - using initials instead
+}
+
+const getInitials = (name: string) => {
+  if (!name) return '学'
+  const chars = name.trim().split('')
+  return chars.length >= 2 ? chars.slice(-2).join('') : chars[0]
+}
+
+const getAvatarColor = (name: string) => {
+  const colors = [
+    '#409EFF', '#67C23A', '#E6A23C', '#F56C6C', 
+    '#909399', '#C71585', '#FF6347', '#32CD32',
+    '#1E90FF', '#FF69B4', '#8A2BE2', '#00CED1'
+  ]
+  let hash = 0
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  return colors[Math.abs(hash) % colors.length]
 }
 </script>
 
@@ -998,11 +1023,38 @@ const handleAvatarSuccess = (response: any, file: any) => {
   line-height: 120px;
 }
 
-.avatar {
+.avatar-div {
   width: 120px;
   height: 120px;
-  display: block;
-  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.student-avatar-div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.student-avatar-large-div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .student-detail {

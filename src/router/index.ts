@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
     name: 'Login',
     component: () => import('@/views/Login.vue'),
     meta: {
-      title: '登录 - 未来教师实习实训系统'
+      title: '登录 - 未来教师智能分析平台'
     }
   },
   {
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
         name: 'Home',
         component: () => import('@/views/Dashboard/Home.vue'),
         meta: {
-          title: '首页 - 未来教师实习实训系统'
+          title: '首页 - 未来教师智能分析平台'
         }
       },
       {
@@ -41,7 +41,7 @@ const routes: RouteRecordRaw[] = [
             name: 'RoleManagement',
             component: () => import('@/views/System/RoleManagement.vue'),
             meta: {
-              title: '角色管理 - 未来教师实习实训系统'
+              title: '角色管理 - 未来教师智能分析平台'
             }
           },
           {
@@ -49,7 +49,7 @@ const routes: RouteRecordRaw[] = [
             name: 'PermissionManagement',
             component: () => import('@/views/System/PermissionManagement.vue'),
             meta: {
-              title: '权限管理 - 未来教师实习实训系统'
+              title: '权限管理 - 未来教师智能分析平台'
             }
           }
         ]
@@ -64,7 +64,7 @@ const routes: RouteRecordRaw[] = [
             name: 'CampusManagement',
             component: () => import('@/views/Organization/CampusManagement.vue'),
             meta: {
-              title: '校区管理 - 未来教师实习实训系统'
+              title: '校区管理 - 未来教师智能分析平台'
             }
           },
           {
@@ -72,7 +72,7 @@ const routes: RouteRecordRaw[] = [
             name: 'CollegeManagement',
             component: () => import('@/views/Organization/CollegeManagement.vue'),
             meta: {
-              title: '学院管理 - 未来教师实习实训系统'
+              title: '学院管理 - 未来教师智能分析平台'
             }
           },
           {
@@ -80,7 +80,7 @@ const routes: RouteRecordRaw[] = [
             name: 'MajorManagement',
             component: () => import('@/views/Organization/MajorManagement.vue'),
             meta: {
-              title: '专业管理 - 未来教师实习实训系统'
+              title: '专业管理 - 未来教师智能分析平台'
             }
           },
           {
@@ -88,7 +88,7 @@ const routes: RouteRecordRaw[] = [
             name: 'ClassManagement',
             component: () => import('@/views/Organization/ClassManagement.vue'),
             meta: {
-              title: '班级管理 - 未来教师实习实训系统'
+              title: '班级管理 - 未来教师智能分析平台'
             }
           },
           {
@@ -96,7 +96,7 @@ const routes: RouteRecordRaw[] = [
             name: 'UserManagement',
             component: () => import('@/views/Organization/UserManagement.vue'),
             meta: {
-              title: '用户管理 - 未来教师实习实训系统'
+              title: '用户管理 - 未来教师智能分析平台'
             }
           }
         ]
@@ -111,7 +111,7 @@ const routes: RouteRecordRaw[] = [
             name: 'CourseLibrary',
             component: () => import('@/views/Database/CourseLibrary.vue'),
             meta: {
-              title: '课程库 - 未来教师实习实训系统'
+              title: '课程库 - 未来教师智能分析平台'
             }
           },
           {
@@ -119,7 +119,7 @@ const routes: RouteRecordRaw[] = [
             name: 'CoursewareLibrary',
             component: () => import('@/views/Database/CoursewareLibrary.vue'),
             meta: {
-              title: '课件库 - 未来教师实习实训系统'
+              title: '课件库 - 未来教师智能分析平台'
             }
           },
           {
@@ -127,7 +127,7 @@ const routes: RouteRecordRaw[] = [
             name: 'QuestionBank',
             component: () => import('@/views/Database/QuestionBank.vue'),
             meta: {
-              title: '题库 - 未来教师实习实训系统'
+              title: '题库 - 未来教师智能分析平台'
             }
           },
           {
@@ -135,7 +135,7 @@ const routes: RouteRecordRaw[] = [
             name: 'SemanticLibrary',
             component: () => import('@/views/Database/SemanticLibrary.vue'),
             meta: {
-              title: '语义库 - 未来教师实习实训系统'
+              title: '语义库 - 未来教师智能分析平台'
             }
           },
           {
@@ -143,7 +143,7 @@ const routes: RouteRecordRaw[] = [
             name: 'SpecialEventLibrary',
             component: () => import('@/views/Database/SpecialEventLibrary.vue'),
             meta: {
-              title: '特殊事件库 - 未来教师实习实训系统'
+              title: '特殊事件库 - 未来教师智能分析平台'
             }
           },
           {
@@ -151,7 +151,7 @@ const routes: RouteRecordRaw[] = [
             name: 'StudentModelLibrary',
             component: () => import('@/views/Database/StudentModelLibrary.vue'),
             meta: {
-              title: '学生模型库 - 未来教师实习实训系统'
+              title: '学生模型库 - 未来教师智能分析平台'
             }
           },
 
@@ -160,7 +160,7 @@ const routes: RouteRecordRaw[] = [
             name: 'ClientVersionLibrary',
             component: () => import('@/views/Database/ClientVersionLibrary.vue'),
             meta: {
-              title: '客户端版本库 - 未来教师实习实训系统'
+              title: '客户端版本库 - 未来教师智能分析平台'
             }
           },
           {
@@ -168,7 +168,7 @@ const routes: RouteRecordRaw[] = [
             name: 'EvaluationSystemLibrary',
             component: () => import('@/views/Database/EvaluationSystemLibrary.vue'),
             meta: {
-              title: '教学评价体系库 - 未来教师实习实训系统'
+              title: '教学评价体系库 - 未来教师智能分析平台'
             }
           },
           {
@@ -176,7 +176,7 @@ const routes: RouteRecordRaw[] = [
             name: 'EvaluationStandardsEditor',
             component: () => import('@/views/Database/EvaluationStandardsEditor.vue'),
             meta: {
-              title: '评价标准设置 - 未来教师实习实训系统'
+              title: '评价标准设置 - 未来教师智能分析平台'
             }
           }
         ]
@@ -191,7 +191,7 @@ const routes: RouteRecordRaw[] = [
             name: 'TaskPublish',
             component: () => import('@/views/Teaching/TaskPublish.vue'),
             meta: {
-              title: '教学任务发布 - 未来教师实习实训系统'
+              title: '教学任务发布 - 未来教师智能分析平台'
             }
           },
           {
@@ -199,7 +199,7 @@ const routes: RouteRecordRaw[] = [
             name: 'MyTasks',
             component: () => import('@/views/Teaching/MyTasks.vue'),
             meta: {
-              title: '我的教学任务 - 未来教师实习实训系统'
+              title: '我的教学任务 - 未来教师智能分析平台'
             }
           },
           {
@@ -207,7 +207,7 @@ const routes: RouteRecordRaw[] = [
             name: 'StudentLearningStatus',
             component: () => import('@/views/Teaching/StudentLearningStatus.vue'),
             meta: {
-              title: '师范生学习情况 - 未来教师实习实训系统'
+              title: '师范生学习情况 - 未来教师智能分析平台'
             }
           },
           {
@@ -215,7 +215,7 @@ const routes: RouteRecordRaw[] = [
             name: 'AIEvaluation',
             component: () => import('@/views/Teaching/AIEvaluation.vue'),
             meta: {
-              title: 'AI综合教学评价 - 未来教师实习实训系统'
+              title: 'AI综合教学评价 - 未来教师智能分析平台'
             }
           },
           {
@@ -223,7 +223,7 @@ const routes: RouteRecordRaw[] = [
             name: 'AudioAnalysis',
             component: () => import('@/views/Teaching/AIAudioAnalysis.vue'),
             meta: {
-              title: 'AI音频分析 - 未来教师实习实训系统'
+              title: 'AI音频分析 - 未来教师智能分析平台'
             }
           },
           {
@@ -231,7 +231,7 @@ const routes: RouteRecordRaw[] = [
             name: 'VideoAnalysis',
             component: () => import('@/views/Teaching/AIVideoAnalysis.vue'),
             meta: {
-              title: 'AI视频分析 - 未来教师实习实训系统'
+              title: 'AI视频分析 - 未来教师智能分析平台'
             }
           }
         ]

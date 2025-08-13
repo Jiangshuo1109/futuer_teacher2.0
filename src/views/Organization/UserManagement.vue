@@ -131,7 +131,7 @@ const tableData = ref<User[]>([
   {
     id: 1,
     username: 'teacher001',
-    realName: '张老师',
+    realName: '王明华',
     role: 'teacher',
     email: 'teacher001@example.com',
     phone: '13800138001',
@@ -151,7 +151,7 @@ const tableData = ref<User[]>([
   {
     id: 3,
     username: 'teacher002',
-    realName: '王老师',
+    realName: '李晓雯',
     role: 'teacher',
     email: 'teacher002@example.com',
     phone: '13800138003',

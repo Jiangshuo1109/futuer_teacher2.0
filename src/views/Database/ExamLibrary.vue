@@ -31,9 +31,9 @@
           </el-select>
           <el-select v-model="selectedSubject" placeholder="学科分类" style="width: 120px; margin-right: 8px" clearable>
             <el-option label="全部学科" value="" />
-            <el-option label="计算机" value="计算机" />
-            <el-option label="教育学" value="教育学" />
-            <el-option label="数学" value="数学" />
+            <el-option label="语文" value="语文" />
+            <el-option label="现代文阅读" value="现代文阅读" />
+            <el-option label="古诗词鉴赏" value="古诗词鉴赏" />
           </el-select>
           <el-input
             v-model="searchKeyword"
@@ -147,9 +147,9 @@ const total = ref(100)
 const tableData = ref<Exam[]>([
   {
     id: 1,
-    title: 'Java程序设计期末考试',
+    title: '现代文阅读理解测试',
     type: 'final',
-    subject: '计算机',
+    subject: '语文',
     questionCount: 50,
     totalScore: 100,
     duration: 120,
@@ -161,9 +161,9 @@ const tableData = ref<Exam[]>([
   },
   {
     id: 2,
-    title: '数据结构随堂测试',
+    title: '古诗词鉴赏期末考试',
     type: 'quiz',
-    subject: '计算机',
+    subject: '语文',
     questionCount: 20,
     totalScore: 50,
     duration: 45,
@@ -175,9 +175,9 @@ const tableData = ref<Exam[]>([
   },
   {
     id: 3,
-    title: '教育心理学期中考试',
+    title: '文言文翻译测验',
     type: 'midterm',
-    subject: '教育学',
+    subject: '语文',
     questionCount: 40,
     totalScore: 100,
     duration: 90,

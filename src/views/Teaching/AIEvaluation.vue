@@ -19,32 +19,14 @@
             <el-icon><ArrowLeft /></el-icon>
             返回
           </el-button>
-          <div class="analysis-nav">
-            <el-button-group>
-              <el-button @click="goToAudioAnalysis" class="nav-btn">
-                <el-icon><Microphone /></el-icon>
-                音频分析
-              </el-button>
-              <el-button @click="goToVideoAnalysis" class="nav-btn">
-                <el-icon><VideoCamera /></el-icon>
-                视频分析
-              </el-button>
-              <el-button type="primary" disabled class="nav-btn">
-                <el-icon><Cpu /></el-icon>
-                综合评价
-              </el-button>
-            </el-button-group>
-          </div>
-          <div class="action-buttons">
-            <el-button type="primary" @click="handleExport" class="action-btn">
-              <el-icon><Download /></el-icon>
-              导出报告
-            </el-button>
-            <el-button type="success" @click="handleShare" class="action-btn">
-              <el-icon><Share /></el-icon>
-              分享
-            </el-button>
-          </div>
+          <el-button type="primary" @click="handleExport" class="action-btn">
+            <el-icon><Download /></el-icon>
+            导出报告
+          </el-button>
+          <el-button type="success" @click="handleShare" class="action-btn">
+            <el-icon><Share /></el-icon>
+            分享
+          </el-button>
         </div>
       </div>
     </div>
@@ -215,8 +197,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { 
   ArrowLeft, Download, TrendCharts, User, Clock, 
-  Cpu, DataAnalysis, Lightbulb, Star, ArrowUp, ArrowDown, Minus, Share,
-  Microphone, VideoCamera
+  Cpu, DataAnalysis, Lightbulb, Star, ArrowUp, ArrowDown, Minus, Share
 } from '@element-plus/icons-vue'
 import { use } from 'echarts/core'
 import { RadarChart } from 'echarts/charts'
@@ -602,15 +583,6 @@ const handleShare = () => {
   ElMessage.success('分享链接已复制到剪贴板')
 }
 
-// 页面跳转方法
-const goToAudioAnalysis = () => {
-  router.push(`/dashboard/teaching/task/${taskId}/student/${studentId}/audio-analysis`)
-}
-
-const goToVideoAnalysis = () => {
-  router.push(`/dashboard/teaching/task/${taskId}/student/${studentId}/video-analysis`)
-}
-
 // 数据获取函数
 const fetchEvaluationData = async () => {
   try {
@@ -622,7 +594,7 @@ const fetchEvaluationData = async () => {
     await new Promise(resolve => setTimeout(resolve, 500))
     
     // 根据studentId更新学生姓名
-    const studentNames = ['张三', '李四', '王五', '赵六', '钱七']
+    const studentNames = ['李明轩', '张雨涵', '陈思琪', '刘浩然', '王欣怡']
     const index = parseInt(studentId) % studentNames.length
     studentName.value = studentNames[index] || '未知学生'
     
@@ -717,25 +689,8 @@ onMounted(() => {
 
 .header-actions {
   display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.analysis-nav {
-  display: flex;
-  align-items: center;
-}
-
-.nav-btn {
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 13px;
-}
-
-.action-buttons {
-  display: flex;
   gap: 12px;
+  align-items: flex-start;
 }
 
 .action-btn {

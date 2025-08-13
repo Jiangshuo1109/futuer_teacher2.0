@@ -122,14 +122,7 @@
         </el-table-column>
         <el-table-column prop="course" label="课程" width="120" />
         <el-table-column prop="teacher" label="发布教师" width="100" />
-        <el-table-column prop="progress" label="学习进度" width="120">
-          <template #default="{ row }">
-            <div class="progress-cell">
-              <el-progress :percentage="row.progress" :stroke-width="6" :show-text="false" />
-              <span class="progress-text">{{ row.progress }}%</span>
-            </div>
-          </template>
-        </el-table-column>
+
         <el-table-column prop="deadline" label="截止时间" width="120" />
         <el-table-column prop="submitTime" label="提交时间" width="120">
           <template #default="{ row }">
@@ -142,33 +135,43 @@
             <el-tag :type="getStatusTagType(row.status)">{{ getStatusLabel(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="220" fixed="right">
+        <el-table-column label="操作" width="280" fixed="right">
           <template #default="{ row }">
-            <el-button size="small" @click="viewTask(row)">查看详情</el-button>
-            <el-button 
-              v-if="row.status === 'in-progress'" 
-              size="small" 
-              type="primary" 
-              @click="continueTask(row)"
-            >
-              继续学习
-            </el-button>
-            <el-button 
-              v-if="row.source === 'custom'" 
-              size="small" 
-              type="warning" 
-              @click="editTask(row)"
-            >
-              编辑
-            </el-button>
-            <el-button 
-              v-if="row.status === 'completed'" 
-              size="small" 
-              type="success" 
-              @click="viewResult(row)"
-            >
-              查看结果
-            </el-button>
+            <div class="action-buttons">
+              <el-tooltip content="查看详情" placement="top">
+                <el-button type="info" size="small" circle @click="viewTask(row)">
+                  <el-icon><View /></el-icon>
+                </el-button>
+              </el-tooltip>
+              <el-tooltip content="继续学习" placement="top" v-if="row.status === 'in-progress'">
+                <el-button type="primary" size="small" circle @click="continueTask(row)">
+                  <el-icon><VideoPlay /></el-icon>
+                </el-button>
+              </el-tooltip>
+              <el-tooltip content="编辑" placement="top" v-if="row.source === 'custom'">
+                <el-button type="warning" size="small" circle @click="editTask(row)">
+                  <el-icon><Edit /></el-icon>
+                </el-button>
+              </el-tooltip>
+              <!-- AI分析按钮组 - 仅在已完成状态显示 -->
+              <template v-if="row.status === 'completed'">
+                <el-tooltip content="AI综合分析" placement="top">
+                  <el-button type="success" size="small" circle @click="viewAIEvaluation(row)">
+                    <el-icon><DataAnalysis /></el-icon>
+                  </el-button>
+                </el-tooltip>
+                <el-tooltip content="AI音频分析" placement="top">
+                  <el-button type="primary" size="small" circle @click="viewAIAudioAnalysis(row)">
+                    <el-icon><Microphone /></el-icon>
+                  </el-button>
+                </el-tooltip>
+                <el-tooltip content="AI视频分析" placement="top">
+                  <el-button type="warning" size="small" circle @click="viewAIVideoAnalysis(row)">
+                    <el-icon><VideoCamera /></el-icon>
+                  </el-button>
+                </el-tooltip>
+              </template>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -189,7 +192,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { List, Check, Clock, Star, Plus, Refresh, Download, Search } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
+import { List, Check, Clock, Star, Plus, Refresh, Download, Search, View, VideoPlay, Edit, DataAnalysis, Microphone, VideoCamera } from '@element-plus/icons-vue'
 import { use } from 'echarts/core'
 import { LineChart, PieChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
@@ -222,9 +226,9 @@ const total = ref(0)
 const taskData = ref<Task[]>([
   {
     id: 1,
-    title: '教育心理学基础理论学习',
+    title: '现代文阅读理解练习',
     source: 'received',
-    course: '教育心理学',
+    course: '现代文阅读',
     teacher: '张教授',
     progress: 85,
     deadline: '2024-01-25',
@@ -233,19 +237,19 @@ const taskData = ref<Task[]>([
   },
   {
     id: 2,
-    title: '课堂管理技巧实践',
+    title: '古诗词背诵默写',
     source: 'received',
-    course: '课堂管理',
-    teacher: '李老师',
+    course: '古诗词鉴赏',
+    teacher: '王明华',
     progress: 60,
     deadline: '2024-01-28',
     status: 'in-progress'
   },
   {
     id: 3,
-    title: '个人教学反思总结',
+    title: '作文写作训练',
     source: 'custom',
-    course: '自主学习',
+    course: '作文指导',
     teacher: '自己',
     progress: 30,
     deadline: '2024-02-01',
@@ -254,9 +258,9 @@ const taskData = ref<Task[]>([
   },
   {
     id: 4,
-    title: '学生评价体系研究',
+    title: '文言文翻译练习',
     source: 'received',
-    course: '教育评价',
+    course: '文言文阅读',
     teacher: '赵教授',
     progress: 0,
     deadline: '2024-01-20',
@@ -264,9 +268,9 @@ const taskData = ref<Task[]>([
   },
   {
     id: 5,
-    title: '多媒体教学设计',
+    title: '语文综合素养提升',
     source: 'custom',
-    course: '教学设计',
+    course: '语文综合',
     teacher: '自己',
     progress: 100,
     deadline: '2024-01-22',
@@ -364,6 +368,28 @@ const editTask = (row: Task) => {
 
 const viewResult = (row: Task) => {
   ElMessage.info(`查看结果: ${row.title}`)
+}
+
+// 路由实例
+const router = useRouter()
+
+// AI分析方法
+const viewAIEvaluation = (row: Task) => {
+  router.push({
+    path: `/dashboard/teaching/task/${row.id}/student/2/ai-evaluation`
+  })
+}
+
+const viewAIAudioAnalysis = (row: Task) => {
+  router.push({
+    path: `/dashboard/teaching/task/${row.id}/student/2/audio-analysis`
+  })
+}
+
+const viewAIVideoAnalysis = (row: Task) => {
+  router.push({
+    path: `/dashboard/teaching/task/${row.id}/student/2/video-analysis`
+  })
 }
 
 // ECharts 配置

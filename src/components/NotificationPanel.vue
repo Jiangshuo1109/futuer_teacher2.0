@@ -65,21 +65,21 @@ const notifications = ref<Notification[]>([
   {
     id: 1,
     title: '新的教学任务',
-    message: '《Web前端开发》课程有新的教学任务已发布，请及时查看。',
+    message: '《现代文阅读》课程有新的教学任务已发布，请及时查看。',
     time: '2小时前',
     read: false
   },
   {
     id: 2,
     title: '任务即将截止',
-    message: '《教育心理学》课程的任务“课堂观察报告”将于明天截止。',
+    message: '《古诗词鉴赏》课程的任务"诗词赏析报告"将于明天截止。',
     time: '1天前',
     read: false
   },
   {
     id: 3,
     title: '成绩已发布',
-    message: '《微格教学》课程的“模拟授课”成绩已发布，快去看看吧！',
+    message: '《作文指导》课程的"写作练习"成绩已发布，快去看看吧！',
     time: '3天前',
     read: true
   }

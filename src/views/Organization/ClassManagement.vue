@@ -105,7 +105,7 @@ const tableData = ref<Class[]>([
     major: '计算机科学与技术',
     grade: '2021',
     studentCount: 42,
-    advisor: '张老师',
+    advisor: '陈建国',
     classroom: 'A101',
     status: 'active'
   },
@@ -115,7 +115,7 @@ const tableData = ref<Class[]>([
     major: '计算机科学与技术',
     grade: '2021',
     studentCount: 40,
-    advisor: '李老师',
+    advisor: '刘雅琴',
     classroom: 'A102',
     status: 'active'
   },
@@ -125,7 +125,7 @@ const tableData = ref<Class[]>([
     major: '软件工程',
     grade: '2022',
     studentCount: 38,
-    advisor: '王老师',
+    advisor: '张志强',
     classroom: 'B201',
     status: 'active'
   },
@@ -135,7 +135,7 @@ const tableData = ref<Class[]>([
     major: '学前教育',
     grade: '2023',
     studentCount: 35,
-    advisor: '刘老师',
+    advisor: '赵美丽',
     classroom: 'C301',
     status: 'active'
   }

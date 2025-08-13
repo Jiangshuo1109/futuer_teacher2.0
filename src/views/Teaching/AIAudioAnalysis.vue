@@ -1129,7 +1129,7 @@ const fetchAudioAnalysisData = async () => {
     await new Promise(resolve => setTimeout(resolve, 500))
     
     // 根据studentId更新学生姓名
-    const studentNames = ['张三', '李四', '王五', '赵六', '钱七']
+    const studentNames = ['李明轩', '张雨涵', '陈思琪', '刘浩然', '王欣怡']
     const index = parseInt(studentId) % studentNames.length
     studentName.value = studentNames[index] || '未知学生'
     

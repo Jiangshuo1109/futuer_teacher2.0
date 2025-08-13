@@ -127,7 +127,7 @@ const taskName = ref('Web前端开发基础')
 const studentData = ref<StudentLearning[]>([
   {
     studentId: '2021001',
-    studentName: '张三',
+    studentName: '李明轩',
     className: '计算机21-1班',
     progress: 85,
     status: 'in_progress',
@@ -137,7 +137,7 @@ const studentData = ref<StudentLearning[]>([
   },
   {
     studentId: '2021002',
-    studentName: '李四',
+    studentName: '张雨涵',
     className: '计算机21-1班',
     progress: 100,
     status: 'completed',
@@ -147,7 +147,7 @@ const studentData = ref<StudentLearning[]>([
   },
   {
     studentId: '2021003',
-    studentName: '王五',
+    studentName: '陈思琪',
     className: '计算机21-2班',
     progress: 45,
     status: 'in_progress',
@@ -157,7 +157,7 @@ const studentData = ref<StudentLearning[]>([
   },
   {
     studentId: '2021004',
-    studentName: '赵六',
+    studentName: '刘浩然',
     className: '计算机21-2班',
     progress: 0,
     status: 'not_started',

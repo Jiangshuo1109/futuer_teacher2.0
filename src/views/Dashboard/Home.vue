@@ -3,7 +3,7 @@
     <!-- 欢迎信息 -->
     <div class="welcome-section">
       <h1>首页</h1>
-      <p class="welcome-text">欢迎使用未来教师实习实训系统</p>
+      <p class="welcome-text">欢迎使用未来教师智能分析平台</p>
     </div>
 
     <!-- 统计卡片 -->
@@ -138,7 +138,7 @@
       <div class="notification-list">
         <div class="notification-item">
           <div class="notification-title">新的教学任务发布</div>
-          <div class="notification-desc">《Web前端开发》课程新的教学任务已发布</div>
+          <div class="notification-desc">《现代文阅读》课程新的教学任务已发布</div>
           <div class="notification-time">2小时前</div>
         </div>
         
@@ -150,7 +150,7 @@
         
         <div class="notification-item">
           <div class="notification-title">课程资料更新</div>
-          <div class="notification-desc">《教育心理学》课程资料已更新</div>
+          <div class="notification-desc">《古诗词鉴赏》课程资料已更新</div>
           <div class="notification-time">1天前</div>
         </div>
       </div>

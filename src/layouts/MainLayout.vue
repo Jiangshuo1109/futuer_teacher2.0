@@ -6,7 +6,7 @@
       <div class="sidebar-header">
         <div class="logo">
           <img src="https://www.deepvrai.com/logo/logo-site.png" alt="Logo" class="logo-image" />
-          <span v-show="!isCollapsed" class="logo-text">未来教师实习评估平台</span>
+          <span v-show="!isCollapsed" class="logo-text">未来教师智能分析平台</span>
         </div>
         <el-button
           text
