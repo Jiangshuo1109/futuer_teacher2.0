@@ -72,7 +72,7 @@
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" fixed="right">
+        <el-table-column label="操作" width="240" fixed="right">
           <template #default="{ row }">
             <div class="action-buttons">
               <el-tooltip content="安排人员" placement="top" v-if="row.taskStatus === 'draft'">
@@ -83,6 +83,11 @@
               <el-tooltip content="发布" placement="top" v-if="row.taskStatus === 'draft'">
                 <el-button type="success" size="small" circle @click="handlePublish(row)">
                   <el-icon><Promotion /></el-icon>
+                </el-button>
+              </el-tooltip>
+              <el-tooltip content="任务学情分析" placement="top" v-if="row.taskStatus === 'active' || row.taskStatus === 'completed'">
+                <el-button type="primary" size="small" circle @click="handleLearningAnalysis(row)">
+                  <el-icon><TrendCharts /></el-icon>
                 </el-button>
               </el-tooltip>
               <el-tooltip content="查看" placement="top">
@@ -283,7 +288,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox, FormInstance, FormRules } from 'element-plus'
-import { Plus, Refresh, Search, Check, UserFilled, Promotion, View, Edit, Delete } from '@element-plus/icons-vue'
+import { Plus, Refresh, Search, Check, UserFilled, Promotion, View, Edit, Delete, TrendCharts } from '@element-plus/icons-vue'
 
 // 接口定义
 interface Task {
@@ -589,6 +594,15 @@ const handleRefresh = () => {
 const handleView = (row: Task) => {
   router.push({
     name: 'StudentLearningStatus',
+    params: {
+      taskId: row.taskNumber
+    }
+  })
+}
+
+const handleLearningAnalysis = (row: Task) => {
+  router.push({
+    name: 'TaskLearningAnalysis',
     params: {
       taskId: row.taskNumber
     }

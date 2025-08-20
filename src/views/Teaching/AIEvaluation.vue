@@ -197,7 +197,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { 
   ArrowLeft, Download, TrendCharts, User, Clock, 
-  Cpu, DataAnalysis, Lightbulb, Star, ArrowUp, ArrowDown, Minus, Share
+  Cpu, DataAnalysis, Star, ArrowUp, ArrowDown, Minus, Share
 } from '@element-plus/icons-vue'
 import { use } from 'echarts/core'
 import { RadarChart } from 'echarts/charts'

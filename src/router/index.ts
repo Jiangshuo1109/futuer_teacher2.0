@@ -233,6 +233,14 @@ const routes: RouteRecordRaw[] = [
             meta: {
               title: 'AI视频分析 - 未来教师智能分析平台'
             }
+          },
+          {
+            path: 'task/:taskId/learning-analysis',
+            name: 'TaskLearningAnalysis',
+            component: () => import('@/views/Teaching/TaskLearningAnalysis.vue'),
+            meta: {
+              title: '任务学情分析 - 未来教师智能分析平台'
+            }
           }
         ]
       }
