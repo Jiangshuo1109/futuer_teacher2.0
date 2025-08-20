@@ -135,18 +135,23 @@ interface TaskAudioData {
   keywordStats: {
     totalKeywords: number
     averagePerStudent: number
-    topKeywords: { word: string, frequency: number }[]
+    topKeywords: { word: string, frequency: number, students: string[] }[]
   }
   fillerStats: {
     totalFillers: number
     averagePerStudent: number
-    commonFillers: { filler: string, frequency: number }[]
+    commonFillers: { filler: string, frequency: number, students: string[] }[]
   }
   questionStats: {
     totalQuestions: number
     averagePerStudent: number
     questionTypes: { type: string, count: number }[]
   }
+  timeDistribution: {
+    studentName: string
+    duration: number
+    rank: number
+  }[]
 }
 
 interface TaskVideoData {
@@ -256,22 +261,27 @@ const audioData = ref<TaskAudioData>({
     totalKeywords: 1248,
     averagePerStudent: 39,
     topKeywords: [
-      { word: '同学们', frequency: 156 },
-      { word: '理解', frequency: 142 },
-      { word: '分析', frequency: 128 },
-      { word: '文章', frequency: 118 },
-      { word: '作者', frequency: 98 }
+      { word: '同学们', frequency: 156, students: ['李明轩', '张雨涵', '陈思琪', '刘浩然', '王欣怡'] },
+      { word: '理解', frequency: 142, students: ['李明轩', '张雨涵', '陈思琪', '刘浩然'] },
+      { word: '分析', frequency: 128, students: ['张雨涵', '陈思琪', '刘浩然', '王欣怡'] },
+      { word: '文章', frequency: 118, students: ['李明轩', '陈思琪', '王欣怡'] },
+      { word: '作者', frequency: 98, students: ['李明轩', '张雨涵', '刘浩然'] },
+      { word: '思考', frequency: 87, students: ['张雨涵', '陈思琪', '王欣怡'] },
+      { word: '问题', frequency: 76, students: ['李明轩', '刘浩然', '王欣怡'] },
+      { word: '知识', frequency: 65, students: ['张雨涵', '陈思琪', '刘浩然'] }
     ]
   },
   fillerStats: {
     totalFillers: 328,
     averagePerStudent: 10.3,
     commonFillers: [
-      { filler: '嗯', frequency: 89 },
-      { filler: '然后', frequency: 76 },
-      { filler: '这个', frequency: 58 },
-      { filler: '那个', frequency: 42 },
-      { filler: '就是说', frequency: 32 }
+      { filler: '嗯', frequency: 89, students: ['李明轩', '张雨涵', '陈思琪'] },
+      { filler: '然后', frequency: 76, students: ['刘浩然', '王欣怡', '李明轩'] },
+      { filler: '这个', frequency: 58, students: ['张雨涵', '陈思琪'] },
+      { filler: '那个', frequency: 42, students: ['刘浩然', '王欣怡'] },
+      { filler: '就是说', frequency: 32, students: ['李明轩', '张雨涵'] },
+      { filler: '呃', frequency: 28, students: ['陈思琪', '王欣怡'] },
+      { filler: '额', frequency: 23, students: ['刘浩然', '李明轩'] }
     ]
   },
   questionStats: {
@@ -282,7 +292,19 @@ const audioData = ref<TaskAudioData>({
       { type: '判断性问题', count: 78 },
       { type: '选择性问题', count: 50 }
     ]
-  }
+  },
+  timeDistribution: [
+    { studentName: '李明轩', duration: 45.2, rank: 1 },
+    { studentName: '张雨涵', duration: 42.8, rank: 2 },
+    { studentName: '陈思琪', duration: 41.5, rank: 3 },
+    { studentName: '刘浩然', duration: 39.7, rank: 4 },
+    { studentName: '王欣怡', duration: 38.9, rank: 5 },
+    { studentName: '赵子涵', duration: 37.2, rank: 6 },
+    { studentName: '孙佳琪', duration: 36.8, rank: 7 },
+    { studentName: '周思远', duration: 35.1, rank: 8 },
+    { studentName: '吴雨桐', duration: 34.6, rank: 9 },
+    { studentName: '郑浩宇', duration: 33.9, rank: 10 }
+  ]
 })
 
 const videoData = ref<TaskVideoData>({

@@ -1,227 +1,127 @@
 <template>
   <div class="audio-analysis">
-    <!-- 音频指标统计卡片 -->
-    <div class="metrics-cards">
-      <div class="metric-card mandarin-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><Microphone /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>普通话水平</h4>
-            <p>语音标准度评估</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="mandarin-stats">
-            <div class="stat-item excellent">
-              <span class="stat-label">优秀</span>
-              <span class="stat-value">{{ audioData.mandarinStats.excellent }}人</span>
-            </div>
-            <div class="stat-item good">
-              <span class="stat-label">良好</span>
-              <span class="stat-value">{{ audioData.mandarinStats.good }}人</span>
-            </div>
-            <div class="stat-item average">
-              <span class="stat-label">一般</span>
-              <span class="stat-value">{{ audioData.mandarinStats.average }}人</span>
-            </div>
-            <div class="stat-item poor">
-              <span class="stat-label">较差</span>
-              <span class="stat-value">{{ audioData.mandarinStats.poor }}人</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="metric-card speed-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><Timer /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>语速分析</h4>
-            <p>每分钟字数统计</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="speed-info">
-            <div class="primary-stat">
-              <span class="value">{{ audioData.speedStats.averageSpeed }}</span>
-              <span class="unit">字/分钟</span>
-            </div>
-            <div class="range-info">
-              <span>范围: {{ audioData.speedStats.minSpeed }} - {{ audioData.speedStats.maxSpeed }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="metric-card volume-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><VideoCamera /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>音量控制</h4>
-            <p>声音音量分析</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="volume-info">
-            <div class="primary-stat">
-              <span class="value">{{ audioData.volumeStats.averageVolume }}</span>
-              <span class="unit">dB</span>
-            </div>
-            <div class="volume-level">
-              <span class="level-text">音量适中</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="metric-card keyword-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><Key /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>关键词使用</h4>
-            <p>教学关键词统计</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="keyword-info">
-            <div class="primary-stat">
-              <span class="value">{{ audioData.keywordStats.totalKeywords }}</span>
-              <span class="unit">个</span>
-            </div>
-            <div class="average-info">
-              <span>人均: {{ audioData.keywordStats.averagePerStudent }}个</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="metric-card filler-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><Warning /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>口头禅统计</h4>
-            <p>非必要词汇使用</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="filler-info">
-            <div class="primary-stat">
-              <span class="value">{{ audioData.fillerStats.totalFillers }}</span>
-              <span class="unit">次</span>
-            </div>
-            <div class="average-info">
-              <span>人均: {{ audioData.fillerStats.averagePerStudent }}次</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="metric-card question-card">
-        <div class="metric-header">
-          <div class="metric-icon">
-            <el-icon><QuestionFilled /></el-icon>
-          </div>
-          <div class="metric-title">
-            <h4>提问互动</h4>
-            <p>课堂提问分析</p>
-          </div>
-        </div>
-        <div class="metric-content">
-          <div class="question-info">
-            <div class="primary-stat">
-              <span class="value">{{ audioData.questionStats.totalQuestions }}</span>
-              <span class="unit">个</span>
-            </div>
-            <div class="average-info">
-              <span>人均: {{ audioData.questionStats.averagePerStudent }}个</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- 数据分布图表区域 -->
     <div class="charts-section">
-      <div class="chart-row">
+      <!-- 第一行：两个图表卡片 -->
+      <div class="chart-row-two">
         <!-- 普通话水平分布饼图 -->
         <div class="chart-card">
           <div class="chart-header">
             <h3>普通话水平分布</h3>
             <p>各等级人数占比</p>
           </div>
-          <div class="chart-placeholder">
-            <div class="placeholder-content">
-              <el-icon class="placeholder-icon"><Microphone /></el-icon>
-              <p>数据统计中...</p>
+          <div class="chart-container">
+            <div v-if="!loading" class="chart-wrapper">
+              <v-chart 
+                class="chart" 
+                :option="mandarinPieOption" 
+                :init-options="{ renderer: 'canvas' }"
+                autoresize
+              />
+            </div>
+            <div v-else class="chart-loading">
+              <el-icon class="loading-icon"><Loading /></el-icon>
+              <p>数据加载中...</p>
             </div>
           </div>
         </div>
 
-        <!-- 语速分布柱状图 -->
+        <!-- 语速区间分布条形图 -->
         <div class="chart-card">
           <div class="chart-header">
-            <h3>语速分布情况</h3>
+            <h3>语速区间分布</h3>
             <p>不同语速区间的人数分布</p>
           </div>
-          <div class="chart-placeholder">
-            <div class="placeholder-content">
-              <el-icon class="placeholder-icon"><Timer /></el-icon>
-              <p>数据统计中...</p>
+          <div class="chart-container">
+            <div v-if="!loading" class="chart-wrapper">
+              <v-chart 
+                class="chart" 
+                :option="speedDistributionOption" 
+                :init-options="{ renderer: 'canvas' }"
+                autoresize
+              />
+            </div>
+            <div v-else class="chart-loading">
+              <el-icon class="loading-icon"><Loading /></el-icon>
+              <p>数据加载中...</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="chart-row">
-        <!-- 关键词使用频率 -->
+      <!-- 第二行：三个卡片 -->
+      <div class="chart-row-three">
+        <!-- 高频关键词展示 -->
         <div class="chart-card">
           <div class="chart-header">
             <h3>高频关键词</h3>
-            <p>使用最多的教学关键词</p>
+            <p>点击查看使用该词的学生信息</p>
           </div>
-          <div class="chart-placeholder">
-            <div class="placeholder-content">
-              <el-icon class="placeholder-icon"><Key /></el-icon>
-              <p>数据统计中...</p>
+          <div class="chart-container">
+            <div v-if="!loading" class="keyword-grid">
+              <div 
+                v-for="(keyword, index) in audioData.keywordStats.topKeywords" 
+                :key="index"
+                class="keyword-item"
+                :style="{ fontSize: getKeywordSize(keyword.frequency) + 'px' }"
+                @click="handleKeywordClick(keyword)"
+              >
+                <span class="keyword-text">{{ keyword.word }}</span>
+                <span class="keyword-count">({{ keyword.frequency }})</span>
+              </div>
+            </div>
+            <div v-else class="chart-loading">
+              <el-icon class="loading-icon"><Loading /></el-icon>
+              <p>数据加载中...</p>
             </div>
           </div>
         </div>
 
-        <!-- 口头禅统计 -->
+        <!-- 口头禅展示 -->
         <div class="chart-card">
           <div class="chart-header">
-            <h3>常见口头禅</h3>
-            <p>需要注意的口头禅使用情况</p>
+            <h3>口头禅统计</h3>
+            <p>点击查看使用该词的学生信息</p>
           </div>
-          <div class="chart-placeholder">
-            <div class="placeholder-content">
-              <el-icon class="placeholder-icon"><Warning /></el-icon>
-              <p>数据统计中...</p>
+          <div class="chart-container">
+            <div v-if="!loading" class="filler-grid">
+              <div 
+                v-for="(filler, index) in audioData.fillerStats.commonFillers" 
+                :key="index"
+                class="filler-item"
+                :style="{ fontSize: getFillerSize(filler.frequency) + 'px' }"
+                @click="handleFillerClick(filler)"
+              >
+                <span class="filler-text">{{ filler.filler }}</span>
+                <span class="filler-count">({{ filler.frequency }})</span>
+              </div>
+            </div>
+            <div v-else class="chart-loading">
+              <el-icon class="loading-icon"><Loading /></el-icon>
+              <p>数据加载中...</p>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 提问类型分析 -->
-      <div class="chart-card full-width">
-        <div class="chart-header">
-          <h3>提问类型分析</h3>
-          <p>不同类型问题的使用情况</p>
-        </div>
-        <div class="chart-placeholder">
-          <div class="placeholder-content">
-            <el-icon class="placeholder-icon"><QuestionFilled /></el-icon>
-            <p>数据统计中...</p>
+        <!-- 提问类型分析 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>提问类型分析</h3>
+            <p>不同类型问题的使用情况</p>
+          </div>
+          <div class="chart-container">
+            <div v-if="!loading" class="chart-wrapper">
+              <v-chart 
+                class="chart" 
+                :option="questionTypeOption" 
+                :init-options="{ renderer: 'canvas' }"
+                autoresize
+              />
+            </div>
+            <div v-else class="chart-loading">
+              <el-icon class="loading-icon"><Loading /></el-icon>
+              <p>数据加载中...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -303,15 +203,12 @@ import {
 } from 'echarts/components'
 import VChart from 'vue-echarts'
 import {
-  Microphone,
-  Timer,
-  VideoCamera,
-  Key,
-  Warning,
-  QuestionFilled,
-  ChatDotRound
+  ChatDotRound,
+  Loading
 } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 
+// 注册ECharts组件
 use([
   CanvasRenderer,
   PieChart,
@@ -343,18 +240,23 @@ interface TaskAudioData {
   keywordStats: {
     totalKeywords: number
     averagePerStudent: number
-    topKeywords: { word: string, frequency: number }[]
+    topKeywords: { word: string, frequency: number, students: string[] }[]
   }
   fillerStats: {
     totalFillers: number
     averagePerStudent: number
-    commonFillers: { filler: string, frequency: number }[]
+    commonFillers: { filler: string, frequency: number, students: string[] }[]
   }
   questionStats: {
     totalQuestions: number
     averagePerStudent: number
     questionTypes: { type: string, count: number }[]
   }
+  timeDistribution: {
+    studentName: string
+    duration: number
+    rank: number
+  }[]
 }
 
 const props = defineProps<{
@@ -362,6 +264,8 @@ const props = defineProps<{
   audioData: TaskAudioData
   loading: boolean
 }>()
+
+
 
 // 普通话水平分布饼图
 const mandarinPieOption = computed(() => ({
@@ -450,88 +354,6 @@ const speedDistributionOption = computed(() => ({
   ]
 }))
 
-// 关键词频率图
-const keywordOption = computed(() => ({
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: {
-    type: 'value'
-  },
-  yAxis: {
-    type: 'category',
-    data: props.audioData.keywordStats.topKeywords.map(item => item.word).reverse(),
-    axisLabel: {
-      fontSize: 12
-    }
-  },
-  series: [
-    {
-      type: 'bar',
-      data: props.audioData.keywordStats.topKeywords.map(item => item.frequency).reverse(),
-      itemStyle: {
-        color: '#67c23a',
-        borderRadius: [0, 4, 4, 0]
-      },
-      label: {
-        show: true,
-        position: 'right',
-        formatter: '{c}次'
-      }
-    }
-  ]
-}))
-
-// 口头禅统计图
-const fillerOption = computed(() => ({
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    containLabel: true
-  },
-  xAxis: {
-    type: 'value'
-  },
-  yAxis: {
-    type: 'category',
-    data: props.audioData.fillerStats.commonFillers.map(item => item.filler).reverse(),
-    axisLabel: {
-      fontSize: 12
-    }
-  },
-  series: [
-    {
-      type: 'bar',
-      data: props.audioData.fillerStats.commonFillers.map(item => item.frequency).reverse(),
-      itemStyle: {
-        color: '#e6a23c',
-        borderRadius: [0, 4, 4, 0]
-      },
-      label: {
-        show: true,
-        position: 'right',
-        formatter: '{c}次'
-      }
-    }
-  ]
-}))
-
 // 提问类型分析图
 const questionTypeOption = computed(() => ({
   tooltip: {
@@ -565,175 +387,54 @@ const questionTypeOption = computed(() => ({
     }
   ]
 }))
+
+// 关键词大小计算
+const getKeywordSize = (frequency: number) => {
+  const maxFreq = Math.max(...props.audioData.keywordStats.topKeywords.map(k => k.frequency))
+  const minSize = 14
+  const maxSize = 28
+  return minSize + (frequency / maxFreq) * (maxSize - minSize)
+}
+
+// 口头禅大小计算
+const getFillerSize = (frequency: number) => {
+  const maxFreq = Math.max(...props.audioData.fillerStats.commonFillers.map(f => f.frequency))
+  const minSize = 14
+  const maxSize = 28
+  return minSize + (frequency / maxFreq) * (maxSize - minSize)
+}
+
+// 点击事件处理函数
+const handleKeywordClick = (keyword: { word: string, frequency: number, students: string[] }) => {
+  if (keyword.students && keyword.students.length > 0) {
+    const studentList = keyword.students.join('、')
+    ElMessage({
+      message: `关键词"${keyword.word}"使用学生：${studentList}`,
+      type: 'info',
+      duration: 5000,
+      showClose: true
+    })
+  }
+}
+
+const handleFillerClick = (filler: { filler: string, frequency: number, students: string[] }) => {
+  if (filler.students && filler.students.length > 0) {
+    const studentList = filler.students.join('、')
+    ElMessage({
+      message: `口头禅"${filler.filler}"使用学生：${studentList}`,
+      type: 'warning',
+      duration: 5000,
+      showClose: true
+    })
+  }
+}
 </script>
 
 <style scoped>
 .audio-analysis {
   height: 100%;
   overflow-y: auto;
-}
-
-/* 指标卡片 */
-.metrics-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 32px;
-}
-
-.metric-card {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
-  border: 1px solid transparent;
-}
-
-.metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-}
-
-.metric-card.mandarin-card:hover {
-  border-color: #67c23a;
-}
-
-.metric-card.speed-card:hover {
-  border-color: #409eff;
-}
-
-.metric-card.volume-card:hover {
-  border-color: #e6a23c;
-}
-
-.metric-card.keyword-card:hover {
-  border-color: #67c23a;
-}
-
-.metric-card.filler-card:hover {
-  border-color: #f56c6c;
-}
-
-.metric-card.question-card:hover {
-  border-color: #409eff;
-}
-
-.metric-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.metric-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #409eff, #67c23a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-}
-
-.metric-title h4 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #303133;
-  margin: 0 0 4px 0;
-}
-
-.metric-title p {
-  font-size: 12px;
-  color: #909399;
-  margin: 0;
-}
-
-.metric-content {
-  margin-top: 16px;
-}
-
-/* 普通话统计 */
-.mandarin-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.stat-item.excellent {
-  background: rgba(103, 194, 58, 0.1);
-  color: #67c23a;
-}
-
-.stat-item.good {
-  background: rgba(64, 158, 255, 0.1);
-  color: #409eff;
-}
-
-.stat-item.average {
-  background: rgba(230, 162, 60, 0.1);
-  color: #e6a23c;
-}
-
-.stat-item.poor {
-  background: rgba(245, 108, 108, 0.1);
-  color: #f56c6c;
-}
-
-.stat-label {
-  font-weight: 500;
-}
-
-.stat-value {
-  font-weight: 600;
-}
-
-/* 其他指标样式 */
-.speed-info,
-.volume-info,
-.keyword-info,
-.filler-info,
-.question-info {
-  text-align: center;
-}
-
-.primary-stat {
-  margin-bottom: 8px;
-}
-
-.primary-stat .value {
-  font-size: 28px;
-  font-weight: 700;
-  color: #303133;
-}
-
-.primary-stat .unit {
-  font-size: 14px;
-  color: #909399;
-  margin-left: 4px;
-}
-
-.range-info,
-.average-info,
-.volume-level {
-  font-size: 12px;
-  color: #606266;
-}
-
-.level-text {
-  color: #67c23a;
-  font-weight: 500;
+  padding: 0;
 }
 
 /* 图表区域 */
@@ -741,10 +442,19 @@ const questionTypeOption = computed(() => ({
   margin-bottom: 32px;
 }
 
-.chart-row {
+/* 第一行：两个图表卡片 */
+.chart-row-two {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* 第二行：三个卡片 */
+.chart-row-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin-bottom: 24px;
 }
 
@@ -756,15 +466,22 @@ const questionTypeOption = computed(() => ({
   height: 400px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.chart-card.full-width {
-  grid-column: 1 / -1;
-  height: 350px;
+.chart-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* 为三列布局中的卡片优化高度 */
+.chart-row-three .chart-card {
+  height: 380px;
 }
 
 .chart-header {
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .chart-header h3 {
@@ -783,6 +500,13 @@ const questionTypeOption = computed(() => ({
 .chart-container {
   flex: 1;
   position: relative;
+  min-height: 0;
+}
+
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .chart {
@@ -790,30 +514,102 @@ const questionTypeOption = computed(() => ({
   height: 100%;
 }
 
-.chart-placeholder {
-  flex: 1;
+.chart-loading {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 2px dashed #e4e7ed;
-}
-
-.placeholder-content {
-  text-align: center;
+  height: 100%;
   color: #909399;
 }
 
-.placeholder-icon {
-  font-size: 48px;
+.loading-icon {
+  font-size: 32px;
   margin-bottom: 12px;
-  color: #c0c4cc;
+  animation: spin 1s linear infinite;
 }
 
-.placeholder-content p {
-  font-size: 14px;
-  margin: 0;
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 关键词网格 */
+.keyword-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+.keyword-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #409eff, #67c23a);
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.3);
+}
+
+.keyword-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(64, 158, 255, 0.4);
+}
+
+.keyword-text {
+  font-weight: bold;
+}
+
+.keyword-count {
+  font-size: 0.8em;
+  opacity: 0.9;
+}
+
+/* 口头禅网格 */
+.filler-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+.filler-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #f56c6c, #e6a23c);
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(245, 108, 108, 0.3);
+}
+
+.filler-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(245, 108, 108, 0.4);
+}
+
+.filler-text {
+  font-weight: bold;
+}
+
+.filler-count {
+  font-size: 0.8em;
+  opacity: 0.9;
 }
 
 /* AI报告区域 */
@@ -826,6 +622,9 @@ const questionTypeOption = computed(() => ({
   border: none;
   margin-top: 32px;
   height: auto;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .ai-header {
@@ -927,23 +726,46 @@ const questionTypeOption = computed(() => ({
 }
 
 /* 响应式设计 */
+@media (max-width: 1200px) {
+  .chart-row-three {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+}
+
 @media (max-width: 768px) {
-  .metrics-cards {
+  .chart-row-two,
+  .chart-row-three {
     grid-template-columns: 1fr;
     gap: 16px;
   }
   
-  .chart-row {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .mandarin-stats {
-    grid-template-columns: 1fr;
+  .chart-card {
+    height: 350px;
   }
   
   .analysis-items {
     grid-template-columns: 1fr;
+  }
+  
+  .keyword-grid,
+  .filler-grid {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-card {
+    height: 300px;
+    padding: 16px;
+  }
+  
+  .chart-header h3 {
+    font-size: 14px;
+  }
+  
+  .chart-header p {
+    font-size: 12px;
   }
 }
 </style>

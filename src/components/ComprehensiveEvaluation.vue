@@ -105,27 +105,32 @@
       </div>
     </div>
 
-    <!-- 详细评价分析 -->
-    <div class="detailed-analysis">
+    <!-- 师范生课堂用时分布图 -->
+    <div class="time-distribution-section">
       <div class="section-card">
         <div class="card-header">
-          <h3>详细评价分析</h3>
-          <p>各维度详细分析结果</p>
+          <h3>师范生课堂用时分布图</h3>
+          <p>每个学生的用时情况排行</p>
         </div>
-        <div class="analysis-grid">
-          <div
-            v-for="(dimension, index) in dimensionAnalysis"
-            :key="index"
-            class="analysis-item"
-          >
-            <div class="analysis-header">
-              <el-icon :class="dimension.icon" class="analysis-icon" />
-              <h4>{{ dimension.name }}</h4>
-              <el-tag :type="dimension.level === 'excellent' ? 'success' : dimension.level === 'good' ? 'primary' : 'warning'" size="small">
-                {{ getLevelText(dimension.level) }}
-              </el-tag>
-            </div>
-            <p class="analysis-content">{{ dimension.analysis }}</p>
+        <div class="time-distribution-chart">
+          <v-chart :option="timeDistributionOption" class="time-chart-container" />
+        </div>
+        <div class="time-stats">
+          <div class="stat-item">
+            <span class="stat-label">平均用时:</span>
+            <span class="stat-value">{{ averageTime }}分钟</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">最长用时:</span>
+            <span class="stat-value">{{ maxTime }}分钟</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">最短用时:</span>
+            <span class="stat-value">{{ minTime }}分钟</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">标准差:</span>
+            <span class="stat-value">{{ timeStandardDeviation }}分钟</span>
           </div>
         </div>
       </div>
@@ -486,6 +491,123 @@ const distributionOption = computed(() => ({
   }
 }))
 
+// 课堂用时分布数据
+const timeDistributionData = [
+  { studentName: '李明轩', duration: 45.2, rank: 1 },
+  { studentName: '张雨涵', duration: 42.8, rank: 2 },
+  { studentName: '陈思琪', duration: 41.5, rank: 3 },
+  { studentName: '刘浩然', duration: 39.7, rank: 4 },
+  { studentName: '王欣怡', duration: 38.9, rank: 5 },
+  { studentName: '赵子涵', duration: 37.2, rank: 6 },
+  { studentName: '孙佳琪', duration: 36.8, rank: 7 },
+  { studentName: '周思远', duration: 35.1, rank: 8 },
+  { studentName: '吴雨桐', duration: 34.6, rank: 9 },
+  { studentName: '郑浩宇', duration: 33.9, rank: 10 },
+  { studentName: '马晓雯', duration: 32.5, rank: 11 },
+  { studentName: '林志强', duration: 31.8, rank: 12 },
+  { studentName: '黄美丽', duration: 30.9, rank: 13 },
+  { studentName: '徐建国', duration: 29.7, rank: 14 },
+  { studentName: '朱小红', duration: 28.3, rank: 15 }
+]
+
+// 课堂用时统计
+const averageTime = computed(() => {
+  const total = timeDistributionData.reduce((sum, item) => sum + item.duration, 0)
+  return (total / timeDistributionData.length).toFixed(1)
+})
+
+const maxTime = computed(() => {
+  return Math.max(...timeDistributionData.map(item => item.duration)).toFixed(1)
+})
+
+const minTime = computed(() => {
+  return Math.min(...timeDistributionData.map(item => item.duration)).toFixed(1)
+})
+
+const timeStandardDeviation = computed(() => {
+  const avg = parseFloat(averageTime.value)
+  const variance = timeDistributionData.reduce((sum, item) => {
+    return sum + Math.pow(item.duration - avg, 2)
+  }, 0) / timeDistributionData.length
+  return Math.sqrt(variance).toFixed(1)
+})
+
+// 课堂用时分布图配置
+const timeDistributionOption = computed(() => ({
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    },
+    formatter: (params: any) => {
+      return `${params[0].name}: ${params[0].value}分钟`
+    }
+  },
+  grid: {
+    left: '15%',
+    right: '10%',
+    top: '10%',
+    bottom: '15%'
+  },
+  xAxis: {
+    type: 'category',
+    data: timeDistributionData.map(item => item.studentName),
+    axisLabel: {
+      fontSize: 11,
+      rotate: 45,
+      interval: 0
+    }
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {
+      formatter: '{value}分钟'
+    },
+    name: '用时(分钟)',
+    nameTextStyle: {
+      fontSize: 12,
+      color: '#666'
+    }
+  },
+  series: [
+    {
+      type: 'bar',
+      data: timeDistributionData.map(item => item.duration),
+      itemStyle: {
+        color: (params: any) => {
+          // 根据排名设置颜色
+          if (params.dataIndex < 3) return '#67c23a' // 前三名绿色
+          if (params.dataIndex < 8) return '#409eff' // 4-8名蓝色
+          if (params.dataIndex < 12) return '#e6a23c' // 9-12名橙色
+          return '#f56c6c' // 其他红色
+        },
+        borderRadius: [4, 4, 0, 0]
+      },
+      label: {
+        show: true,
+        position: 'top',
+        formatter: '{c}分钟',
+        fontSize: 10
+      },
+      markLine: {
+        data: [
+          {
+            type: 'average',
+            name: '平均值',
+            lineStyle: {
+              color: '#909399',
+              type: 'dashed'
+            },
+            label: {
+              formatter: '平均: {c}分钟'
+            }
+          }
+        ]
+      }
+    }
+  ]
+}))
+
 // 工具方法
 const getLevelText = (level: string) => {
   const levelMap: Record<string, string> = {
@@ -711,55 +833,56 @@ const getLevelText = (level: string) => {
   color: #303133;
 }
 
-/* 详细分析区域 */
-.detailed-analysis {
+/* 课堂用时分布区域 */
+.time-distribution-section {
   margin-top: 48px;
   margin-bottom: 32px;
 }
 
-.analysis-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 20px;
-  padding: 16px 0;
-}
-
-.analysis-item {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  min-height: 120px;
-  border-left: 4px solid #409eff;
-}
-
-.analysis-header {
+.time-distribution-section .section-card {
+  height: auto;
+  min-height: 450px;
+  padding: 24px;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  flex-direction: column;
 }
 
-.analysis-icon {
-  font-size: 20px;
-  color: #409eff;
-}
-
-.analysis-header h4 {
+.time-distribution-chart {
   flex: 1;
-  font-size: 16px;
+  margin-bottom: 20px;
+  height: 350px;
+  overflow: hidden;
+}
+
+.time-chart-container {
+  width: 100%;
+  height: 350px;
+}
+
+.time-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f2f5;
+  flex-shrink: 0;
+}
+
+.time-stats .stat-item {
+  text-align: center;
+}
+
+.time-stats .stat-label {
+  display: block;
+  font-size: 12px;
+  color: #909399;
+  margin-bottom: 4px;
+}
+
+.time-stats .stat-value {
+  font-size: 18px;
   font-weight: 600;
   color: #303133;
-  margin: 0;
-}
-
-.analysis-content {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #606266;
-  margin: 0;
 }
 
 /* AI报告区域 */
