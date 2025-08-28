@@ -18,7 +18,11 @@
           </el-button>
         </div>
         <div class="toolbar-right">
-          <el-select v-model="filterRole" placeholder="选择角色" style="width: 120px; margin-right: 8px">
+          <el-select
+            v-model="filterRole"
+            placeholder="选择角色"
+            style="width: 120px; margin-right: 8px"
+          >
             <el-option label="全部" value="" />
             <el-option label="教师" value="teacher" />
             <el-option label="学生" value="student" />
@@ -54,7 +58,7 @@
         <el-table-column prop="role" label="角色" width="100">
           <template #default="{ row }">
             <el-tag :type="row.role === 'teacher' ? 'primary' : 'success'">
-              {{ row.role === 'teacher' ? '教师' : '学生' }}
+              {{ row.role === "teacher" ? "教师" : "学生" }}
             </el-tag>
           </template>
         </el-table-column>
@@ -63,26 +67,36 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '正常' : '禁用' }}
+              {{ row.status === "active" ? "正常" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="lastLogin" label="最后登录" width="180" />
         <el-table-column label="操作" width="200" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="warning" size="small" text @click="handleResetPassword(row)">
+            <el-button
+              type="warning"
+              size="small"
+              text
+              @click="handleResetPassword(row)"
+            >
               重置密码
             </el-button>
-            <el-button 
+            <el-button
               :type="row.status === 'active' ? 'danger' : 'success'"
-              size="small" 
-              text 
+              size="small"
+              text
               @click="handleToggleStatus(row)"
             >
-              {{ row.status === 'active' ? '禁用' : '启用' }}
+              {{ row.status === "active" ? "禁用" : "启用" }}
             </el-button>
           </template>
         </el-table-column>
@@ -104,157 +118,162 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { Plus, Refresh, Search, User } from '@element-plus/icons-vue'
+import { ref, computed, onMounted } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { Plus, Refresh, Search, User } from "@element-plus/icons-vue";
 
 interface User {
-  id: number
-  username: string
-  realName: string
-  role: 'teacher' | 'student'
-  email: string
-  phone: string
-  avatar?: string
-  status: 'active' | 'inactive'
-  lastLogin: string
+  id: number;
+  username: string;
+  realName: string;
+  role: "teacher" | "student";
+  email: string;
+  phone: string;
+  avatar?: string;
+  status: "active" | "inactive";
+  lastLogin: string;
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const filterRole = ref('')
-const currentPage = ref(1)
-const pageSize = ref(10)
-const total = ref(0)
+const loading = ref(false);
+const searchKeyword = ref("");
+const filterRole = ref("");
+const currentPage = ref(1);
+const pageSize = ref(10);
+const total = ref(0);
 
 const tableData = ref<User[]>([
   {
     id: 1,
-    username: 'teacher001',
-    realName: '王明华',
-    role: 'teacher',
-    email: 'teacher001@example.com',
-    phone: '13800138001',
-    status: 'active',
-    lastLogin: '2024-01-15 09:30:00'
+    username: "teacher001",
+    realName: "王明华",
+    role: "teacher",
+    email: "teacher001@example.com",
+    phone: "13800138001",
+    status: "active",
+    lastLogin: "2024-01-15 09:30:00",
   },
   {
     id: 2,
-    username: 'student001',
-    realName: '李同学',
-    role: 'student',
-    email: 'student001@example.com',
-    phone: '13800138002',
-    status: 'active',
-    lastLogin: '2024-01-15 10:15:00'
+    username: "student001",
+    realName: "李同学",
+    role: "student",
+    email: "student001@example.com",
+    phone: "13800138002",
+    status: "active",
+    lastLogin: "2024-01-15 10:15:00",
   },
   {
     id: 3,
-    username: 'teacher002',
-    realName: '李晓雯',
-    role: 'teacher',
-    email: 'teacher002@example.com',
-    phone: '13800138003',
-    status: 'active',
-    lastLogin: '2024-01-14 16:20:00'
+    username: "teacher002",
+    realName: "李晓雯",
+    role: "teacher",
+    email: "teacher002@example.com",
+    phone: "13800138003",
+    status: "active",
+    lastLogin: "2024-01-14 16:20:00",
   },
   {
     id: 4,
-    username: 'student002',
-    realName: '赵同学',
-    role: 'student',
-    email: 'student002@example.com',
-    phone: '13800138004',
-    status: 'inactive',
-    lastLogin: '2024-01-10 14:30:00'
-  }
-])
+    username: "student002",
+    realName: "赵同学",
+    role: "student",
+    email: "student002@example.com",
+    phone: "13800138004",
+    status: "inactive",
+    lastLogin: "2024-01-10 14:30:00",
+  },
+]);
 
 const filteredTableData = computed(() => {
-  let filtered = tableData.value
-  
+  let filtered = tableData.value;
+
   if (filterRole.value) {
-    filtered = filtered.filter(item => item.role === filterRole.value)
+    filtered = filtered.filter((item) => item.role === filterRole.value);
   }
-  
+
   if (searchKeyword.value) {
-    filtered = filtered.filter(item => 
-      item.username.toLowerCase().includes(searchKeyword.value.toLowerCase()) ||
-      item.realName.toLowerCase().includes(searchKeyword.value.toLowerCase()) ||
-      item.email.toLowerCase().includes(searchKeyword.value.toLowerCase())
-    )
+    filtered = filtered.filter(
+      (item) =>
+        item.username
+          .toLowerCase()
+          .includes(searchKeyword.value.toLowerCase()) ||
+        item.realName
+          .toLowerCase()
+          .includes(searchKeyword.value.toLowerCase()) ||
+        item.email.toLowerCase().includes(searchKeyword.value.toLowerCase()),
+    );
   }
-  
-  return filtered
-})
+
+  return filtered;
+});
 
 const handleAdd = () => {
-  ElMessage.info('新增用户功能开发中')
-}
+  ElMessage.info("新增用户功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleEdit = (row: User) => {
-  ElMessage.info(`编辑用户: ${row.realName}`)
-}
+  ElMessage.info(`编辑用户: ${row.realName}`);
+};
 
 const handleResetPassword = async (row: User) => {
   try {
     await ElMessageBox.confirm(
       `确定要重置用户 "${row.realName}" 的密码吗？`,
-      '重置密码确认',
+      "重置密码确认",
       {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }
-    )
-    
-    ElMessage.success('密码重置成功，新密码已发送到用户邮箱')
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      },
+    );
+
+    ElMessage.success("密码重置成功，新密码已发送到用户邮箱");
   } catch {
     // 用户取消
   }
-}
+};
 
 const handleToggleStatus = async (row: User) => {
-  const action = row.status === 'active' ? '禁用' : '启用'
-  
+  const action = row.status === "active" ? "禁用" : "启用";
+
   try {
     await ElMessageBox.confirm(
       `确定要${action}用户 "${row.realName}" 吗？`,
       `${action}用户确认`,
       {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }
-    )
-    
-    row.status = row.status === 'active' ? 'inactive' : 'active'
-    ElMessage.success(`用户${action}成功`)
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      },
+    );
+
+    row.status = row.status === "active" ? "inactive" : "active";
+    ElMessage.success(`用户${action}成功`);
   } catch {
     // 用户取消
   }
-}
+};
 
 const handleSizeChange = (val: number) => {
-  pageSize.value = val
-  currentPage.value = 1
-}
+  pageSize.value = val;
+  currentPage.value = 1;
+};
 
 const handleCurrentChange = (val: number) => {
-  currentPage.value = val
-}
+  currentPage.value = val;
+};
 
 onMounted(() => {
-  total.value = tableData.value.length
-})
+  total.value = tableData.value.length;
+});
 </script>
 
 <style scoped>
@@ -278,33 +297,5 @@ onMounted(() => {
   margin: 0;
 }
 
-.content-card {
-  background: white;
-  border-radius: 8px;
-  padding: 24px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
-
-.toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.toolbar-left {
-  display: flex;
-  gap: 8px;
-}
-
-.toolbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.pagination {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-}
+/* 使用全局content-card样式，移除重复定义 */
 </style>

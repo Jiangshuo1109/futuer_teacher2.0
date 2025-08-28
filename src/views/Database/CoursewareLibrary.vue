@@ -22,14 +22,24 @@
           </el-button>
         </div>
         <div class="toolbar-right">
-          <el-select v-model="selectedType" placeholder="文件类型" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedType"
+            placeholder="文件类型"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部类型" value="" />
             <el-option label="PPT" value="ppt" />
             <el-option label="PDF" value="pdf" />
             <el-option label="Word" value="word" />
             <el-option label="视频" value="video" />
           </el-select>
-          <el-select v-model="selectedSubject" placeholder="学科分类" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedSubject"
+            placeholder="学科分类"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部学科" value="" />
             <el-option label="语文" value="语文" />
             <el-option label="现代文阅读" value="现代文阅读" />
@@ -61,7 +71,9 @@
               </el-icon>
               <div class="file-details">
                 <div class="file-name">{{ row.name }}</div>
-                <div class="file-meta">{{ row.size }} | {{ row.uploadTime }}</div>
+                <div class="file-meta">
+                  {{ row.size }} | {{ row.uploadTime }}
+                </div>
               </div>
             </div>
           </template>
@@ -78,23 +90,57 @@
         <el-table-column prop="downloadCount" label="下载次数" width="100" />
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
-            <el-tag :type="row.status === 'approved' ? 'success' : row.status === 'pending' ? 'warning' : 'danger'">
-              {{ row.status === 'approved' ? '已审核' : row.status === 'pending' ? '待审核' : '已拒绝' }}
+            <el-tag
+              :type="
+                row.status === 'approved'
+                  ? 'success'
+                  : row.status === 'pending'
+                    ? 'warning'
+                    : 'danger'
+              "
+            >
+              {{
+                row.status === "approved"
+                  ? "已审核"
+                  : row.status === "pending"
+                    ? "待审核"
+                    : "已拒绝"
+              }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="200" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handlePreview(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handlePreview(row)"
+            >
               预览
             </el-button>
-            <el-button type="success" size="small" text @click="handleDownload(row)">
+            <el-button
+              type="success"
+              size="small"
+              text
+              @click="handleDownload(row)"
+            >
               下载
             </el-button>
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -115,117 +161,125 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Upload, FolderAdd, Refresh, Search, Document, VideoPlay, Files } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import {
+  Upload,
+  FolderAdd,
+  Refresh,
+  Search,
+  Document,
+  VideoPlay,
+  Files,
+} from "@element-plus/icons-vue";
 
 interface Courseware {
-  id: number
-  name: string
-  type: string
-  subject: string
-  size: string
-  uploader: string
-  downloadCount: number
-  status: 'approved' | 'pending' | 'rejected'
-  uploadTime: string
+  id: number;
+  name: string;
+  type: string;
+  subject: string;
+  size: string;
+  uploader: string;
+  downloadCount: number;
+  status: "approved" | "pending" | "rejected";
+  uploadTime: string;
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const selectedType = ref('')
-const selectedSubject = ref('')
-const currentPage = ref(1)
-const pageSize = ref(10)
-const total = ref(100)
+const loading = ref(false);
+const searchKeyword = ref("");
+const selectedType = ref("");
+const selectedSubject = ref("");
+const currentPage = ref(1);
+const pageSize = ref(10);
+const total = ref(100);
 
 const tableData = ref<Courseware[]>([
   {
     id: 1,
-    name: '现代文阅读技巧.pptx',
-    type: 'ppt',
-    subject: '语文',
-    size: '2.5MB',
-    uploader: '张教授',
+    name: "现代文阅读技巧.pptx",
+    type: "ppt",
+    subject: "语文",
+    size: "2.5MB",
+    uploader: "张教授",
     downloadCount: 45,
-    status: 'approved',
-    uploadTime: '2024-01-15'
+    status: "approved",
+    uploadTime: "2024-01-15",
   },
   {
     id: 2,
-    name: '古诗词鉴赏方法.pdf',
-    type: 'pdf',
-    subject: '语文',
-    size: '1.8MB',
-    uploader: '李教授',
+    name: "古诗词鉴赏方法.pdf",
+    type: "pdf",
+    subject: "语文",
+    size: "1.8MB",
+    uploader: "李教授",
     downloadCount: 32,
-    status: 'approved',
-    uploadTime: '2024-01-12'
+    status: "approved",
+    uploadTime: "2024-01-12",
   },
   {
     id: 3,
-    name: '作文写作指导.mp4',
-    type: 'video',
-    subject: '语文',
-    size: '125MB',
-    uploader: '王教授',
+    name: "作文写作指导.mp4",
+    type: "video",
+    subject: "语文",
+    size: "125MB",
+    uploader: "王教授",
     downloadCount: 18,
-    status: 'pending',
-    uploadTime: '2024-01-10'
-  }
-])
+    status: "pending",
+    uploadTime: "2024-01-10",
+  },
+]);
 
 const getFileIconClass = (type: string) => {
   const typeMap: Record<string, string> = {
-    pdf: 'text-red-500',
-    ppt: 'text-orange-500',
-    word: 'text-blue-500',
-    video: 'text-purple-500'
-  }
-  return typeMap[type] || 'text-gray-500'
-}
+    pdf: "text-red-500",
+    ppt: "text-orange-500",
+    word: "text-blue-500",
+    video: "text-purple-500",
+  };
+  return typeMap[type] || "text-gray-500";
+};
 
 const getTypeTagType = (type: string) => {
   const typeMap: Record<string, string> = {
-    pdf: 'danger',
-    ppt: 'warning',
-    word: 'primary',
-    video: 'success'
-  }
-  return typeMap[type] || 'info'
-}
+    pdf: "danger",
+    ppt: "warning",
+    word: "primary",
+    video: "success",
+  };
+  return typeMap[type] || "info";
+};
 
 const handleUpload = () => {
-  ElMessage.info('上传课件功能开发中')
-}
+  ElMessage.info("上传课件功能开发中");
+};
 
 const handleBatchUpload = () => {
-  ElMessage.info('批量上传功能开发中')
-}
+  ElMessage.info("批量上传功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handlePreview = (row: Courseware) => {
-  ElMessage.info(`预览课件: ${row.name}`)
-}
+  ElMessage.info(`预览课件: ${row.name}`);
+};
 
 const handleDownload = (row: Courseware) => {
-  ElMessage.success(`开始下载: ${row.name}`)
-}
+  ElMessage.success(`开始下载: ${row.name}`);
+};
 
 const handleEdit = (row: Courseware) => {
-  ElMessage.info(`编辑课件: ${row.name}`)
-}
+  ElMessage.info(`编辑课件: ${row.name}`);
+};
 
 const handleDelete = (row: Courseware) => {
-  ElMessage.info(`删除课件: ${row.name}`)
-}
+  ElMessage.info(`删除课件: ${row.name}`);
+};
 </script>
 
 <style scoped>
@@ -240,20 +294,22 @@ const handleDelete = (row: Courseware) => {
 .page-header h2 {
   font-size: 20px;
   font-weight: 600;
-  color: #303133;
+  color: #ffffff;
   margin: 0 0 8px 0;
 }
 
 .page-header p {
-  color: #606266;
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
 .content-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
 }
 
 .toolbar {
@@ -289,13 +345,13 @@ const handleDelete = (row: Courseware) => {
 
 .file-name {
   font-weight: 500;
-  color: #303133;
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
 .file-meta {
   font-size: 12px;
-  color: #909399;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .pagination {

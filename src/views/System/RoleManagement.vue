@@ -47,7 +47,7 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '启用' : '禁用' }}
+              {{ row.status === "active" ? "启用" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
@@ -99,153 +99,154 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ref, computed, onMounted } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { Plus, Refresh, Search } from "@element-plus/icons-vue";
 
 interface Role {
-  id: number
-  name: string
-  code: string
-  description: string
-  userCount: number
-  status: 'active' | 'inactive'
-  createTime: string
+  id: number;
+  name: string;
+  code: string;
+  description: string;
+  userCount: number;
+  status: "active" | "inactive";
+  createTime: string;
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const currentPage = ref(1)
-const pageSize = ref(10)
-const total = ref(0)
+const loading = ref(false);
+const searchKeyword = ref("");
+const currentPage = ref(1);
+const pageSize = ref(10);
+const total = ref(0);
 
 // 模拟数据
 const tableData = ref<Role[]>([
   {
     id: 1,
-    name: '超级管理员',
-    code: 'super_admin',
-    description: '系统超级管理员，拥有所有权限',
+    name: "超级管理员",
+    code: "super_admin",
+    description: "系统超级管理员，拥有所有权限",
     userCount: 1,
-    status: 'active',
-    createTime: '2024-01-01 10:00:00'
+    status: "active",
+    createTime: "2024-01-01 10:00:00",
   },
   {
     id: 2,
-    name: '系统管理员',
-    code: 'admin',
-    description: '系统管理员，负责系统配置和用户管理',
+    name: "系统管理员",
+    code: "admin",
+    description: "系统管理员，负责系统配置和用户管理",
     userCount: 3,
-    status: 'active',
-    createTime: '2024-01-02 10:00:00'
+    status: "active",
+    createTime: "2024-01-02 10:00:00",
   },
   {
     id: 3,
-    name: '教师',
-    code: 'teacher',
-    description: '教师角色，可以发布和管理教学任务',
+    name: "教师",
+    code: "teacher",
+    description: "教师角色，可以发布和管理教学任务",
     userCount: 25,
-    status: 'active',
-    createTime: '2024-01-03 10:00:00'
+    status: "active",
+    createTime: "2024-01-03 10:00:00",
   },
   {
     id: 4,
-    name: '学生',
-    code: 'student',
-    description: '学生角色，可以参与教学任务和实训',
+    name: "学生",
+    code: "student",
+    description: "学生角色，可以参与教学任务和实训",
     userCount: 156,
-    status: 'active',
-    createTime: '2024-01-04 10:00:00'
+    status: "active",
+    createTime: "2024-01-04 10:00:00",
   },
   {
     id: 5,
-    name: '访客',
-    code: 'guest',
-    description: '访客角色，只有基本的查看权限',
+    name: "访客",
+    code: "guest",
+    description: "访客角色，只有基本的查看权限",
     userCount: 0,
-    status: 'inactive',
-    createTime: '2024-01-05 10:00:00'
-  }
-])
+    status: "inactive",
+    createTime: "2024-01-05 10:00:00",
+  },
+]);
 
 // 过滤后的表格数据
 const filteredTableData = computed(() => {
   if (!searchKeyword.value) {
-    return tableData.value
+    return tableData.value;
   }
-  return tableData.value.filter(item => 
-    item.name.toLowerCase().includes(searchKeyword.value.toLowerCase()) ||
-    item.code.toLowerCase().includes(searchKeyword.value.toLowerCase())
-  )
-})
+  return tableData.value.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchKeyword.value.toLowerCase()) ||
+      item.code.toLowerCase().includes(searchKeyword.value.toLowerCase()),
+  );
+});
 
 // 搜索处理
 const handleSearch = () => {
-  currentPage.value = 1
-}
+  currentPage.value = 1;
+};
 
 // 刷新数据
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 // 新增角色
 const handleAdd = () => {
-  ElMessage.info('新增角色功能开发中')
-}
+  ElMessage.info("新增角色功能开发中");
+};
 
 // 编辑角色
 const handleEdit = (row: Role) => {
-  ElMessage.info(`编辑角色: ${row.name}`)
-}
+  ElMessage.info(`编辑角色: ${row.name}`);
+};
 
 // 权限管理
 const handlePermission = (row: Role) => {
-  ElMessage.info(`管理角色权限: ${row.name}`)
-}
+  ElMessage.info(`管理角色权限: ${row.name}`);
+};
 
 // 删除角色
 const handleDelete = async (row: Role) => {
   try {
     await ElMessageBox.confirm(
       `确定要删除角色 "${row.name}" 吗？`,
-      '删除确认',
+      "删除确认",
       {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }
-    )
-    
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      },
+    );
+
     // 模拟删除操作
-    const index = tableData.value.findIndex(item => item.id === row.id)
+    const index = tableData.value.findIndex((item) => item.id === row.id);
     if (index > -1) {
-      tableData.value.splice(index, 1)
-      ElMessage.success('删除成功')
+      tableData.value.splice(index, 1);
+      ElMessage.success("删除成功");
     }
   } catch {
     // 用户取消删除
   }
-}
+};
 
 // 分页处理
 const handleSizeChange = (val: number) => {
-  pageSize.value = val
-  currentPage.value = 1
-}
+  pageSize.value = val;
+  currentPage.value = 1;
+};
 
 const handleCurrentChange = (val: number) => {
-  currentPage.value = val
-}
+  currentPage.value = val;
+};
 
 // 初始化数据
 onMounted(() => {
-  total.value = tableData.value.length
-})
+  total.value = tableData.value.length;
+});
 </script>
 
 <style scoped>
@@ -301,11 +302,11 @@ onMounted(() => {
     gap: 16px;
     align-items: stretch;
   }
-  
+
   .toolbar-right {
     width: 100%;
   }
-  
+
   .toolbar-right .el-input {
     width: 100% !important;
   }

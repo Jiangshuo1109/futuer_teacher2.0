@@ -12,24 +12,34 @@
             <el-icon><Plus /></el-icon>
             创建试卷
           </el-button>
-          <el-button @click="handleImport">
+          <el-button type="default" @click="handleImport">
             <el-icon><Upload /></el-icon>
             导入试卷
           </el-button>
-          <el-button @click="handleRefresh">
+          <el-button type="default" @click="handleRefresh">
             <el-icon><Refresh /></el-icon>
             刷新
           </el-button>
         </div>
         <div class="toolbar-right">
-          <el-select v-model="selectedType" placeholder="试卷类型" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedType"
+            placeholder="试卷类型"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部类型" value="" />
             <el-option label="期中考试" value="midterm" />
             <el-option label="期末考试" value="final" />
             <el-option label="随堂测试" value="quiz" />
             <el-option label="作业" value="homework" />
           </el-select>
-          <el-select v-model="selectedSubject" placeholder="学科分类" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedSubject"
+            placeholder="学科分类"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部学科" value="" />
             <el-option label="语文" value="语文" />
             <el-option label="现代文阅读" value="现代文阅读" />
@@ -64,8 +74,14 @@
         <el-table-column prop="duration" label="时长(分钟)" width="100" />
         <el-table-column prop="difficulty" label="难度" width="80">
           <template #default="{ row }">
-            <el-tag 
-              :type="row.difficulty === '简单' ? 'success' : row.difficulty === '中等' ? 'warning' : 'danger'"
+            <el-tag
+              :type="
+                row.difficulty === '简单'
+                  ? 'success'
+                  : row.difficulty === '中等'
+                    ? 'warning'
+                    : 'danger'
+              "
               size="small"
             >
               {{ row.difficulty }}
@@ -76,27 +92,61 @@
         <el-table-column prop="usageCount" label="使用次数" width="100" />
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
-            <el-tag :type="row.status === 'published' ? 'success' : row.status === 'draft' ? 'warning' : 'info'">
-              {{ row.status === 'published' ? '已发布' : row.status === 'draft' ? '草稿' : '审核中' }}
+            <el-tag
+              :type="
+                row.status === 'published'
+                  ? 'success'
+                  : row.status === 'draft'
+                    ? 'warning'
+                    : 'info'
+              "
+            >
+              {{
+                row.status === "published"
+                  ? "已发布"
+                  : row.status === "draft"
+                    ? "草稿"
+                    : "审核中"
+              }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="120" />
         <el-table-column label="操作" width="220" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handlePreview(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handlePreview(row)"
+            >
               预览
             </el-button>
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
             <el-button type="info" size="small" text @click="handleCopy(row)">
               复制
             </el-button>
-            <el-button type="success" size="small" text @click="handleExport(row)">
+            <el-button
+              type="success"
+              size="small"
+              text
+              @click="handleExport(row)"
+            >
               导出
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -117,133 +167,133 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Plus, Upload, Refresh, Search } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { Plus, Upload, Refresh, Search } from "@element-plus/icons-vue";
 
 interface Exam {
-  id: number
-  title: string
-  type: string
-  subject: string
-  questionCount: number
-  totalScore: number
-  duration: number
-  difficulty: string
-  creator: string
-  usageCount: number
-  status: 'published' | 'draft' | 'reviewing'
-  createTime: string
+  id: number;
+  title: string;
+  type: string;
+  subject: string;
+  questionCount: number;
+  totalScore: number;
+  duration: number;
+  difficulty: string;
+  creator: string;
+  usageCount: number;
+  status: "published" | "draft" | "reviewing";
+  createTime: string;
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const selectedType = ref('')
-const selectedSubject = ref('')
-const currentPage = ref(1)
-const pageSize = ref(10)
-const total = ref(100)
+const loading = ref(false);
+const searchKeyword = ref("");
+const selectedType = ref("");
+const selectedSubject = ref("");
+const currentPage = ref(1);
+const pageSize = ref(10);
+const total = ref(100);
 
 const tableData = ref<Exam[]>([
   {
     id: 1,
-    title: '现代文阅读理解测试',
-    type: 'final',
-    subject: '语文',
+    title: "现代文阅读理解测试",
+    type: "final",
+    subject: "语文",
     questionCount: 50,
     totalScore: 100,
     duration: 120,
-    difficulty: '中等',
-    creator: '张教授',
+    difficulty: "中等",
+    creator: "张教授",
     usageCount: 15,
-    status: 'published',
-    createTime: '2024-01-15'
+    status: "published",
+    createTime: "2024-01-15",
   },
   {
     id: 2,
-    title: '古诗词鉴赏期末考试',
-    type: 'quiz',
-    subject: '语文',
+    title: "古诗词鉴赏期末考试",
+    type: "quiz",
+    subject: "语文",
     questionCount: 20,
     totalScore: 50,
     duration: 45,
-    difficulty: '简单',
-    creator: '李教授',
+    difficulty: "简单",
+    creator: "李教授",
     usageCount: 8,
-    status: 'published',
-    createTime: '2024-01-12'
+    status: "published",
+    createTime: "2024-01-12",
   },
   {
     id: 3,
-    title: '文言文翻译测验',
-    type: 'midterm',
-    subject: '语文',
+    title: "文言文翻译测验",
+    type: "midterm",
+    subject: "语文",
     questionCount: 40,
     totalScore: 100,
     duration: 90,
-    difficulty: '困难',
-    creator: '王教授',
+    difficulty: "困难",
+    creator: "王教授",
     usageCount: 3,
-    status: 'draft',
-    createTime: '2024-01-10'
-  }
-])
+    status: "draft",
+    createTime: "2024-01-10",
+  },
+]);
 
 const getTypeLabel = (type: string) => {
   const typeMap: Record<string, string> = {
-    midterm: '期中考试',
-    final: '期末考试',
-    quiz: '随堂测试',
-    homework: '作业'
-  }
-  return typeMap[type] || type
-}
+    midterm: "期中考试",
+    final: "期末考试",
+    quiz: "随堂测试",
+    homework: "作业",
+  };
+  return typeMap[type] || type;
+};
 
 const getTypeTagType = (type: string) => {
   const typeMap: Record<string, string> = {
-    final: 'danger',
-    midterm: 'warning',
-    quiz: 'primary',
-    homework: 'success'
-  }
-  return typeMap[type] || 'info'
-}
+    final: "danger",
+    midterm: "warning",
+    quiz: "primary",
+    homework: "success",
+  };
+  return typeMap[type] || "info";
+};
 
 const handleCreate = () => {
-  ElMessage.info('创建试卷功能开发中')
-}
+  ElMessage.info("创建试卷功能开发中");
+};
 
 const handleImport = () => {
-  ElMessage.info('导入试卷功能开发中')
-}
+  ElMessage.info("导入试卷功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handlePreview = (row: Exam) => {
-  ElMessage.info(`预览试卷: ${row.title}`)
-}
+  ElMessage.info(`预览试卷: ${row.title}`);
+};
 
 const handleEdit = (row: Exam) => {
-  ElMessage.info(`编辑试卷: ${row.title}`)
-}
+  ElMessage.info(`编辑试卷: ${row.title}`);
+};
 
 const handleCopy = (row: Exam) => {
-  ElMessage.info(`复制试卷: ${row.title}`)
-}
+  ElMessage.info(`复制试卷: ${row.title}`);
+};
 
 const handleExport = (row: Exam) => {
-  ElMessage.success(`导出试卷: ${row.title}`)
-}
+  ElMessage.success(`导出试卷: ${row.title}`);
+};
 
 const handleDelete = (row: Exam) => {
-  ElMessage.info(`删除试卷: ${row.title}`)
-}
+  ElMessage.info(`删除试卷: ${row.title}`);
+};
 </script>
 
 <style scoped>

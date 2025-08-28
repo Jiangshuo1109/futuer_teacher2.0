@@ -21,19 +21,27 @@
                 <div class="stat-items">
                   <div class="stat-item excellent">
                     <span class="stat-label">优秀</span>
-                    <span class="stat-value">{{ videoData.postureStats.stability.excellent }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.stability.excellent }}人</span
+                    >
                   </div>
                   <div class="stat-item good">
                     <span class="stat-label">良好</span>
-                    <span class="stat-value">{{ videoData.postureStats.stability.good }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.stability.good }}人</span
+                    >
                   </div>
                   <div class="stat-item average">
                     <span class="stat-label">一般</span>
-                    <span class="stat-value">{{ videoData.postureStats.stability.average }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.stability.average }}人</span
+                    >
                   </div>
                   <div class="stat-item poor">
                     <span class="stat-label">较差</span>
-                    <span class="stat-value">{{ videoData.postureStats.stability.poor }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.stability.poor }}人</span
+                    >
                   </div>
                 </div>
               </div>
@@ -42,19 +50,27 @@
                 <div class="stat-items">
                   <div class="stat-item excellent">
                     <span class="stat-label">优秀</span>
-                    <span class="stat-value">{{ videoData.postureStats.gesture.excellent }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.gesture.excellent }}人</span
+                    >
                   </div>
                   <div class="stat-item good">
                     <span class="stat-label">良好</span>
-                    <span class="stat-value">{{ videoData.postureStats.gesture.good }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.gesture.good }}人</span
+                    >
                   </div>
                   <div class="stat-item average">
                     <span class="stat-label">一般</span>
-                    <span class="stat-value">{{ videoData.postureStats.gesture.average }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.gesture.average }}人</span
+                    >
                   </div>
                   <div class="stat-item poor">
                     <span class="stat-label">较差</span>
-                    <span class="stat-value">{{ videoData.postureStats.gesture.poor }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.postureStats.gesture.poor }}人</span
+                    >
                   </div>
                 </div>
               </div>
@@ -77,23 +93,33 @@
             <div class="expression-stats">
               <div class="expression-item happy">
                 <span class="expression-label">愉悦</span>
-                <span class="expression-value">{{ videoData.expressionStats.happy.toFixed(1) }}%</span>
+                <span class="expression-value"
+                  >{{ videoData.expressionStats.happy.toFixed(1) }}%</span
+                >
               </div>
               <div class="expression-item confident">
                 <span class="expression-label">自信</span>
-                <span class="expression-value">{{ videoData.expressionStats.confident.toFixed(1) }}%</span>
+                <span class="expression-value"
+                  >{{ videoData.expressionStats.confident.toFixed(1) }}%</span
+                >
               </div>
               <div class="expression-item focused">
                 <span class="expression-label">专注</span>
-                <span class="expression-value">{{ videoData.expressionStats.focused.toFixed(1) }}%</span>
+                <span class="expression-value"
+                  >{{ videoData.expressionStats.focused.toFixed(1) }}%</span
+                >
               </div>
               <div class="expression-item neutral">
                 <span class="expression-label">平静</span>
-                <span class="expression-value">{{ videoData.expressionStats.neutral.toFixed(1) }}%</span>
+                <span class="expression-value"
+                  >{{ videoData.expressionStats.neutral.toFixed(1) }}%</span
+                >
               </div>
               <div class="expression-item concerned">
                 <span class="expression-label">担忧</span>
-                <span class="expression-value">{{ videoData.expressionStats.concerned.toFixed(1) }}%</span>
+                <span class="expression-value"
+                  >{{ videoData.expressionStats.concerned.toFixed(1) }}%</span
+                >
               </div>
             </div>
           </div>
@@ -117,19 +143,27 @@
                 <div class="stat-items">
                   <div class="stat-item excellent">
                     <span class="stat-label">优秀</span>
-                    <span class="stat-value">{{ videoData.blackboardStats.clarity.excellent }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.blackboardStats.clarity.excellent }}人</span
+                    >
                   </div>
                   <div class="stat-item good">
                     <span class="stat-label">良好</span>
-                    <span class="stat-value">{{ videoData.blackboardStats.clarity.good }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.blackboardStats.clarity.good }}人</span
+                    >
                   </div>
                   <div class="stat-item average">
                     <span class="stat-label">一般</span>
-                    <span class="stat-value">{{ videoData.blackboardStats.clarity.average }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.blackboardStats.clarity.average }}人</span
+                    >
                   </div>
                   <div class="stat-item poor">
                     <span class="stat-label">较差</span>
-                    <span class="stat-value">{{ videoData.blackboardStats.clarity.poor }}人</span>
+                    <span class="stat-value"
+                      >{{ videoData.blackboardStats.clarity.poor }}人</span
+                    >
                   </div>
                 </div>
               </div>
@@ -138,11 +172,17 @@
                 <div class="color-stats">
                   <div class="color-item">
                     <span class="color-label">单色</span>
-                    <span class="color-value">{{ videoData.blackboardStats.colorUsage.single }}人</span>
+                    <span class="color-value"
+                      >{{ videoData.blackboardStats.colorUsage.single }}人</span
+                    >
                   </div>
                   <div class="color-item">
                     <span class="color-label">多色</span>
-                    <span class="color-value">{{ videoData.blackboardStats.colorUsage.multiple }}人</span>
+                    <span class="color-value"
+                      >{{
+                        videoData.blackboardStats.colorUsage.multiple
+                      }}人</span
+                    >
                   </div>
                 </div>
               </div>
@@ -165,19 +205,35 @@
             <div class="interaction-stats">
               <div class="interaction-item">
                 <span class="interaction-label">平均提问</span>
-                <span class="interaction-value">{{ videoData.interactionStats.averageQuestions.toFixed(1) }}次</span>
+                <span class="interaction-value"
+                  >{{
+                    videoData.interactionStats.averageQuestions.toFixed(1)
+                  }}次</span
+                >
               </div>
               <div class="interaction-item">
                 <span class="interaction-label">眼神交流</span>
-                <span class="interaction-value">{{ videoData.interactionStats.averageEyeContact.toFixed(1) }}%</span>
+                <span class="interaction-value"
+                  >{{
+                    videoData.interactionStats.averageEyeContact.toFixed(1)
+                  }}%</span
+                >
               </div>
               <div class="interaction-item">
                 <span class="interaction-label">学生回应</span>
-                <span class="interaction-value">{{ videoData.interactionStats.averageResponses.toFixed(1) }}次</span>
+                <span class="interaction-value"
+                  >{{
+                    videoData.interactionStats.averageResponses.toFixed(1)
+                  }}次</span
+                >
               </div>
               <div class="interaction-item">
                 <span class="interaction-label">参与度</span>
-                <span class="interaction-value">{{ videoData.interactionStats.averageParticipation.toFixed(1) }}%</span>
+                <span class="interaction-value"
+                  >{{
+                    videoData.interactionStats.averageParticipation.toFixed(1)
+                  }}%</span
+                >
               </div>
             </div>
           </div>
@@ -196,9 +252,9 @@
           </div>
           <div class="chart-container">
             <div v-if="!loading" class="chart-wrapper">
-              <v-chart 
-                class="chart" 
-                :option="postureStabilityOption" 
+              <v-chart
+                class="chart"
+                :option="postureStabilityOption"
                 :init-options="{ renderer: 'canvas' }"
                 autoresize
               />
@@ -218,9 +274,9 @@
           </div>
           <div class="chart-container">
             <div v-if="!loading" class="chart-wrapper">
-              <v-chart 
-                class="chart" 
-                :option="expressionDistributionOption" 
+              <v-chart
+                class="chart"
+                :option="expressionDistributionOption"
                 :init-options="{ renderer: 'canvas' }"
                 autoresize
               />
@@ -242,9 +298,9 @@
           </div>
           <div class="chart-container">
             <div v-if="!loading" class="chart-wrapper">
-              <v-chart 
-                class="chart" 
-                :option="blackboardQualityOption" 
+              <v-chart
+                class="chart"
+                :option="blackboardQualityOption"
                 :init-options="{ renderer: 'canvas' }"
                 autoresize
               />
@@ -264,9 +320,9 @@
           </div>
           <div class="chart-container">
             <div v-if="!loading" class="chart-wrapper">
-              <v-chart 
-                class="chart" 
-                :option="interactionRadarOption" 
+              <v-chart
+                class="chart"
+                :option="interactionRadarOption"
                 :init-options="{ renderer: 'canvas' }"
                 autoresize
               />
@@ -294,42 +350,84 @@
           <div class="report-summary">
             <h4>视频表现总览</h4>
             <p>
-              本次任务中，师范生在视频表现方面整体良好。教学姿态稳定性优秀率达到{{ 
-                Math.round((videoData.postureStats.stability.excellent / (videoData.postureStats.stability.excellent + videoData.postureStats.stability.good + videoData.postureStats.stability.average + videoData.postureStats.stability.poor)) * 100) 
-              }}%，
-              面部表情以愉悦（{{ videoData.expressionStats.happy.toFixed(1) }}%）和自信（{{ videoData.expressionStats.confident.toFixed(1) }}%）为主，
-              板书清晰度优秀率{{ 
-                Math.round((videoData.blackboardStats.clarity.excellent / (videoData.blackboardStats.clarity.excellent + videoData.blackboardStats.clarity.good + videoData.blackboardStats.clarity.average + videoData.blackboardStats.clarity.poor)) * 100) 
-              }}%，
-              平均课堂互动参与度{{ videoData.interactionStats.averageParticipation.toFixed(1) }}%。
+              本次任务中，师范生在视频表现方面整体良好。教学姿态稳定性优秀率达到{{
+                Math.round(
+                  (videoData.postureStats.stability.excellent /
+                    (videoData.postureStats.stability.excellent +
+                      videoData.postureStats.stability.good +
+                      videoData.postureStats.stability.average +
+                      videoData.postureStats.stability.poor)) *
+                    100,
+                )
+              }}%， 面部表情以愉悦（{{
+                videoData.expressionStats.happy.toFixed(1)
+              }}%）和自信（{{
+                videoData.expressionStats.confident.toFixed(1)
+              }}%）为主， 板书清晰度优秀率{{
+                Math.round(
+                  (videoData.blackboardStats.clarity.excellent /
+                    (videoData.blackboardStats.clarity.excellent +
+                      videoData.blackboardStats.clarity.good +
+                      videoData.blackboardStats.clarity.average +
+                      videoData.blackboardStats.clarity.poor)) *
+                    100,
+                )
+              }}%， 平均课堂互动参与度{{
+                videoData.interactionStats.averageParticipation.toFixed(1)
+              }}%。
             </p>
           </div>
-          
+
           <div class="report-details">
             <h4>详细分析</h4>
             <div class="analysis-items">
               <div class="analysis-item">
                 <h5>教学姿态</h5>
-                <p>{{ videoData.postureStats.stability.excellent }}位师范生姿态稳定性达到优秀水平，手势表达自然得体。建议对姿态表现一般的{{ videoData.postureStats.stability.average + videoData.postureStats.stability.poor }}位师范生加强形体训练。</p>
+                <p>
+                  {{
+                    videoData.postureStats.stability.excellent
+                  }}位师范生姿态稳定性达到优秀水平，手势表达自然得体。建议对姿态表现一般的{{
+                    videoData.postureStats.stability.average +
+                    videoData.postureStats.stability.poor
+                  }}位师范生加强形体训练。
+                </p>
               </div>
-              
+
               <div class="analysis-item">
                 <h5>面部表情</h5>
-                <p>师范生面部表情丰富，愉悦表情占比{{ videoData.expressionStats.happy.toFixed(1) }}%，自信表情占比{{ videoData.expressionStats.confident.toFixed(1) }}%，整体表现积极向上，有利于营造良好的课堂氛围。</p>
+                <p>
+                  师范生面部表情丰富，愉悦表情占比{{
+                    videoData.expressionStats.happy.toFixed(1)
+                  }}%，自信表情占比{{
+                    videoData.expressionStats.confident.toFixed(1)
+                  }}%，整体表现积极向上，有利于营造良好的课堂氛围。
+                </p>
               </div>
-              
+
               <div class="analysis-item">
                 <h5>板书质量</h5>
-                <p>板书清晰度整体良好，{{ videoData.blackboardStats.clarity.excellent }}位师范生达到优秀水平。{{ videoData.blackboardStats.colorUsage.multiple }}位师范生使用多色板书，有助于突出重点内容。</p>
+                <p>
+                  板书清晰度整体良好，{{
+                    videoData.blackboardStats.clarity.excellent
+                  }}位师范生达到优秀水平。{{
+                    videoData.blackboardStats.colorUsage.multiple
+                  }}位师范生使用多色板书，有助于突出重点内容。
+                </p>
               </div>
-              
+
               <div class="analysis-item">
                 <h5>课堂互动</h5>
-                <p>平均提问次数{{ videoData.interactionStats.averageQuestions.toFixed(1) }}次，眼神交流时间占比{{ videoData.interactionStats.averageEyeContact.toFixed(1) }}%，师生互动较为活跃，课堂参与度良好。</p>
+                <p>
+                  平均提问次数{{
+                    videoData.interactionStats.averageQuestions.toFixed(1)
+                  }}次，眼神交流时间占比{{
+                    videoData.interactionStats.averageEyeContact.toFixed(1)
+                  }}%，师生互动较为活跃，课堂参与度良好。
+                </p>
               </div>
             </div>
           </div>
-          
+
           <div class="report-suggestions">
             <h4>改进建议</h4>
             <ul class="suggestion-list">
@@ -347,26 +445,26 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { defineProps, computed } from "vue";
 import {
   VideoCamera,
   User,
   Star,
   Document,
   ChatDotRound,
-  Loading
-} from '@element-plus/icons-vue'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { PieChart, BarChart, RadarChart } from 'echarts/charts'
+  Loading,
+} from "@element-plus/icons-vue";
+import { use } from "echarts/core";
+import { CanvasRenderer } from "echarts/renderers";
+import { PieChart, BarChart, RadarChart } from "echarts/charts";
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   GridComponent,
-  RadarComponent
-} from 'echarts/components'
-import VChart from 'vue-echarts'
+  RadarComponent,
+} from "echarts/components";
+import VChart from "vue-echarts";
 
 // 注册ECharts组件
 use([
@@ -378,301 +476,355 @@ use([
   TooltipComponent,
   LegendComponent,
   GridComponent,
-  RadarComponent
-])
+  RadarComponent,
+]);
 
 // Props接口，保持与其他组件一致
 interface TaskVideoData {
   postureStats: {
     stability: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
     gesture: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
     orientation: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
     movement: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
-  }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
+  };
   expressionStats: {
-    happy: number
-    confident: number
-    focused: number
-    neutral: number
-    concerned: number
-  }
+    happy: number;
+    confident: number;
+    focused: number;
+    neutral: number;
+    concerned: number;
+  };
   blackboardStats: {
     clarity: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
     layout: {
-      excellent: number
-      good: number
-      average: number
-      poor: number
-    }
+      excellent: number;
+      good: number;
+      average: number;
+      poor: number;
+    };
     colorUsage: {
-      single: number
-      multiple: number
-    }
-  }
+      single: number;
+      multiple: number;
+    };
+  };
   interactionStats: {
-    averageQuestions: number
-    averageEyeContact: number
-    averageResponses: number
-    averageParticipation: number
-  }
+    averageQuestions: number;
+    averageEyeContact: number;
+    averageResponses: number;
+    averageParticipation: number;
+  };
 }
 
 const props = defineProps<{
-  taskId: string
-  videoData: TaskVideoData
-  loading: boolean
-}>()
+  taskId: string;
+  videoData: TaskVideoData;
+  loading: boolean;
+}>();
 
 // 教学姿态稳定性分布饼图配置
 const postureStabilityOption = computed(() => ({
   title: {
-    text: '姿态稳定性',
-    left: 'center',
+    text: "姿态稳定性",
+    left: "center",
     textStyle: {
       fontSize: 14,
-      fontWeight: 'normal'
-    }
+      fontWeight: "normal",
+    },
   },
   tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b}: {c}人 ({d}%)'
+    trigger: "item",
+    formatter: "{a} <br/>{b}: {c}人 ({d}%)",
   },
   legend: {
-    orient: 'vertical',
-    left: 'left',
+    orient: "vertical",
+    left: "left",
     textStyle: {
-      fontSize: 12
-    }
+      fontSize: 12,
+    },
   },
   series: [
     {
-      name: '姿态稳定性',
-      type: 'pie',
-      radius: '60%',
-      center: ['50%', '60%'],
+      name: "姿态稳定性",
+      type: "pie",
+      radius: "60%",
+      center: ["50%", "60%"],
       data: [
-        { value: props.videoData.postureStats.stability.excellent, name: '优秀', itemStyle: { color: '#67C23A' } },
-        { value: props.videoData.postureStats.stability.good, name: '良好', itemStyle: { color: '#409EFF' } },
-        { value: props.videoData.postureStats.stability.average, name: '一般', itemStyle: { color: '#E6A23C' } },
-        { value: props.videoData.postureStats.stability.poor, name: '较差', itemStyle: { color: '#F56C6C' } }
+        {
+          value: props.videoData.postureStats.stability.excellent,
+          name: "优秀",
+          itemStyle: { color: "#67C23A" },
+        },
+        {
+          value: props.videoData.postureStats.stability.good,
+          name: "良好",
+          itemStyle: { color: "#409EFF" },
+        },
+        {
+          value: props.videoData.postureStats.stability.average,
+          name: "一般",
+          itemStyle: { color: "#E6A23C" },
+        },
+        {
+          value: props.videoData.postureStats.stability.poor,
+          name: "较差",
+          itemStyle: { color: "#F56C6C" },
+        },
       ],
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-}))
+          shadowColor: "rgba(0, 0, 0, 0.5)",
+        },
+      },
+    },
+  ],
+}));
 
 // 面部表情分布饼图配置
 const expressionDistributionOption = computed(() => ({
   title: {
-    text: '表情分布',
-    left: 'center',
+    text: "表情分布",
+    left: "center",
     textStyle: {
       fontSize: 14,
-      fontWeight: 'normal'
-    }
+      fontWeight: "normal",
+    },
   },
   tooltip: {
-    trigger: 'item',
-    formatter: '{a} <br/>{b}: {c}%'
+    trigger: "item",
+    formatter: "{a} <br/>{b}: {c}%",
   },
   legend: {
-    orient: 'vertical',
-    left: 'left',
+    orient: "vertical",
+    left: "left",
     textStyle: {
-      fontSize: 12
-    }
+      fontSize: 12,
+    },
   },
   series: [
     {
-      name: '面部表情',
-      type: 'pie',
-      radius: '60%',
-      center: ['50%', '60%'],
+      name: "面部表情",
+      type: "pie",
+      radius: "60%",
+      center: ["50%", "60%"],
       data: [
-        { value: props.videoData.expressionStats.happy, name: '愉悦', itemStyle: { color: '#FF6B9D' } },
-        { value: props.videoData.expressionStats.confident, name: '自信', itemStyle: { color: '#4ECDC4' } },
-        { value: props.videoData.expressionStats.focused, name: '专注', itemStyle: { color: '#45B7D1' } },
-        { value: props.videoData.expressionStats.neutral, name: '平静', itemStyle: { color: '#96CEB4' } },
-        { value: props.videoData.expressionStats.concerned, name: '担忧', itemStyle: { color: '#FFEAA7' } }
+        {
+          value: props.videoData.expressionStats.happy,
+          name: "愉悦",
+          itemStyle: { color: "#FF6B9D" },
+        },
+        {
+          value: props.videoData.expressionStats.confident,
+          name: "自信",
+          itemStyle: { color: "#4ECDC4" },
+        },
+        {
+          value: props.videoData.expressionStats.focused,
+          name: "专注",
+          itemStyle: { color: "#45B7D1" },
+        },
+        {
+          value: props.videoData.expressionStats.neutral,
+          name: "平静",
+          itemStyle: { color: "#96CEB4" },
+        },
+        {
+          value: props.videoData.expressionStats.concerned,
+          name: "担忧",
+          itemStyle: { color: "#FFEAA7" },
+        },
       ],
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
           shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
-        }
-      }
-    }
-  ]
-}))
+          shadowColor: "rgba(0, 0, 0, 0.5)",
+        },
+      },
+    },
+  ],
+}));
 
 // 板书质量分布柱状图配置
 const blackboardQualityOption = computed(() => ({
   title: {
-    text: '板书质量评估',
-    left: 'center',
+    text: "板书质量评估",
+    left: "center",
     textStyle: {
       fontSize: 14,
-      fontWeight: 'normal'
-    }
+      fontWeight: "normal",
+    },
   },
   tooltip: {
-    trigger: 'axis',
+    trigger: "axis",
     axisPointer: {
-      type: 'shadow'
-    }
+      type: "shadow",
+    },
   },
   legend: {
-    data: ['清晰度'],
-    top: '10%'
+    data: ["清晰度"],
+    top: "10%",
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
-    top: '20%',
-    containLabel: true
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    top: "20%",
+    containLabel: true,
   },
   xAxis: {
-    type: 'category',
-    data: ['优秀', '良好', '一般', '较差'],
+    type: "category",
+    data: ["优秀", "良好", "一般", "较差"],
     axisLabel: {
-      fontSize: 12
-    }
+      fontSize: 12,
+    },
   },
   yAxis: {
-    type: 'value',
+    type: "value",
     axisLabel: {
-      fontSize: 12
-    }
+      fontSize: 12,
+    },
   },
   series: [
     {
-      name: '清晰度',
-      type: 'bar',
+      name: "清晰度",
+      type: "bar",
       data: [
-        { value: props.videoData.blackboardStats.clarity.excellent, itemStyle: { color: '#67C23A' } },
-        { value: props.videoData.blackboardStats.clarity.good, itemStyle: { color: '#409EFF' } },
-        { value: props.videoData.blackboardStats.clarity.average, itemStyle: { color: '#E6A23C' } },
-        { value: props.videoData.blackboardStats.clarity.poor, itemStyle: { color: '#F56C6C' } }
+        {
+          value: props.videoData.blackboardStats.clarity.excellent,
+          itemStyle: { color: "#67C23A" },
+        },
+        {
+          value: props.videoData.blackboardStats.clarity.good,
+          itemStyle: { color: "#409EFF" },
+        },
+        {
+          value: props.videoData.blackboardStats.clarity.average,
+          itemStyle: { color: "#E6A23C" },
+        },
+        {
+          value: props.videoData.blackboardStats.clarity.poor,
+          itemStyle: { color: "#F56C6C" },
+        },
       ],
-      barWidth: '60%'
-    }
-  ]
-}))
+      barWidth: "60%",
+    },
+  ],
+}));
 
 // 课堂互动指标雷达图配置
 const interactionRadarOption = computed(() => {
   // 动态计算最大值，确保数据不会超出范围
-  const maxQuestions = Math.max(15, Math.ceil(props.videoData.interactionStats.averageQuestions * 1.2))
-  const maxEyeContact = 100
-  const maxResponses = Math.max(20, Math.ceil(props.videoData.interactionStats.averageResponses * 1.2))
-  const maxParticipation = 100
-  
+  const maxQuestions = Math.max(
+    15,
+    Math.ceil(props.videoData.interactionStats.averageQuestions * 1.2),
+  );
+  const maxEyeContact = 100;
+  const maxResponses = Math.max(
+    20,
+    Math.ceil(props.videoData.interactionStats.averageResponses * 1.2),
+  );
+  const maxParticipation = 100;
+
   return {
     title: {
-      text: '互动指标',
-      left: 'center',
+      text: "互动指标",
+      left: "center",
       textStyle: {
         fontSize: 14,
-        fontWeight: 'normal'
-      }
+        fontWeight: "normal",
+      },
     },
     tooltip: {
-      trigger: 'item',
-      formatter: function(params: any) {
-        const data = params.data
-        const indicators = ['提问频次', '眼神交流', '学生回应', '参与度']
-        const units = ['次', '%', '次', '%']
-        let result = `${data.name}<br/>`
+      trigger: "item",
+      formatter: function (params: any) {
+        const data = params.data;
+        const indicators = ["提问频次", "眼神交流", "学生回应", "参与度"];
+        const units = ["次", "%", "次", "%"];
+        let result = `${data.name}<br/>`;
         data.value.forEach((value: number, index: number) => {
-          result += `${indicators[index]}: ${value.toFixed(1)}${units[index]}<br/>`
-        })
-        return result
-      }
+          result += `${indicators[index]}: ${value.toFixed(1)}${units[index]}<br/>`;
+        });
+        return result;
+      },
     },
     radar: {
       indicator: [
-        { name: '提问频次', max: maxQuestions },
-        { name: '眼神交流', max: maxEyeContact },
-        { name: '学生回应', max: maxResponses },
-        { name: '参与度', max: maxParticipation }
+        { name: "提问频次", max: maxQuestions },
+        { name: "眼神交流", max: maxEyeContact },
+        { name: "学生回应", max: maxResponses },
+        { name: "参与度", max: maxParticipation },
       ],
-      center: ['50%', '60%'],
-      radius: '60%',
+      center: ["50%", "60%"],
+      radius: "60%",
       splitNumber: 4,
       axisName: {
         fontSize: 12,
-        color: '#666'
+        color: "#666",
       },
       splitLine: {
         lineStyle: {
-          color: 'rgba(0, 0, 0, 0.1)'
-        }
+          color: "rgba(0, 0, 0, 0.1)",
+        },
       },
       splitArea: {
-        show: false
-      }
+        show: false,
+      },
     },
     series: [
       {
-        name: '课堂互动',
-        type: 'radar',
+        name: "课堂互动",
+        type: "radar",
         data: [
           {
             value: [
               props.videoData.interactionStats.averageQuestions,
               props.videoData.interactionStats.averageEyeContact,
               props.videoData.interactionStats.averageResponses,
-              props.videoData.interactionStats.averageParticipation
+              props.videoData.interactionStats.averageParticipation,
             ],
-            name: '平均水平',
+            name: "平均水平",
             itemStyle: {
-              color: '#409EFF'
+              color: "#409EFF",
             },
             areaStyle: {
-              color: 'rgba(64, 158, 255, 0.3)'
+              color: "rgba(64, 158, 255, 0.3)",
             },
             lineStyle: {
-              width: 2
-            }
-          }
-        ]
-      }
-    ]
-  }
-})
+              width: 2,
+            },
+          },
+        ],
+      },
+    ],
+  };
+});
 </script>
 
 <style scoped>
@@ -1163,23 +1315,23 @@ const interactionRadarOption = computed(() => {
   .video-analysis {
     padding: 16px;
   }
-  
+
   .metrics-cards {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .chart-row {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  
+
   .metric-card,
   .chart-card,
   .section-card {
     padding: 20px;
   }
-  
+
   .chart-container {
     height: 300px;
   }

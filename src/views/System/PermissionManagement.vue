@@ -43,7 +43,7 @@
         <el-table-column prop="type" label="类型" width="100">
           <template #default="{ row }">
             <el-tag :type="row.type === 'menu' ? 'primary' : 'success'">
-              {{ row.type === 'menu' ? '菜单' : '按钮' }}
+              {{ row.type === "menu" ? "菜单" : "按钮" }}
             </el-tag>
           </template>
         </el-table-column>
@@ -51,16 +51,26 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '启用' : '禁用' }}
+              {{ row.status === "active" ? "启用" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -71,89 +81,89 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { Plus, Refresh, Search } from "@element-plus/icons-vue";
 
 interface Permission {
-  id: number
-  name: string
-  code: string
-  type: 'menu' | 'button'
-  path?: string
-  status: 'active' | 'inactive'
-  children?: Permission[]
+  id: number;
+  name: string;
+  code: string;
+  type: "menu" | "button";
+  path?: string;
+  status: "active" | "inactive";
+  children?: Permission[];
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
+const loading = ref(false);
+const searchKeyword = ref("");
 
 const tableData = ref<Permission[]>([
   {
     id: 1,
-    name: '系统管理',
-    code: 'system',
-    type: 'menu',
-    path: '/dashboard/system',
-    status: 'active',
+    name: "系统管理",
+    code: "system",
+    type: "menu",
+    path: "/dashboard/system",
+    status: "active",
     children: [
       {
         id: 11,
-        name: '角色管理',
-        code: 'system:role',
-        type: 'menu',
-        path: '/dashboard/system/role',
-        status: 'active'
+        name: "角色管理",
+        code: "system:role",
+        type: "menu",
+        path: "/dashboard/system/role",
+        status: "active",
       },
       {
         id: 12,
-        name: '权限管理',
-        code: 'system:permission',
-        type: 'menu',
-        path: '/dashboard/system/permission',
-        status: 'active'
-      }
-    ]
+        name: "权限管理",
+        code: "system:permission",
+        type: "menu",
+        path: "/dashboard/system/permission",
+        status: "active",
+      },
+    ],
   },
   {
     id: 2,
-    name: '组织管理',
-    code: 'organization',
-    type: 'menu',
-    path: '/dashboard/organization',
-    status: 'active',
+    name: "组织管理",
+    code: "organization",
+    type: "menu",
+    path: "/dashboard/organization",
+    status: "active",
     children: [
       {
         id: 21,
-        name: '用户管理',
-        code: 'organization:user',
-        type: 'menu',
-        path: '/dashboard/organization/user',
-        status: 'active'
-      }
-    ]
-  }
-])
+        name: "用户管理",
+        code: "organization:user",
+        type: "menu",
+        path: "/dashboard/organization/user",
+        status: "active",
+      },
+    ],
+  },
+]);
 
 const handleAdd = () => {
-  ElMessage.info('新增权限功能开发中')
-}
+  ElMessage.info("新增权限功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleEdit = (row: Permission) => {
-  ElMessage.info(`编辑权限: ${row.name}`)
-}
+  ElMessage.info(`编辑权限: ${row.name}`);
+};
 
 const handleDelete = (row: Permission) => {
-  ElMessage.info(`删除权限: ${row.name}`)
-}
+  ElMessage.info(`删除权限: ${row.name}`);
+};
 </script>
 
 <style scoped>

@@ -26,19 +26,34 @@
           </el-button>
         </div>
         <div class="toolbar-right">
-          <el-select v-model="selectedGender" placeholder="性别" style="width: 100px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedGender"
+            placeholder="性别"
+            style="width: 100px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部" value="" />
             <el-option label="男" value="male" />
             <el-option label="女" value="female" />
           </el-select>
-          <el-select v-model="selectedPersonality" placeholder="人格类型" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedPersonality"
+            placeholder="人格类型"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部类型" value="" />
             <el-option label="ESTP" value="ESTP" />
             <el-option label="ISFJ" value="ISFJ" />
             <el-option label="ENFP" value="ENFP" />
             <el-option label="INTJ" value="INTJ" />
           </el-select>
-          <el-select v-model="selectedGrade" placeholder="年级" style="width: 120px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedGrade"
+            placeholder="年级"
+            style="width: 120px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部年级" value="" />
             <el-option label="七年级" value="7" />
             <el-option label="八年级" value="8" />
@@ -59,19 +74,38 @@
 
       <!-- 学生模型卡片网格 -->
       <div class="student-grid" v-loading="loading">
-        <div v-for="student in studentList" :key="student.id" class="student-card">
+        <div
+          v-for="student in studentList"
+          :key="student.id"
+          class="student-card"
+        >
           <div class="student-avatar">
-            <div class="student-avatar-div" :style="{ backgroundColor: getAvatarColor(student.name) }">
+            <div
+              class="student-avatar-div"
+              :style="{ backgroundColor: getAvatarColor(student.name) }"
+            >
               {{ getInitials(student.name) }}
             </div>
             <div class="student-overlay">
-              <el-button type="primary" size="small" @click="handleView(student)">
+              <el-button
+                type="primary"
+                size="small"
+                @click="handleView(student)"
+              >
                 查看详情
               </el-button>
-              <el-button type="success" size="small" @click="handleEdit(student)">
+              <el-button
+                type="success"
+                size="small"
+                @click="handleEdit(student)"
+              >
                 编辑
               </el-button>
-              <el-button type="danger" size="small" @click="handleDelete(student)">
+              <el-button
+                type="danger"
+                size="small"
+                @click="handleDelete(student)"
+              >
                 删除
               </el-button>
             </div>
@@ -80,22 +114,36 @@
             <h3 class="student-name">{{ student.name }}</h3>
             <div class="student-basic">
               <p><span class="label">年龄：</span>{{ student.age }}岁</p>
-              <p><span class="label">性别：</span>{{ student.gender === 'male' ? '男' : '女' }}</p>
+              <p>
+                <span class="label">性别：</span
+                >{{ student.gender === "male" ? "男" : "女" }}
+              </p>
               <p><span class="label">身高：</span>{{ student.height }}cm</p>
               <p><span class="label">班级：</span>{{ student.class }}</p>
             </div>
             <div class="student-personality">
               <el-tag type="primary" size="small">{{ student.mbti }}</el-tag>
-              <el-tag type="success" size="small" style="margin-left: 4px">{{ student.zodiac }}</el-tag>
+              <el-tag type="success" size="small" style="margin-left: 4px">{{
+                student.zodiac
+              }}</el-tag>
             </div>
             <div class="student-stats">
               <div class="stat-item">
                 <span class="stat-label">学习能力</span>
-                <el-progress :percentage="student.learningAbility" :show-text="false" :stroke-width="6" />
+                <el-progress
+                  :percentage="student.learningAbility"
+                  :show-text="false"
+                  :stroke-width="6"
+                />
               </div>
               <div class="stat-item">
                 <span class="stat-label">参与度</span>
-                <el-progress :percentage="student.participation" :show-text="false" :stroke-width="6" color="#67c23a" />
+                <el-progress
+                  :percentage="student.participation"
+                  :show-text="false"
+                  :stroke-width="6"
+                  color="#67c23a"
+                />
               </div>
             </div>
             <div class="usage-count">
@@ -124,7 +172,12 @@
       width="800px"
       @close="resetForm"
     >
-      <el-form :model="studentForm" :rules="formRules" ref="formRef" label-width="120px">
+      <el-form
+        :model="studentForm"
+        :rules="formRules"
+        ref="formRef"
+        label-width="120px"
+      >
         <el-tabs v-model="activeTab">
           <el-tab-pane label="基本信息" name="basic">
             <el-row :gutter="20">
@@ -137,10 +190,18 @@
                     :before-upload="beforeAvatarUpload"
                     :on-success="handleAvatarSuccess"
                   >
-                    <div v-if="studentForm.name" class="avatar-div" :style="{ backgroundColor: getAvatarColor(studentForm.name) }">
+                    <div
+                      v-if="studentForm.name"
+                      class="avatar-div"
+                      :style="{
+                        backgroundColor: getAvatarColor(studentForm.name),
+                      }"
+                    >
                       {{ getInitials(studentForm.name) }}
                     </div>
-                    <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+                    <el-icon v-else class="avatar-uploader-icon"
+                      ><Plus
+                    /></el-icon>
                   </el-upload>
                 </el-form-item>
               </el-col>
@@ -148,12 +209,20 @@
                 <el-row :gutter="20">
                   <el-col :span="12">
                     <el-form-item label="姓名" prop="name">
-                      <el-input v-model="studentForm.name" placeholder="请输入学生姓名" />
+                      <el-input
+                        v-model="studentForm.name"
+                        placeholder="请输入学生姓名"
+                      />
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="年龄" prop="age">
-                      <el-input-number v-model="studentForm.age" :min="10" :max="20" style="width: 100%" />
+                      <el-input-number
+                        v-model="studentForm.age"
+                        :min="10"
+                        :max="20"
+                        style="width: 100%"
+                      />
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -168,19 +237,30 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="身高(cm)" prop="height">
-                      <el-input-number v-model="studentForm.height" :min="120" :max="200" style="width: 100%" />
+                      <el-input-number
+                        v-model="studentForm.height"
+                        :min="120"
+                        :max="200"
+                        style="width: 100%"
+                      />
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row :gutter="20">
                   <el-col :span="12">
                     <el-form-item label="学校" prop="school">
-                      <el-input v-model="studentForm.school" placeholder="请输入学校名称" />
+                      <el-input
+                        v-model="studentForm.school"
+                        placeholder="请输入学校名称"
+                      />
                     </el-form-item>
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="班级" prop="class">
-                      <el-input v-model="studentForm.class" placeholder="如：八年级(3)班" />
+                      <el-input
+                        v-model="studentForm.class"
+                        placeholder="如：八年级(3)班"
+                      />
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -199,7 +279,11 @@
                   </el-col>
                   <el-col :span="12">
                     <el-form-item label="星座" prop="zodiac">
-                      <el-select v-model="studentForm.zodiac" placeholder="请选择星座" style="width: 100%">
+                      <el-select
+                        v-model="studentForm.zodiac"
+                        placeholder="请选择星座"
+                        style="width: 100%"
+                      >
                         <el-option label="白羊座" value="白羊座" />
                         <el-option label="金牛座" value="金牛座" />
                         <el-option label="双子座" value="双子座" />
@@ -219,10 +303,14 @@
               </el-col>
             </el-row>
           </el-tab-pane>
-          
+
           <el-tab-pane label="人格特征" name="personality">
             <el-form-item label="MBTI人格" prop="mbti">
-              <el-select v-model="studentForm.mbti" placeholder="请选择MBTI人格类型" style="width: 200px">
+              <el-select
+                v-model="studentForm.mbti"
+                placeholder="请选择MBTI人格类型"
+                style="width: 200px"
+              >
                 <el-option label="ESTP（企业家型）" value="ESTP" />
                 <el-option label="ISFJ（守护者型）" value="ISFJ" />
                 <el-option label="ENFP（竞选者型）" value="ENFP" />
@@ -250,7 +338,7 @@
               />
             </el-form-item>
           </el-tab-pane>
-          
+
           <el-tab-pane label="学习能力" name="learning">
             <el-form-item label="学习能力评分">
               <el-slider
@@ -320,7 +408,7 @@
               />
             </el-form-item>
           </el-tab-pane>
-          
+
           <el-tab-pane label="兴趣爱好" name="interests">
             <el-form-item label="兴趣爱好" prop="interests">
               <el-select
@@ -353,7 +441,7 @@
               />
             </el-form-item>
           </el-tab-pane>
-          
+
           <el-tab-pane label="家庭背景" name="family">
             <el-form-item label="家庭背景" prop="familyBackground">
               <el-input
@@ -364,10 +452,16 @@
               />
             </el-form-item>
             <el-form-item label="父亲职业">
-              <el-input v-model="studentForm.fatherJob" placeholder="请输入父亲职业" />
+              <el-input
+                v-model="studentForm.fatherJob"
+                placeholder="请输入父亲职业"
+              />
             </el-form-item>
             <el-form-item label="母亲职业">
-              <el-input v-model="studentForm.motherJob" placeholder="请输入母亲职业" />
+              <el-input
+                v-model="studentForm.motherJob"
+                placeholder="请输入母亲职业"
+              />
             </el-form-item>
             <el-form-item label="家庭经济状况">
               <el-radio-group v-model="studentForm.economicStatus">
@@ -389,29 +483,36 @@
     </el-dialog>
 
     <!-- 学生详情对话框 -->
-    <el-dialog
-      v-model="detailDialogVisible"
-      title="学生模型详情"
-      width="900px"
-    >
+    <el-dialog v-model="detailDialogVisible" title="学生模型详情" width="900px">
       <div v-if="currentStudent" class="student-detail">
         <div class="detail-header">
           <div class="student-avatar-large">
-            <div class="student-avatar-large-div" :style="{ backgroundColor: getAvatarColor(currentStudent.name) }">
+            <div
+              class="student-avatar-large-div"
+              :style="{ backgroundColor: getAvatarColor(currentStudent.name) }"
+            >
               {{ getInitials(currentStudent.name) }}
             </div>
           </div>
           <div class="student-basic-info">
             <h2>{{ currentStudent.name }}</h2>
             <div class="basic-tags">
-              <el-tag type="primary" size="large">{{ currentStudent.mbti }}</el-tag>
-              <el-tag type="success" size="large" style="margin-left: 8px">{{ currentStudent.zodiac }}</el-tag>
-              <el-tag type="info" size="large" style="margin-left: 8px">{{ currentStudent.age }}岁</el-tag>
+              <el-tag type="primary" size="large">{{
+                currentStudent.mbti
+              }}</el-tag>
+              <el-tag type="success" size="large" style="margin-left: 8px">{{
+                currentStudent.zodiac
+              }}</el-tag>
+              <el-tag type="info" size="large" style="margin-left: 8px"
+                >{{ currentStudent.age }}岁</el-tag
+              >
             </div>
             <div class="basic-info-grid">
               <div class="info-item">
                 <span class="info-label">性别：</span>
-                <span>{{ currentStudent.gender === 'male' ? '男' : '女' }}</span>
+                <span>{{
+                  currentStudent.gender === "male" ? "男" : "女"
+                }}</span>
               </div>
               <div class="info-item">
                 <span class="info-label">身高：</span>
@@ -436,13 +537,17 @@
             </div>
           </div>
         </div>
-        
+
         <el-divider />
-        
+
         <el-tabs>
           <el-tab-pane label="性格特点" name="personality">
             <div class="detail-section">
-              <h3>MBTI人格：{{ currentStudent.mbti }}（{{ getMBTIDescription(currentStudent.mbti) }}）</h3>
+              <h3>
+                MBTI人格：{{ currentStudent.mbti }}（{{
+                  getMBTIDescription(currentStudent.mbti)
+                }}）
+              </h3>
               <div class="content-box">
                 {{ currentStudent.personality }}
               </div>
@@ -454,24 +559,36 @@
               </div>
             </div>
           </el-tab-pane>
-          
+
           <el-tab-pane label="学习能力" name="learning">
             <div class="ability-stats">
               <div class="stat-item">
                 <span class="stat-label">学习能力</span>
-                <el-progress :percentage="currentStudent.learningAbility" :stroke-width="12" />
+                <el-progress
+                  :percentage="currentStudent.learningAbility"
+                  :stroke-width="12"
+                />
               </div>
               <div class="stat-item">
                 <span class="stat-label">课堂参与度</span>
-                <el-progress :percentage="currentStudent.participation" :stroke-width="12" color="#67c23a" />
+                <el-progress
+                  :percentage="currentStudent.participation"
+                  :stroke-width="12"
+                  color="#67c23a"
+                />
               </div>
             </div>
-            
+
             <div class="subjects-section">
               <div class="subject-group">
                 <h4>擅长科目</h4>
                 <div class="subject-tags">
-                  <el-tag v-for="subject in currentStudent.goodSubjects" :key="subject" type="success" style="margin: 4px">
+                  <el-tag
+                    v-for="subject in currentStudent.goodSubjects"
+                    :key="subject"
+                    type="success"
+                    style="margin: 4px"
+                  >
                     {{ subject }}
                   </el-tag>
                 </div>
@@ -479,13 +596,18 @@
               <div class="subject-group">
                 <h4>薄弱科目</h4>
                 <div class="subject-tags">
-                  <el-tag v-for="subject in currentStudent.weakSubjects" :key="subject" type="warning" style="margin: 4px">
+                  <el-tag
+                    v-for="subject in currentStudent.weakSubjects"
+                    :key="subject"
+                    type="warning"
+                    style="margin: 4px"
+                  >
                     {{ subject }}
                   </el-tag>
                 </div>
               </div>
             </div>
-            
+
             <div class="detail-section">
               <h3>学习描述</h3>
               <div class="content-box">
@@ -493,10 +615,16 @@
               </div>
             </div>
           </el-tab-pane>
-          
+
           <el-tab-pane label="兴趣爱好" name="interests">
             <div class="interests-tags">
-              <el-tag v-for="interest in currentStudent.interests" :key="interest" type="primary" size="large" style="margin: 4px">
+              <el-tag
+                v-for="interest in currentStudent.interests"
+                :key="interest"
+                type="primary"
+                size="large"
+                style="margin: 4px"
+              >
                 {{ interest }}
               </el-tag>
             </div>
@@ -507,18 +635,26 @@
               </div>
             </div>
           </el-tab-pane>
-          
+
           <el-tab-pane label="家庭背景" name="family">
             <div class="family-info">
               <el-descriptions :column="2" border>
-                <el-descriptions-item label="父亲职业">{{ currentStudent.fatherJob || '未填写' }}</el-descriptions-item>
-                <el-descriptions-item label="母亲职业">{{ currentStudent.motherJob || '未填写' }}</el-descriptions-item>
+                <el-descriptions-item label="父亲职业">{{
+                  currentStudent.fatherJob || "未填写"
+                }}</el-descriptions-item>
+                <el-descriptions-item label="母亲职业">{{
+                  currentStudent.motherJob || "未填写"
+                }}</el-descriptions-item>
                 <el-descriptions-item label="经济状况">
-                  <el-tag :type="getEconomicStatusTag(currentStudent.economicStatus)">
+                  <el-tag
+                    :type="getEconomicStatusTag(currentStudent.economicStatus)"
+                  >
                     {{ getEconomicStatusLabel(currentStudent.economicStatus) }}
                   </el-tag>
                 </el-descriptions-item>
-                <el-descriptions-item label="创建时间">{{ currentStudent.createTime }}</el-descriptions-item>
+                <el-descriptions-item label="创建时间">{{
+                  currentStudent.createTime
+                }}</el-descriptions-item>
               </el-descriptions>
             </div>
             <div class="detail-section">
@@ -535,309 +671,339 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { Plus, Upload, Download, Refresh, Search, User } from '@element-plus/icons-vue'
+import { ref, reactive } from "vue";
+import { ElMessage, ElMessageBox } from "element-plus";
+import {
+  Plus,
+  Upload,
+  Download,
+  Refresh,
+  Search,
+  User,
+} from "@element-plus/icons-vue";
 
 interface StudentModel {
-  id: number
-  name: string
-  age: number
-  gender: 'male' | 'female'
-  height: number
-  school: string
-  class: string
-  birthday: string
-  zodiac: string
-  mbti: string
-  personality: string
-  psychology: string
-  learningAbility: number
-  participation: number
-  goodSubjects: string[]
-  weakSubjects: string[]
-  learningDescription: string
-  interests: string[]
-  interestDescription: string
-  familyBackground: string
-  fatherJob?: string
-  motherJob?: string
-  economicStatus: string
-  avatar: string
-  usageCount: number
-  createTime: string
+  id: number;
+  name: string;
+  age: number;
+  gender: "male" | "female";
+  height: number;
+  school: string;
+  class: string;
+  birthday: string;
+  zodiac: string;
+  mbti: string;
+  personality: string;
+  psychology: string;
+  learningAbility: number;
+  participation: number;
+  goodSubjects: string[];
+  weakSubjects: string[];
+  learningDescription: string;
+  interests: string[];
+  interestDescription: string;
+  familyBackground: string;
+  fatherJob?: string;
+  motherJob?: string;
+  economicStatus: string;
+  avatar: string;
+  usageCount: number;
+  createTime: string;
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const selectedGender = ref('')
-const selectedPersonality = ref('')
-const selectedGrade = ref('')
-const currentPage = ref(1)
-const pageSize = ref(12)
-const total = ref(100)
+const loading = ref(false);
+const searchKeyword = ref("");
+const selectedGender = ref("");
+const selectedPersonality = ref("");
+const selectedGrade = ref("");
+const currentPage = ref(1);
+const pageSize = ref(12);
+const total = ref(100);
 
-const dialogVisible = ref(false)
-const detailDialogVisible = ref(false)
-const dialogTitle = ref('添加学生模型')
-const currentStudent = ref<StudentModel | null>(null)
-const formRef = ref()
-const activeTab = ref('basic')
+const dialogVisible = ref(false);
+const detailDialogVisible = ref(false);
+const dialogTitle = ref("添加学生模型");
+const currentStudent = ref<StudentModel | null>(null);
+const formRef = ref();
+const activeTab = ref("basic");
 
 const studentForm = reactive({
   id: null as number | null,
-  name: '',
+  name: "",
   age: 14,
-  gender: 'female' as 'male' | 'female',
+  gender: "female" as "male" | "female",
   height: 156,
-  school: '',
-  class: '',
-  birthday: '',
-  zodiac: '',
-  mbti: '',
-  personality: '',
-  psychology: '',
+  school: "",
+  class: "",
+  birthday: "",
+  zodiac: "",
+  mbti: "",
+  personality: "",
+  psychology: "",
   learningAbility: 75,
   participation: 80,
   goodSubjects: [] as string[],
   weakSubjects: [] as string[],
-  learningDescription: '',
+  learningDescription: "",
   interests: [] as string[],
-  interestDescription: '',
-  familyBackground: '',
-  fatherJob: '',
-  motherJob: '',
-  economicStatus: 'good',
-  avatar: ''
-})
+  interestDescription: "",
+  familyBackground: "",
+  fatherJob: "",
+  motherJob: "",
+  economicStatus: "good",
+  avatar: "",
+});
 
 const formRules = {
-  name: [{ required: true, message: '请输入学生姓名', trigger: 'blur' }],
-  age: [{ required: true, message: '请输入年龄', trigger: 'blur' }],
-  gender: [{ required: true, message: '请选择性别', trigger: 'change' }],
-  height: [{ required: true, message: '请输入身高', trigger: 'blur' }],
-  school: [{ required: true, message: '请输入学校名称', trigger: 'blur' }],
-  class: [{ required: true, message: '请输入班级', trigger: 'blur' }],
-  mbti: [{ required: true, message: '请选择MBTI人格类型', trigger: 'change' }],
-  personality: [{ required: true, message: '请输入性格特点', trigger: 'blur' }]
-}
+  name: [{ required: true, message: "请输入学生姓名", trigger: "blur" }],
+  age: [{ required: true, message: "请输入年龄", trigger: "blur" }],
+  gender: [{ required: true, message: "请选择性别", trigger: "change" }],
+  height: [{ required: true, message: "请输入身高", trigger: "blur" }],
+  school: [{ required: true, message: "请输入学校名称", trigger: "blur" }],
+  class: [{ required: true, message: "请输入班级", trigger: "blur" }],
+  mbti: [{ required: true, message: "请选择MBTI人格类型", trigger: "change" }],
+  personality: [{ required: true, message: "请输入性格特点", trigger: "blur" }],
+};
 
 const studentList = ref<StudentModel[]>([
   {
     id: 1,
-    name: '苏晴',
+    name: "苏晴",
     age: 14,
-    gender: 'female',
+    gender: "female",
     height: 156,
-    school: '阳光实验中学',
-    class: '八年级（3）班',
-    birthday: '12-05',
-    zodiac: '射手座',
-    mbti: 'ESTP',
-    personality: '性格直爽，大大咧咧，有什么说什么，从不藏着掖着。ESTP人格坦率直接，注重实际行动和结果，不喜欢拐弯抹角。乐观自信，面对困难总是勇往直前，不畏惧挑战，但有时过于自我，不太能听取他人的意见。',
-    psychology: '内心强大，对自己的能力充满信心，很少因挫折而气馁。但在集体活动中，如果自己的想法不被采纳，会有些失落和委屈。',
+    school: "阳光实验中学",
+    class: "八年级（3）班",
+    birthday: "12-05",
+    zodiac: "射手座",
+    mbti: "ESTP",
+    personality:
+      "性格直爽，大大咧咧，有什么说什么，从不藏着掖着。ESTP人格坦率直接，注重实际行动和结果，不喜欢拐弯抹角。乐观自信，面对困难总是勇往直前，不畏惧挑战，但有时过于自我，不太能听取他人的意见。",
+    psychology:
+      "内心强大，对自己的能力充满信心，很少因挫折而气馁。但在集体活动中，如果自己的想法不被采纳，会有些失落和委屈。",
     learningAbility: 75,
     participation: 85,
-    goodSubjects: ['体育', '艺术'],
-    weakSubjects: ['数学', '几何'],
-    learningDescription: '擅长体育和艺术，是校田径队成员，在短跑项目上表现出色，多次在学校运动会上夺冠。绘画天赋也很高，美术课上的作品常常惊艳众人。然而文化课成绩一般，尤其是代数和几何，理解起来十分困难。',
-    interests: ['舞蹈', '户外探险', '拉丁舞', '爬山', '露营'],
-    interestDescription: '热爱舞蹈，学习拉丁舞多年，参加过不少比赛并获得奖项。喜欢户外探险，周末常和家人去爬山、露营，享受大自然的魅力。',
-    familyBackground: '父亲是一名体育教练，从小培养她的运动能力；母亲是一名舞蹈老师，引导她走上艺术之路。家庭的专业引导和支持，为ESTP人格在体育和艺术方面的发展提供了良好条件。',
-    fatherJob: '体育教练',
-    motherJob: '舞蹈老师',
-    economicStatus: 'good',
-    avatar: 'https://via.placeholder.com/150x150?text=苏晴',
+    goodSubjects: ["体育", "艺术"],
+    weakSubjects: ["数学", "几何"],
+    learningDescription:
+      "擅长体育和艺术，是校田径队成员，在短跑项目上表现出色，多次在学校运动会上夺冠。绘画天赋也很高，美术课上的作品常常惊艳众人。然而文化课成绩一般，尤其是代数和几何，理解起来十分困难。",
+    interests: ["舞蹈", "户外探险", "拉丁舞", "爬山", "露营"],
+    interestDescription:
+      "热爱舞蹈，学习拉丁舞多年，参加过不少比赛并获得奖项。喜欢户外探险，周末常和家人去爬山、露营，享受大自然的魅力。",
+    familyBackground:
+      "父亲是一名体育教练，从小培养她的运动能力；母亲是一名舞蹈老师，引导她走上艺术之路。家庭的专业引导和支持，为ESTP人格在体育和艺术方面的发展提供了良好条件。",
+    fatherJob: "体育教练",
+    motherJob: "舞蹈老师",
+    economicStatus: "good",
+    avatar: "https://via.placeholder.com/150x150?text=苏晴",
     usageCount: 45,
-    createTime: '2024-01-15'
+    createTime: "2024-01-15",
   },
   {
     id: 2,
-    name: '李明轩',
+    name: "李明轩",
     age: 15,
-    gender: 'male',
+    gender: "male",
     height: 168,
-    school: '实验中学',
-    class: '九年级（1）班',
-    birthday: '03-15',
-    zodiac: '双鱼座',
-    mbti: 'ISFJ',
-    personality: '性格内向稳重，做事认真负责，善于倾听他人意见。ISFJ人格温和友善，具有强烈的责任感和同理心，总是优先考虑他人的需要。',
-    psychology: '内心敏感细腻，容易受到他人情绪影响。在面对冲突时倾向于回避，更愿意通过协调和妥协来解决问题。',
+    school: "实验中学",
+    class: "九年级（1）班",
+    birthday: "03-15",
+    zodiac: "双鱼座",
+    mbti: "ISFJ",
+    personality:
+      "性格内向稳重，做事认真负责，善于倾听他人意见。ISFJ人格温和友善，具有强烈的责任感和同理心，总是优先考虑他人的需要。",
+    psychology:
+      "内心敏感细腻，容易受到他人情绪影响。在面对冲突时倾向于回避，更愿意通过协调和妥协来解决问题。",
     learningAbility: 88,
     participation: 65,
-    goodSubjects: ['语文', '历史', '生物'],
-    weakSubjects: ['体育', '音乐'],
-    learningDescription: '学习成绩优秀，特别擅长文科类科目，记忆力强，理解能力好。但在体育运动方面表现一般，不太喜欢竞技性强的活动。',
-    interests: ['阅读', '写作', '历史研究', '古典音乐'],
-    interestDescription: '热爱阅读各类书籍，尤其是历史类和文学作品。喜欢写作，经常在校刊上发表文章。对古典音乐有浓厚兴趣。',
-    familyBackground: '父亲是中学语文教师，母亲是图书馆管理员。家庭书香气息浓厚，从小就培养了良好的阅读习惯。',
-    fatherJob: '中学教师',
-    motherJob: '图书馆管理员',
-    economicStatus: 'average',
-    avatar: 'https://via.placeholder.com/150x150?text=李明轩',
+    goodSubjects: ["语文", "历史", "生物"],
+    weakSubjects: ["体育", "音乐"],
+    learningDescription:
+      "学习成绩优秀，特别擅长文科类科目，记忆力强，理解能力好。但在体育运动方面表现一般，不太喜欢竞技性强的活动。",
+    interests: ["阅读", "写作", "历史研究", "古典音乐"],
+    interestDescription:
+      "热爱阅读各类书籍，尤其是历史类和文学作品。喜欢写作，经常在校刊上发表文章。对古典音乐有浓厚兴趣。",
+    familyBackground:
+      "父亲是中学语文教师，母亲是图书馆管理员。家庭书香气息浓厚，从小就培养了良好的阅读习惯。",
+    fatherJob: "中学教师",
+    motherJob: "图书馆管理员",
+    economicStatus: "average",
+    avatar: "https://via.placeholder.com/150x150?text=李明轩",
     usageCount: 32,
-    createTime: '2024-01-12'
-  }
-])
+    createTime: "2024-01-12",
+  },
+]);
 
 const getMBTIDescription = (mbti: string) => {
   const descriptions: Record<string, string> = {
-    'ESTP': '企业家型人格',
-    'ISFJ': '守护者型人格',
-    'ENFP': '竞选者型人格',
-    'INTJ': '建筑师型人格',
-    'ESFP': '娱乐家型人格',
-    'ISTJ': '物流师型人格',
-    'ENTP': '辩论家型人格',
-    'INFJ': '提倡者型人格'
-  }
-  return descriptions[mbti] || mbti
-}
+    ESTP: "企业家型人格",
+    ISFJ: "守护者型人格",
+    ENFP: "竞选者型人格",
+    INTJ: "建筑师型人格",
+    ESFP: "娱乐家型人格",
+    ISTJ: "物流师型人格",
+    ENTP: "辩论家型人格",
+    INFJ: "提倡者型人格",
+  };
+  return descriptions[mbti] || mbti;
+};
 
 const getEconomicStatusLabel = (status: string) => {
   const labels: Record<string, string> = {
-    'excellent': '优秀',
-    'good': '良好',
-    'average': '一般',
-    'poor': '困难'
-  }
-  return labels[status] || status
-}
+    excellent: "优秀",
+    good: "良好",
+    average: "一般",
+    poor: "困难",
+  };
+  return labels[status] || status;
+};
 
 const getEconomicStatusTag = (status: string) => {
   const tags: Record<string, string> = {
-    'excellent': 'success',
-    'good': 'primary',
-    'average': 'warning',
-    'poor': 'danger'
-  }
-  return tags[status] || 'info'
-}
+    excellent: "success",
+    good: "primary",
+    average: "warning",
+    poor: "danger",
+  };
+  return tags[status] || "info";
+};
 
 const handleAdd = () => {
-  dialogTitle.value = '添加学生模型'
-  activeTab.value = 'basic'
-  dialogVisible.value = true
-}
+  dialogTitle.value = "添加学生模型";
+  activeTab.value = "basic";
+  dialogVisible.value = true;
+};
 
 const handleEdit = (student: StudentModel) => {
-  dialogTitle.value = '编辑学生模型'
-  Object.assign(studentForm, student)
-  activeTab.value = 'basic'
-  dialogVisible.value = true
-}
+  dialogTitle.value = "编辑学生模型";
+  Object.assign(studentForm, student);
+  activeTab.value = "basic";
+  dialogVisible.value = true;
+};
 
 const handleView = (student: StudentModel) => {
-  currentStudent.value = student
-  detailDialogVisible.value = true
-}
+  currentStudent.value = student;
+  detailDialogVisible.value = true;
+};
 
 const handleDelete = async (student: StudentModel) => {
   try {
-    await ElMessageBox.confirm(`确定要删除学生模型 "${student.name}" 吗？`, '确认删除', {
-      type: 'warning'
-    })
-    ElMessage.success('删除成功')
+    await ElMessageBox.confirm(
+      `确定要删除学生模型 "${student.name}" 吗？`,
+      "确认删除",
+      {
+        type: "warning",
+      },
+    );
+    ElMessage.success("删除成功");
   } catch {
-    ElMessage.info('已取消删除')
+    ElMessage.info("已取消删除");
   }
-}
+};
 
 const handleBatchImport = () => {
-  ElMessage.info('批量导入功能开发中')
-}
+  ElMessage.info("批量导入功能开发中");
+};
 
 const handleExport = () => {
-  ElMessage.info('导出数据功能开发中')
-}
+  ElMessage.info("导出数据功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleSubmit = async () => {
   try {
-    await formRef.value.validate()
-    ElMessage.success(studentForm.id ? '修改成功' : '添加成功')
-    dialogVisible.value = false
-    resetForm()
+    await formRef.value.validate();
+    ElMessage.success(studentForm.id ? "修改成功" : "添加成功");
+    dialogVisible.value = false;
+    resetForm();
   } catch {
-    ElMessage.error('请检查表单信息')
+    ElMessage.error("请检查表单信息");
   }
-}
+};
 
 const resetForm = () => {
   Object.assign(studentForm, {
     id: null,
-    name: '',
+    name: "",
     age: 14,
-    gender: 'female',
+    gender: "female",
     height: 156,
-    school: '',
-    class: '',
-    birthday: '',
-    zodiac: '',
-    mbti: '',
-    personality: '',
-    psychology: '',
+    school: "",
+    class: "",
+    birthday: "",
+    zodiac: "",
+    mbti: "",
+    personality: "",
+    psychology: "",
     learningAbility: 75,
     participation: 80,
     goodSubjects: [],
     weakSubjects: [],
-    learningDescription: '',
+    learningDescription: "",
     interests: [],
-    interestDescription: '',
-    familyBackground: '',
-    fatherJob: '',
-    motherJob: '',
-    economicStatus: 'good',
-    avatar: ''
-  })
-  formRef.value?.resetFields()
-}
+    interestDescription: "",
+    familyBackground: "",
+    fatherJob: "",
+    motherJob: "",
+    economicStatus: "good",
+    avatar: "",
+  });
+  formRef.value?.resetFields();
+};
 
 const beforeAvatarUpload = (file: File) => {
-  const isImage = file.type.startsWith('image/')
-  const isLt2M = file.size / 1024 / 1024 < 2
+  const isImage = file.type.startsWith("image/");
+  const isLt2M = file.size / 1024 / 1024 < 2;
 
   if (!isImage) {
-    ElMessage.error('只能上传图片文件!')
-    return false
+    ElMessage.error("只能上传图片文件!");
+    return false;
   }
   if (!isLt2M) {
-    ElMessage.error('图片大小不能超过 2MB!')
-    return false
+    ElMessage.error("图片大小不能超过 2MB!");
+    return false;
   }
-  return true
-}
+  return true;
+};
 
 const handleAvatarSuccess = (response: any, file: any) => {
   // Avatar functionality removed - using initials instead
-}
+};
 
 const getInitials = (name: string) => {
-  if (!name) return '学'
-  const chars = name.trim().split('')
-  return chars.length >= 2 ? chars.slice(-2).join('') : chars[0]
-}
+  if (!name) return "学";
+  const chars = name.trim().split("");
+  return chars.length >= 2 ? chars.slice(-2).join("") : chars[0];
+};
 
 const getAvatarColor = (name: string) => {
   const colors = [
-    '#409EFF', '#67C23A', '#E6A23C', '#F56C6C', 
-    '#909399', '#C71585', '#FF6347', '#32CD32',
-    '#1E90FF', '#FF69B4', '#8A2BE2', '#00CED1'
-  ]
-  let hash = 0
+    "#409EFF",
+    "#67C23A",
+    "#E6A23C",
+    "#F56C6C",
+    "#909399",
+    "#C71585",
+    "#FF6347",
+    "#32CD32",
+    "#1E90FF",
+    "#FF69B4",
+    "#8A2BE2",
+    "#00CED1",
+  ];
+  let hash = 0;
   for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash)
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
-  return colors[Math.abs(hash) % colors.length]
-}
+  return colors[Math.abs(hash) % colors.length];
+};
 </script>
 
 <style scoped>
@@ -852,20 +1018,22 @@ const getAvatarColor = (name: string) => {
 .page-header h2 {
   font-size: 20px;
   font-weight: 600;
-  color: #303133;
+  color: #ffffff;
   margin: 0 0 8px 0;
 }
 
 .page-header p {
-  color: #606266;
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
 }
 
 .content-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
 }
 
 .toolbar {
@@ -893,11 +1061,11 @@ const getAvatarColor = (name: string) => {
 }
 
 .student-card {
-  border: 1px solid #e4e7ed;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s;
-  background: white;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .student-card:hover {
@@ -943,7 +1111,7 @@ const getAvatarColor = (name: string) => {
 .student-name {
   font-size: 18px;
   font-weight: 600;
-  color: #303133;
+  color: #ffffff;
   margin: 0 0 12px 0;
   text-align: center;
 }
@@ -955,12 +1123,12 @@ const getAvatarColor = (name: string) => {
 .student-basic p {
   margin: 4px 0;
   font-size: 14px;
-  color: #606266;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .label {
   font-weight: 500;
-  color: #303133;
+  color: #ffffff;
 }
 
 .student-personality {
@@ -981,7 +1149,7 @@ const getAvatarColor = (name: string) => {
 
 .stat-label {
   font-size: 12px;
-  color: #606266;
+  color: rgba(255, 255, 255, 0.8);
   width: 60px;
 }
 
@@ -990,7 +1158,7 @@ const getAvatarColor = (name: string) => {
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: #909399;
+  color: rgba(255, 255, 255, 0.6);
   justify-content: center;
 }
 

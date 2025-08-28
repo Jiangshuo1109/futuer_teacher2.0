@@ -1,0 +1,409 @@
+/* 表格深色模式样式 - 适用于深色背景 */
+
+/* 基础表格样式 - 全局覆盖 */
+.el-table,
+.el-table--fit,
+.el-table--enable-row-transition,
+.el-table--layout-fixed {
+  --el-table-border-color: rgba(255, 255, 255, 0.1) !important;
+  --el-table-border: 1px solid var(--el-table-border-color) !important;
+  --el-table-text-color: #ffffff !important;
+  --el-table-header-text-color: #ffffff !important;
+  --el-table-row-hover-bg-color: rgba(59, 130, 246, 0.1) !important;
+  --el-table-current-row-bg-color: rgba(59, 130, 246, 0.15) !important;
+  --el-table-header-bg-color: rgba(59, 130, 246, 0.1) !important;
+  --el-table-fixed-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+  --el-table-bg-color: transparent !important;
+  --el-table-tr-bg-color: rgba(255, 255, 255, 0.02) !important;
+  --el-table-expanded-cell-bg-color: rgba(255, 255, 255, 0.01) !important;
+  --el-table-fixed-left-column: inset 10px 0 8px -8px rgba(0, 0, 0, 0.15) !important;
+  --el-table-fixed-right-column: inset -10px 0 8px -8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 表格容器 - 强制样式 */
+.el-table {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* 表格头部 - 强制样式 */
+.el-table th.el-table__cell {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.15),
+    rgba(16, 185, 129, 0.08)
+  ) !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.3) !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(10px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 表格行 - 强制样式 */
+.el-table tr {
+  background-color: transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.el-table td.el-table__cell {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 表格行交替背景 - 强制样式 */
+.el-table tr:nth-child(even) > td {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.el-table tr:nth-child(odd) > td {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* 表格行悬停效果 - 强制样式 */
+.el-table tr:hover > td {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.12),
+    rgba(16, 185, 129, 0.06)
+  ) !important;
+  transform: scale(1.001) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* 表格选择状态 - 强制样式 */
+.el-table tr.current-row > td {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.15),
+    rgba(16, 185, 129, 0.08)
+  ) !important;
+  color: #ffffff !important;
+}
+
+/* 表格固定列 - 强制样式 */
+.el-table__fixed,
+.el-table__fixed-right {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.el-table__fixed::before,
+.el-table__fixed-right::before {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 表格边框 - 强制样式 */
+.el-table--border,
+.el-table--group {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.el-table--border::after,
+.el-table--group::after {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.el-table--border .el-table__cell,
+.el-table--group .el-table__cell {
+  border-right-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 表格空状态 - 强制样式 */
+.el-table__empty-block {
+  background-color: transparent !important;
+}
+
+.el-table__empty-text {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 表格滚动条 - 强制样式 */
+.el-table__body-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* 表格标签 - 强制样式 */
+.el-table .el-tag {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.el-table .el-tag--primary {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  color: #60a5fa !important;
+}
+
+.el-table .el-tag--success {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #34d399 !important;
+}
+
+.el-table .el-tag--warning {
+  background-color: rgba(245, 158, 11, 0.2) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  color: #fbbf24 !important;
+}
+
+.el-table .el-tag--danger {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #f87171 !important;
+}
+
+.el-table .el-tag--info {
+  background-color: rgba(107, 114, 128, 0.2) !important;
+  border-color: rgba(107, 114, 128, 0.4) !important;
+  color: #9ca3af !important;
+}
+
+/* 表格按钮 - 强制样式 */
+.el-table .el-button {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.el-table .el-button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.el-table .el-button--primary {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  color: #60a5fa !important;
+}
+
+.el-table .el-button--primary:hover {
+  background-color: rgba(59, 130, 246, 0.3) !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+}
+
+.el-table .el-button--success {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #34d399 !important;
+}
+
+.el-table .el-button--success:hover {
+  background-color: rgba(16, 185, 129, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+.el-table .el-button--warning {
+  background-color: rgba(245, 158, 11, 0.2) !important;
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  color: #fbbf24 !important;
+}
+
+.el-table .el-button--warning:hover {
+  background-color: rgba(245, 158, 11, 0.3) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+.el-table .el-button--danger {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #f87171 !important;
+}
+
+.el-table .el-button--danger:hover {
+  background-color: rgba(239, 68, 68, 0.3) !important;
+  border-color: rgba(239, 68, 68, 0.5) !important;
+}
+
+.el-table .el-button--info {
+  background-color: rgba(107, 114, 128, 0.2) !important;
+  border-color: rgba(107, 114, 128, 0.4) !important;
+  color: #9ca3af !important;
+}
+
+.el-table .el-button--info:hover {
+  background-color: rgba(107, 114, 128, 0.3) !important;
+  border-color: rgba(107, 114, 128, 0.5) !important;
+}
+
+/* 表格进度条 - 强制样式 */
+.el-table .el-progress {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.el-table .el-progress__text {
+  color: #ffffff !important;
+}
+
+/* 表格图片 - 强制样式 */
+.el-table .el-image {
+  border-radius: 8px !important;
+}
+
+/* 表格链接 - 强制样式 */
+.el-table .el-link {
+  color: #3b82f6 !important;
+}
+
+.el-table .el-link:hover {
+  color: #60a5fa !important;
+}
+
+/* 表格工具提示 - 强制样式 */
+.el-table .el-tooltip__trigger {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 表格排序图标 - 强制样式 */
+.el-table .sort-caret {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.el-table .sort-caret.ascending {
+  border-bottom-color: #3b82f6 !important;
+}
+
+.el-table .sort-caret.descending {
+  border-top-color: #3b82f6 !important;
+}
+
+/* 表格展开行 - 强制样式 */
+.el-table .el-table__expand-icon {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.el-table .el-table__expand-icon:hover {
+  color: #3b82f6 !important;
+}
+
+/* 表格选择框 - 强制样式 */
+.el-table .el-checkbox__input {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.el-table .el-checkbox__input.is-checked {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+/* 表格加载遮罩 - 强制样式 */
+.el-table .el-loading-mask {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.el-table .el-loading-spinner {
+  color: #3b82f6 !important;
+}
+
+/* 分页组件深色模式 - 强制样式 */
+.el-pagination {
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 16px 0 !important;
+  background: transparent !important;
+}
+
+.el-pagination .el-pager li {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  margin: 0 2px !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.el-pagination .el-pager li:hover {
+  color: #3b82f6 !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2) !important;
+}
+
+.el-pagination .el-pager li.is-active {
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%) !important;
+  color: white !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.el-pagination .btn-prev,
+.el-pagination .btn-next {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.el-pagination .btn-prev:hover,
+.el-pagination .btn-next:hover {
+  color: #3b82f6 !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 分页跳转输入框 - 强制样式 */
+.el-pagination .el-pagination__jump {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.el-pagination .el-pagination__jump .el-input__inner {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+.el-pagination .el-pagination__jump .el-input__inner:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* 分页每页条数选择器 - 强制样式 */
+.el-pagination .el-pagination__sizes .el-select .el-input__wrapper {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.el-pagination .el-pagination__sizes .el-select .el-input__wrapper:hover {
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 分页总数显示 - 强制样式 */
+.el-pagination .el-pagination__total {
+  color: rgba(255, 255, 255, 0.8) !important;
+}

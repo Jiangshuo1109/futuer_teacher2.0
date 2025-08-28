@@ -11,8 +11,12 @@
           <p class="page-subtitle">基于人工智能的视频教学质量分析</p>
           <div class="video-info">
             <el-tag type="info" size="large">学生：{{ studentName }}</el-tag>
-            <el-tag type="primary" size="large">视频时长：{{ videoDuration }}</el-tag>
-            <el-tag type="success" size="large">分析时间：{{ analysisTime }}</el-tag>
+            <el-tag type="primary" size="large"
+              >视频时长：{{ videoDuration }}</el-tag
+            >
+            <el-tag type="success" size="large"
+              >分析时间：{{ analysisTime }}</el-tag
+            >
           </div>
         </div>
         <div class="header-actions">
@@ -62,9 +66,14 @@
             </h3>
             <div class="video-controls">
               <el-button-group size="small">
-                <el-button @click="togglePlay" :type="isPlaying ? 'danger' : 'success'">
-                  <el-icon><VideoPlay v-if="!isPlaying" /><VideoPause v-else /></el-icon>
-                  {{ isPlaying ? '暂停' : '播放' }}
+                <el-button
+                  @click="togglePlay"
+                  :type="isPlaying ? 'danger' : 'success'"
+                >
+                  <el-icon
+                    ><VideoPlay v-if="!isPlaying" /><VideoPause v-else
+                  /></el-icon>
+                  {{ isPlaying ? "暂停" : "播放" }}
                 </el-button>
                 <el-button @click="handleFullscreen">
                   <el-icon><FullScreen /></el-icon>
@@ -105,138 +114,146 @@
 
       <!-- AI视频分析组件 -->
       <VideoAnalysis :video-data="videoAnalysisData" :loading="false" />
-
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
-import { 
-  ArrowLeft, Download, Share, VideoCamera, VideoPlay, VideoPause, FullScreen,
-  Microphone
-} from '@element-plus/icons-vue'
-import VideoAnalysis from '@/components/VideoAnalysis.vue'
+import { ref, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { ElMessage } from "element-plus";
+import {
+  ArrowLeft,
+  Download,
+  Share,
+  VideoCamera,
+  VideoPlay,
+  VideoPause,
+  FullScreen,
+  Microphone,
+} from "@element-plus/icons-vue";
+import VideoAnalysis from "@/components/VideoAnalysis.vue";
 
 // 响应式数据
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
 // 从路由参数获取信息
-const taskId = route.params.taskId as string
-const studentId = route.params.studentId as string
+const taskId = route.params.taskId as string;
+const studentId = route.params.studentId as string;
 
 // 基础数据
-const studentName = ref('张明')
-const videoDuration = ref('45:30')
-const analysisTime = ref('2025-08-20 15:30')
-const isPlaying = ref(false)
-const videoProgress = ref(35)
-const currentTime = ref('15:45')
+const studentName = ref("张明");
+const videoDuration = ref("45:30");
+const analysisTime = ref("2025-08-20 15:30");
+const isPlaying = ref(false);
+const videoProgress = ref(35);
+const currentTime = ref("15:45");
 
 // VideoAnalysis组件的数据
 const videoAnalysisData = ref({
-  taskId: 'task_001',
-  taskName: '小学数学课堂教学',
+  taskId: "task_001",
+  taskName: "小学数学课堂教学",
   postureStats: {
     stability: {
       excellent: 8,
       good: 5,
       average: 2,
-      poor: 0
+      poor: 0,
     },
     gesture: {
       excellent: 6,
       good: 7,
       average: 2,
-      poor: 0
-    }
+      poor: 0,
+    },
   },
   expressionStats: {
     happy: 35.2,
     confident: 28.8,
     focused: 22.1,
     neutral: 10.5,
-    concerned: 3.4
+    concerned: 3.4,
   },
   blackboardStats: {
     clarity: {
       excellent: 9,
       good: 4,
       average: 2,
-      poor: 0
+      poor: 0,
     },
     colorUsage: {
       single: 6,
-      multiple: 9
-    }
+      multiple: 9,
+    },
   },
   interactionStats: {
     averageQuestions: 8.5,
     averageEyeContact: 75.3,
     averageResponses: 6.2,
-    averageParticipation: 82.7
-  }
-})
+    averageParticipation: 82.7,
+  },
+});
 
 // 事件处理
 const handleBack = () => {
-  router.back()
-}
+  router.back();
+};
 
 const handleExport = () => {
-  ElMessage.success('视频分析报告导出成功')
-}
+  ElMessage.success("视频分析报告导出成功");
+};
 
 const handleShare = () => {
-  ElMessage.success('分享链接已复制到剪贴板')
-}
+  ElMessage.success("分享链接已复制到剪贴板");
+};
 
 const togglePlay = () => {
-  isPlaying.value = !isPlaying.value
-  ElMessage.info(isPlaying.value ? '开始播放视频' : '视频已暂停')
-}
+  isPlaying.value = !isPlaying.value;
+  ElMessage.info(isPlaying.value ? "开始播放视频" : "视频已暂停");
+};
 
 const handleFullscreen = () => {
-  ElMessage.info('进入全屏模式')
-}
+  ElMessage.info("进入全屏模式");
+};
 
 // 页面跳转方法
 const goToAudioAnalysis = () => {
-  router.push(`/dashboard/teaching/task/${taskId}/student/${studentId}/audio-analysis`)
-}
+  router.push(
+    `/dashboard/teaching/task/${taskId}/student/${studentId}/audio-analysis`,
+  );
+};
 
 const goToEvaluation = () => {
-  router.push(`/dashboard/teaching/task/${taskId}/student/${studentId}/ai-evaluation`)
-}
+  router.push(
+    `/dashboard/teaching/task/${taskId}/student/${studentId}/ai-evaluation`,
+  );
+};
 
 // 数据获取函数
 const fetchVideoAnalysisData = async () => {
   try {
-    console.log('获取视频分析数据', { taskId, studentId })
+    console.log("获取视频分析数据", { taskId, studentId });
     // 模拟数据获取
-    await new Promise(resolve => setTimeout(resolve, 500))
-    
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
     // 根据studentId更新学生姓名
-    const studentNames = ['李明轩', '张雨涵', '陈思琪', '刘浩然', '王欣怡']
-    const index = parseInt(studentId) % studentNames.length
-    studentName.value = studentNames[index] || '未知学生'
-    
-    ElMessage.success('视频分析数据加载完成')
+    const studentNames = ["李明轩", "张雨涵", "陈思琪", "刘浩然", "王欣怡"];
+    const index = parseInt(studentId) % studentNames.length;
+    studentName.value = studentNames[index] || "未知学生";
+
+    ElMessage.success("视频分析数据加载完成");
   } catch (error) {
-    console.error('获取视频分析数据失败:', error)
-    ElMessage.error('数据加载失败，请稍后重试')
+    console.error("获取视频分析数据失败:", error);
+    ElMessage.error("数据加载失败，请稍后重试");
   }
-}
+};
 
 // 生命周期
 onMounted(() => {
-  console.log('AIVideoAnalysis页面挂载', { taskId, studentId })
-  fetchVideoAnalysisData()
-})
+  console.log("AIVideoAnalysis页面挂载", { taskId, studentId });
+  fetchVideoAnalysisData();
+});
 </script>
 
 <style scoped>
@@ -438,21 +455,21 @@ onMounted(() => {
   .ai-video-analysis {
     padding: 16px;
   }
-  
+
   .header-content {
     flex-direction: column;
     gap: 20px;
     align-items: stretch;
   }
-  
+
   .header-actions {
     justify-content: center;
   }
-  
+
   .video-player-container {
     min-height: 250px;
   }
-  
+
   .video-meta {
     flex-direction: column;
     gap: 8px;

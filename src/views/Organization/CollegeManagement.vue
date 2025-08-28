@@ -41,16 +41,26 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '启用' : '禁用' }}
+              {{ row.status === "active" ? "启用" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -61,63 +71,63 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { Plus, Refresh, Search } from "@element-plus/icons-vue";
 
 interface College {
-  id: number
-  name: string
-  campus: string
-  majorCount: number
-  studentCount: number
-  teacherCount: number
-  status: 'active' | 'inactive'
+  id: number;
+  name: string;
+  campus: string;
+  majorCount: number;
+  studentCount: number;
+  teacherCount: number;
+  status: "active" | "inactive";
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
+const loading = ref(false);
+const searchKeyword = ref("");
 
 const tableData = ref<College[]>([
   {
     id: 1,
-    name: '计算机学院',
-    campus: '主校区',
+    name: "计算机学院",
+    campus: "主校区",
     majorCount: 5,
     studentCount: 2000,
     teacherCount: 80,
-    status: 'active'
+    status: "active",
   },
   {
     id: 2,
-    name: '教育学院',
-    campus: '主校区',
+    name: "教育学院",
+    campus: "主校区",
     majorCount: 3,
     studentCount: 1500,
     teacherCount: 60,
-    status: 'active'
-  }
-])
+    status: "active",
+  },
+]);
 
 const handleAdd = () => {
-  ElMessage.info('新增学院功能开发中')
-}
+  ElMessage.info("新增学院功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleEdit = (row: College) => {
-  ElMessage.info(`编辑学院: ${row.name}`)
-}
+  ElMessage.info(`编辑学院: ${row.name}`);
+};
 
 const handleDelete = (row: College) => {
-  ElMessage.info(`删除学院: ${row.name}`)
-}
+  ElMessage.info(`删除学院: ${row.name}`);
+};
 </script>
 
 <style scoped>

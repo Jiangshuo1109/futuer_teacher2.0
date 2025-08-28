@@ -18,7 +18,12 @@
           </el-button>
         </div>
         <div class="toolbar-right">
-          <el-select v-model="selectedCollege" placeholder="选择学院" style="width: 150px; margin-right: 8px" clearable>
+          <el-select
+            v-model="selectedCollege"
+            placeholder="选择学院"
+            style="width: 150px; margin-right: 8px"
+            clearable
+          >
             <el-option label="全部学院" value="" />
             <el-option label="计算机学院" value="计算机学院" />
             <el-option label="教育学院" value="教育学院" />
@@ -47,16 +52,26 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '启用' : '禁用' }}
+              {{ row.status === "active" ? "启用" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -67,77 +82,77 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { Plus, Refresh, Search } from "@element-plus/icons-vue";
 
 interface Major {
-  id: number
-  name: string
-  code: string
-  college: string
-  classCount: number
-  studentCount: number
-  duration: string
-  status: 'active' | 'inactive'
+  id: number;
+  name: string;
+  code: string;
+  college: string;
+  classCount: number;
+  studentCount: number;
+  duration: string;
+  status: "active" | "inactive";
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
-const selectedCollege = ref('')
+const loading = ref(false);
+const searchKeyword = ref("");
+const selectedCollege = ref("");
 
 const tableData = ref<Major[]>([
   {
     id: 1,
-    name: '计算机科学与技术',
-    code: 'CS001',
-    college: '计算机学院',
+    name: "计算机科学与技术",
+    code: "CS001",
+    college: "计算机学院",
     classCount: 8,
     studentCount: 320,
-    duration: '4年',
-    status: 'active'
+    duration: "4年",
+    status: "active",
   },
   {
     id: 2,
-    name: '软件工程',
-    code: 'SE001',
-    college: '计算机学院',
+    name: "软件工程",
+    code: "SE001",
+    college: "计算机学院",
     classCount: 6,
     studentCount: 240,
-    duration: '4年',
-    status: 'active'
+    duration: "4年",
+    status: "active",
   },
   {
     id: 3,
-    name: '学前教育',
-    code: 'ED001',
-    college: '教育学院',
+    name: "学前教育",
+    code: "ED001",
+    college: "教育学院",
     classCount: 4,
     studentCount: 160,
-    duration: '4年',
-    status: 'active'
-  }
-])
+    duration: "4年",
+    status: "active",
+  },
+]);
 
 const handleAdd = () => {
-  ElMessage.info('新增专业功能开发中')
-}
+  ElMessage.info("新增专业功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleEdit = (row: Major) => {
-  ElMessage.info(`编辑专业: ${row.name}`)
-}
+  ElMessage.info(`编辑专业: ${row.name}`);
+};
 
 const handleDelete = (row: Major) => {
-  ElMessage.info(`删除专业: ${row.name}`)
-}
+  ElMessage.info(`删除专业: ${row.name}`);
+};
 </script>
 
 <style scoped>

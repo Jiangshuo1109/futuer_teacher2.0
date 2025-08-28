@@ -40,16 +40,26 @@
         <el-table-column prop="status" label="状态" width="100">
           <template #default="{ row }">
             <el-tag :type="row.status === 'active' ? 'success' : 'danger'">
-              {{ row.status === 'active' ? '启用' : '禁用' }}
+              {{ row.status === "active" ? "启用" : "禁用" }}
             </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="150" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" size="small" text @click="handleEdit(row)">
+            <el-button
+              type="primary"
+              size="small"
+              text
+              @click="handleEdit(row)"
+            >
               编辑
             </el-button>
-            <el-button type="danger" size="small" text @click="handleDelete(row)">
+            <el-button
+              type="danger"
+              size="small"
+              text
+              @click="handleDelete(row)"
+            >
               删除
             </el-button>
           </template>
@@ -60,60 +70,60 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { Plus, Refresh, Search } from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { Plus, Refresh, Search } from "@element-plus/icons-vue";
 
 interface Campus {
-  id: number
-  name: string
-  address: string
-  collegeCount: number
-  studentCount: number
-  status: 'active' | 'inactive'
+  id: number;
+  name: string;
+  address: string;
+  collegeCount: number;
+  studentCount: number;
+  status: "active" | "inactive";
 }
 
-const loading = ref(false)
-const searchKeyword = ref('')
+const loading = ref(false);
+const searchKeyword = ref("");
 
 const tableData = ref<Campus[]>([
   {
     id: 1,
-    name: '主校区',
-    address: '北京市海淀区学院路1号',
+    name: "主校区",
+    address: "北京市海淀区学院路1号",
     collegeCount: 15,
     studentCount: 12000,
-    status: 'active'
+    status: "active",
   },
   {
     id: 2,
-    name: '东校区',
-    address: '北京市朝阳区东三环北路2号',
+    name: "东校区",
+    address: "北京市朝阳区东三环北路2号",
     collegeCount: 8,
     studentCount: 6000,
-    status: 'active'
-  }
-])
+    status: "active",
+  },
+]);
 
 const handleAdd = () => {
-  ElMessage.info('新增校区功能开发中')
-}
+  ElMessage.info("新增校区功能开发中");
+};
 
 const handleRefresh = () => {
-  loading.value = true
+  loading.value = true;
   setTimeout(() => {
-    loading.value = false
-    ElMessage.success('数据刷新成功')
-  }, 1000)
-}
+    loading.value = false;
+    ElMessage.success("数据刷新成功");
+  }, 1000);
+};
 
 const handleEdit = (row: Campus) => {
-  ElMessage.info(`编辑校区: ${row.name}`)
-}
+  ElMessage.info(`编辑校区: ${row.name}`);
+};
 
 const handleDelete = (row: Campus) => {
-  ElMessage.info(`删除校区: ${row.name}`)
-}
+  ElMessage.info(`删除校区: ${row.name}`);
+};
 </script>
 
 <style scoped>

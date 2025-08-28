@@ -1,275 +1,306 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+import type { RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
-    redirect: '/login'
+    path: "/",
+    redirect: "/portal",
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login.vue'),
+    path: "/portal",
+    name: "Portal",
+    component: () => import("@/views/Portal.vue"),
     meta: {
-      title: '登录 - 未来教师智能分析平台'
-    }
+      title: "门户 - 未来教师智能分析平台",
+    },
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/layouts/MainLayout.vue'),
-    redirect: '/dashboard/home',
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login.vue"),
     meta: {
-      requiresAuth: true
+      title: "登录 - 未来教师智能分析平台",
+    },
+  },
+  {
+    path: "/test-table",
+    name: "TestTable",
+    component: () => import("@/views/TestTable.vue"),
+    meta: {
+      title: "表格测试 - 未来教师智能分析平台",
+    },
+  },
+  {
+    path: "/test-table-all",
+    name: "TableTestAll",
+    component: () => import("@/views/TableTestAll.vue"),
+    meta: {
+      title: "所有模块表格测试 - 未来教师智能分析平台",
+    },
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/layouts/MainLayout.vue"),
+    redirect: "/dashboard/home",
+    meta: {
+      requiresAuth: true,
     },
     children: [
       {
-        path: 'home',
-        name: 'Home',
-        component: () => import('@/views/Dashboard/Home.vue'),
+        path: "home",
+        name: "Home",
+        component: () => import("@/views/Dashboard/Home.vue"),
         meta: {
-          title: '首页 - 未来教师智能分析平台'
-        }
+          title: "首页 - 未来教师智能分析平台",
+        },
       },
       {
-        path: 'system',
-        name: 'System',
-        redirect: '/dashboard/system/role',
+        path: "system",
+        name: "System",
+        redirect: "/dashboard/system/role",
         children: [
           {
-            path: 'role',
-            name: 'RoleManagement',
-            component: () => import('@/views/System/RoleManagement.vue'),
+            path: "role",
+            name: "RoleManagement",
+            component: () => import("@/views/System/RoleManagement.vue"),
             meta: {
-              title: '角色管理 - 未来教师智能分析平台'
-            }
+              title: "角色管理 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'permission',
-            name: 'PermissionManagement',
-            component: () => import('@/views/System/PermissionManagement.vue'),
+            path: "permission",
+            name: "PermissionManagement",
+            component: () => import("@/views/System/PermissionManagement.vue"),
             meta: {
-              title: '权限管理 - 未来教师智能分析平台'
-            }
-          }
-        ]
+              title: "权限管理 - 未来教师智能分析平台",
+            },
+          },
+        ],
       },
       {
-        path: 'organization',
-        name: 'Organization',
-        redirect: '/dashboard/organization/campus',
+        path: "organization",
+        name: "Organization",
+        redirect: "/dashboard/organization/campus",
         children: [
           {
-            path: 'campus',
-            name: 'CampusManagement',
-            component: () => import('@/views/Organization/CampusManagement.vue'),
+            path: "campus",
+            name: "CampusManagement",
+            component: () =>
+              import("@/views/Organization/CampusManagement.vue"),
             meta: {
-              title: '校区管理 - 未来教师智能分析平台'
-            }
+              title: "校区管理 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'college',
-            name: 'CollegeManagement',
-            component: () => import('@/views/Organization/CollegeManagement.vue'),
+            path: "college",
+            name: "CollegeManagement",
+            component: () =>
+              import("@/views/Organization/CollegeManagement.vue"),
             meta: {
-              title: '学院管理 - 未来教师智能分析平台'
-            }
+              title: "学院管理 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'major',
-            name: 'MajorManagement',
-            component: () => import('@/views/Organization/MajorManagement.vue'),
+            path: "major",
+            name: "MajorManagement",
+            component: () => import("@/views/Organization/MajorManagement.vue"),
             meta: {
-              title: '专业管理 - 未来教师智能分析平台'
-            }
+              title: "专业管理 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'class',
-            name: 'ClassManagement',
-            component: () => import('@/views/Organization/ClassManagement.vue'),
+            path: "class",
+            name: "ClassManagement",
+            component: () => import("@/views/Organization/ClassManagement.vue"),
             meta: {
-              title: '班级管理 - 未来教师智能分析平台'
-            }
+              title: "班级管理 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'user',
-            name: 'UserManagement',
-            component: () => import('@/views/Organization/UserManagement.vue'),
+            path: "user",
+            name: "UserManagement",
+            component: () => import("@/views/Organization/UserManagement.vue"),
             meta: {
-              title: '用户管理 - 未来教师智能分析平台'
-            }
-          }
-        ]
+              title: "用户管理 - 未来教师智能分析平台",
+            },
+          },
+        ],
       },
       {
-        path: 'database',
-        name: 'Database',
-        redirect: '/dashboard/database/course',
+        path: "database",
+        name: "Database",
+        redirect: "/dashboard/database/course",
         children: [
           {
-            path: 'course',
-            name: 'CourseLibrary',
-            component: () => import('@/views/Database/CourseLibrary.vue'),
+            path: "course",
+            name: "CourseLibrary",
+            component: () => import("@/views/Database/CourseLibrary.vue"),
             meta: {
-              title: '课程库 - 未来教师智能分析平台'
-            }
+              title: "课程库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'courseware',
-            name: 'CoursewareLibrary',
-            component: () => import('@/views/Database/CoursewareLibrary.vue'),
+            path: "courseware",
+            name: "CoursewareLibrary",
+            component: () => import("@/views/Database/CoursewareLibrary.vue"),
             meta: {
-              title: '课件库 - 未来教师智能分析平台'
-            }
+              title: "课件库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'question',
-            name: 'QuestionBank',
-            component: () => import('@/views/Database/QuestionBank.vue'),
+            path: "question",
+            name: "QuestionBank",
+            component: () => import("@/views/Database/QuestionBank.vue"),
             meta: {
-              title: '题库 - 未来教师智能分析平台'
-            }
+              title: "题库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'semantic',
-            name: 'SemanticLibrary',
-            component: () => import('@/views/Database/SemanticLibrary.vue'),
+            path: "semantic",
+            name: "SemanticLibrary",
+            component: () => import("@/views/Database/SemanticLibrary.vue"),
             meta: {
-              title: '语义库 - 未来教师智能分析平台'
-            }
+              title: "语义库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'special-event',
-            name: 'SpecialEventLibrary',
-            component: () => import('@/views/Database/SpecialEventLibrary.vue'),
+            path: "special-event",
+            name: "SpecialEventLibrary",
+            component: () => import("@/views/Database/SpecialEventLibrary.vue"),
             meta: {
-              title: '特殊事件库 - 未来教师智能分析平台'
-            }
+              title: "特殊事件库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'student-model',
-            name: 'StudentModelLibrary',
-            component: () => import('@/views/Database/StudentModelLibrary.vue'),
+            path: "student-model",
+            name: "StudentModelLibrary",
+            component: () => import("@/views/Database/StudentModelLibrary.vue"),
             meta: {
-              title: '学生模型库 - 未来教师智能分析平台'
-            }
+              title: "学生模型库 - 未来教师智能分析平台",
+            },
           },
 
           {
-            path: 'client-version',
-            name: 'ClientVersionLibrary',
-            component: () => import('@/views/Database/ClientVersionLibrary.vue'),
+            path: "client-version",
+            name: "ClientVersionLibrary",
+            component: () =>
+              import("@/views/Database/ClientVersionLibrary.vue"),
             meta: {
-              title: '客户端版本库 - 未来教师智能分析平台'
-            }
+              title: "客户端版本库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'evaluation-system',
-            name: 'EvaluationSystemLibrary',
-            component: () => import('@/views/Database/EvaluationSystemLibrary.vue'),
+            path: "evaluation-system",
+            name: "EvaluationSystemLibrary",
+            component: () =>
+              import("@/views/Database/EvaluationSystemLibrary.vue"),
             meta: {
-              title: '教学评价体系库 - 未来教师智能分析平台'
-            }
+              title: "教学评价体系库 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'evaluation-standards-editor',
-            name: 'EvaluationStandardsEditor',
-            component: () => import('@/views/Database/EvaluationStandardsEditor.vue'),
+            path: "evaluation-standards-editor",
+            name: "EvaluationStandardsEditor",
+            component: () =>
+              import("@/views/Database/EvaluationStandardsEditor.vue"),
             meta: {
-              title: '评价标准设置 - 未来教师智能分析平台'
-            }
-          }
-        ]
+              title: "评价标准设置 - 未来教师智能分析平台",
+            },
+          },
+        ],
       },
       {
-        path: 'teaching',
-        name: 'Teaching',
-        redirect: '/dashboard/teaching/task-publish',
+        path: "teaching",
+        name: "Teaching",
+        redirect: "/dashboard/teaching/task-publish",
         children: [
           {
-            path: 'task-publish',
-            name: 'TaskPublish',
-            component: () => import('@/views/Teaching/TaskPublish.vue'),
+            path: "task-publish",
+            name: "TaskPublish",
+            component: () => import("@/views/Teaching/TaskPublish.vue"),
             meta: {
-              title: '教学任务发布 - 未来教师智能分析平台'
-            }
+              title: "教学任务发布 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'my-tasks',
-            name: 'MyTasks',
-            component: () => import('@/views/Teaching/MyTasks.vue'),
+            path: "my-tasks",
+            name: "MyTasks",
+            component: () => import("@/views/Teaching/MyTasks.vue"),
             meta: {
-              title: '我的教学任务 - 未来教师智能分析平台'
-            }
+              title: "我的教学任务 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'task/:taskId/students',
-            name: 'StudentLearningStatus',
-            component: () => import('@/views/Teaching/StudentLearningStatus.vue'),
+            path: "task/:taskId/students",
+            name: "StudentLearningStatus",
+            component: () =>
+              import("@/views/Teaching/StudentLearningStatus.vue"),
             meta: {
-              title: '师范生学习情况 - 未来教师智能分析平台'
-            }
+              title: "师范生学习情况 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'task/:taskId/student/:studentId/ai-evaluation',
-            name: 'AIEvaluation',
-            component: () => import('@/views/Teaching/AIEvaluation.vue'),
+            path: "task/:taskId/student/:studentId/ai-evaluation",
+            name: "AIEvaluation",
+            component: () => import("@/views/Teaching/AIEvaluation.vue"),
             meta: {
-              title: 'AI综合教学评价 - 未来教师智能分析平台'
-            }
+              title: "AI综合教学评价 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'task/:taskId/student/:studentId/audio-analysis',
-            name: 'AudioAnalysis',
-            component: () => import('@/views/Teaching/AIAudioAnalysis.vue'),
+            path: "task/:taskId/student/:studentId/audio-analysis",
+            name: "AudioAnalysis",
+            component: () => import("@/views/Teaching/AIAudioAnalysis.vue"),
             meta: {
-              title: 'AI音频分析 - 未来教师智能分析平台'
-            }
+              title: "AI音频分析 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'task/:taskId/student/:studentId/video-analysis',
-            name: 'VideoAnalysis',
-            component: () => import('@/views/Teaching/AIVideoAnalysis.vue'),
+            path: "task/:taskId/student/:studentId/video-analysis",
+            name: "VideoAnalysis",
+            component: () => import("@/views/Teaching/AIVideoAnalysis.vue"),
             meta: {
-              title: 'AI视频分析 - 未来教师智能分析平台'
-            }
+              title: "AI视频分析 - 未来教师智能分析平台",
+            },
           },
           {
-            path: 'task/:taskId/learning-analysis',
-            name: 'TaskLearningAnalysis',
-            component: () => import('@/views/Teaching/TaskLearningAnalysis.vue'),
+            path: "task/:taskId/learning-analysis",
+            name: "TaskLearningAnalysis",
+            component: () =>
+              import("@/views/Teaching/TaskLearningAnalysis.vue"),
             meta: {
-              title: '任务学情分析 - 未来教师智能分析平台'
-            }
-          }
-        ]
-      }
-    ]
-  }
-]
+              title: "任务学情分析 - 未来教师智能分析平台",
+            },
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
 // 路由守卫
 router.beforeEach((to, _from, next) => {
   // 设置页面标题
   if (to.meta?.title) {
-    document.title = to.meta.title as string
+    document.title = to.meta.title as string;
   }
 
   // 检查是否需要登录
   if (to.meta?.requiresAuth) {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     if (!token) {
-      next('/login')
-      return
+      next("/login");
+      return;
     }
   }
 
-  next()
-})
+  next();
+});
 
-export default router
+export default router;
